@@ -3,6 +3,7 @@
 // caller must have already checked access (session, token or webhook signature).
 
 import { prisma } from "@/lib/prisma";
+import { runEventAutomations } from "@/lib/automations/engine";
 import { audit, logActivity, notify, notifyTier } from "@/lib/audit";
 import { paymentStatus, roundCents } from "@/lib/quotes/math";
 import type { PaymentMethod } from "@/generated/prisma/enums";
@@ -40,6 +41,7 @@ export async function systemMoveDealStage(dealId: string, stageKey: string, acto
     if (deal.companyId) await prisma.company.update({ where: { id: deal.companyId }, data: { status: "ACTIVE" } });
     await notifyTier({ minTier: "LEADERSHIP", type: "deal", title: `Deal won: ${deal.name}`, body: `${deal.company?.name ?? ""} · setup task and install project created`, link: `/hq/deals/${dealId}`, exceptUserId: actorId ?? undefined });
   }
+  await runEventAutomations("deal.stage_changed", { dealId, from: deal.stageKey, to: stageKey });
   return true;
 }
 

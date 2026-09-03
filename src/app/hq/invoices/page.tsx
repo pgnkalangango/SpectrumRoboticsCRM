@@ -3,7 +3,7 @@ import { Receipt } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { requireStaff } from "@/lib/session";
 import { getSetting } from "@/lib/settings";
-import { cn, fmtDate, fullName, isOverdue, money, relTime } from "@/lib/utils";
+import { cn, fmtDate, fullName, isOverdue, money } from "@/lib/utils";
 import { markOverdueCore } from "@/lib/quotes/core";
 import { PageHeader, EmptyState } from "@/components/ui/empty-state";
 import { Stat } from "@/components/ui/card";
@@ -117,7 +117,6 @@ export default async function InvoicesPage({ searchParams }: { searchParams: Pro
         </Table>
       )}
       <Pagination page={page} pageSize={PAGE_SIZE} total={total} hrefFor={hrefFor} />
-      <span className="sr-only">{rows.length ? relTime(rows[0].updatedAt) : ""}</span>
     </div>
   );
 }

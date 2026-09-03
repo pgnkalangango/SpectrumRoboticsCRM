@@ -6,7 +6,7 @@ import { fullName } from "@/lib/utils";
 import { PageHeader } from "@/components/ui/empty-state";
 import { Breadcrumbs } from "@/components/hq/record";
 import { QuoteBuilder, type BuilderQuote } from "@/components/hq/quotes/quote-builder";
-import { loadCatalog } from "@/app/hq/quotes/new/page";
+import { loadCatalog } from "@/lib/quotes/load";
 
 export const metadata = { title: "Edit quote" };
 

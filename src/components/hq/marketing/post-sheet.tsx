@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 import { toast } from "sonner";
-import { CalendarClock, Copy, ExternalLink, Palette, Send, ShieldCheck, Trash2, Undo2, XCircle } from "lucide-react";
+import { CalendarClock, Copy, ExternalLink, Palette, Send, ShieldCheck, Undo2, XCircle } from "lucide-react";
 import { FormSheet, FormRow, useUrlSheet } from "@/components/hq/form-sheet";
 import { Field, Input, NativeSelect, Textarea } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -88,7 +88,8 @@ export function PostSheet({ open, onClose, initial, history, accounts, campaigns
       const id = await persist();
       if (!id) return;
       const r = await submitPostForApproval(id);
-      r.ok ? finish("Sent for approval. Approvers have been notified.") : toast.error(r.error);
+      if (r.ok) finish("Sent for approval. Approvers have been notified.");
+      else toast.error(r.error);
     });
   const onSchedule = (label = "Scheduled") =>
     run(async () => {
@@ -100,21 +101,24 @@ export function PostSheet({ open, onClose, initial, history, accounts, campaigns
       const id = await persist();
       if (!id) return;
       const r = status === "PENDING_APPROVAL" ? await approvePost(id, { scheduledAt: new Date(when).toISOString(), overrideClaims: override }) : await schedulePost(id, new Date(when).toISOString(), { overrideClaims: override });
-      r.ok ? finish(`${label} for ${fmtDateTime(when)}`) : toast.error(r.error);
+      if (r.ok) finish(`${label} for ${fmtDateTime(when)}`);
+      else toast.error(r.error);
     });
   const onApproveOnly = () =>
     run(async () => {
       const id = await persist();
       if (!id) return;
       const r = await approvePost(id, { overrideClaims: override });
-      r.ok ? finish("Approved. Schedule it or publish when ready.", id, true) : toast.error(r.error);
+      if (r.ok) finish("Approved. Schedule it or publish when ready.", id, true);
+      else toast.error(r.error);
     });
   const onReject = () => {
     const note = prompt("What needs to change? The author will see this note.");
     if (note === null) return;
     run(async () => {
       const r = await rejectPost(initial!.id, note);
-      r.ok ? finish("Sent back to the author") : toast.error(r.error);
+      if (r.ok) finish("Sent back to the author");
+      else toast.error(r.error);
     });
   };
   const onPublishNow = () => {
@@ -123,25 +127,29 @@ export function PostSheet({ open, onClose, initial, history, accounts, campaigns
       const id = locked ? initial!.id : await persist();
       if (!id) return;
       const r = await publishPostNow(id, { overrideClaims: override });
-      r.ok ? finish(`Published to ${r.data?.published ?? 0} channel${r.data?.published === 1 ? "" : "s"}`) : toast.error(r.error);
+      if (r.ok) finish(`Published to ${r.data?.published ?? 0} channel${r.data?.published === 1 ? "" : "s"}`);
+      else toast.error(r.error);
     });
   };
   const onUnschedule = () =>
     run(async () => {
       const r = await unschedulePost(initial!.id);
-      r.ok ? finish("Unscheduled. The post is approved and waiting.", initial!.id, true) : toast.error(r.error);
+      if (r.ok) finish("Unscheduled. The post is approved and waiting.", initial!.id, true);
+      else toast.error(r.error);
     });
   const onDuplicate = () =>
     run(async () => {
       const r = await duplicatePost(initial!.id);
-      r.ok ? finish("Copy created as a draft", r.data?.id, true) : toast.error(r.error);
+      if (r.ok) finish("Copy created as a draft", r.data?.id, true);
+      else toast.error(r.error);
     });
   const onDelete = initial && !locked && (canPost || isMine)
     ? () => {
         if (!confirm("Delete this post? This cannot be undone.")) return;
         run(async () => {
           const r = await deletePost(initial.id);
-          r.ok ? finish("Post deleted") : toast.error(r.error);
+          if (r.ok) finish("Post deleted");
+          else toast.error(r.error);
         });
       }
     : undefined;

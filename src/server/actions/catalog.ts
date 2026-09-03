@@ -17,8 +17,8 @@ function fail(e: unknown): Result<never> {
 }
 
 const opt = (max = 200) => z.string().max(max).optional().nullable().transform((v) => (v && v.trim() ? v.trim() : null));
-const money = z.union([z.coerce.number().min(0), z.literal(""), z.null(), z.undefined()]).transform((v) => (v === "" || v === null || v === undefined ? null : v));
-const int = z.union([z.coerce.number().int().min(0), z.literal(""), z.null(), z.undefined()]).transform((v) => (v === "" || v === null || v === undefined ? null : v));
+const money = z.union([z.null(), z.undefined(), z.literal(""), z.coerce.number().min(0, "Prices cannot be negative.")]).transform((v) => (v === "" || v === null || v === undefined ? null : v));
+const int = z.union([z.null(), z.undefined(), z.literal(""), z.coerce.number().int().min(0)]).transform((v) => (v === "" || v === null || v === undefined ? null : v));
 
 const productSchema = z.object({
   name: z.string().min(1, "Give the product a name.").max(160),

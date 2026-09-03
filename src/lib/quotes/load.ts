@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getSetting } from "@/lib/settings";
 import { invoiceToDoc, quoteToDoc, type InvoiceDoc, type QuoteDoc } from "@/lib/quotes/document";
 import type { Prisma } from "@/generated/prisma/client";
+import type { CatalogProduct } from "@/components/hq/quotes/catalog-picker";
 
 export const quoteDocInclude = {
   lines: { orderBy: { sortOrder: "asc" } },
@@ -38,6 +39,12 @@ export async function loadInvoiceDoc(where: Prisma.InvoiceWhereUniqueInput): Pro
   const [invoice, s] = await Promise.all([prisma.invoice.findUnique({ where, include: invoiceDocInclude }), docSettings()]);
   if (!invoice) return null;
   return { invoice, doc: invoiceToDoc(invoice, s) };
+}
+
+// Published products for the quote builder's catalog picker. Never includes internalCost.
+export async function loadCatalog(): Promise<CatalogProduct[]> {
+  const rows = await prisma.product.findMany({ where: { published: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }], select: { id: true, name: true, sku: true, oem: true, category: true, imageUrl: true, purchasePrice: true, monthlyPrice: true, description: true } });
+  return rows.map((p) => ({ id: p.id, name: p.name, sku: p.sku, oem: p.oem, category: p.category, imageUrl: p.imageUrl, purchasePrice: p.purchasePrice === null ? null : Number(p.purchasePrice), monthlyPrice: p.monthlyPrice === null ? null : Number(p.monthlyPrice), description: p.description ? p.description.slice(0, 160) : null }));
 }
 
 export function pdfResponse(bytes: Uint8Array, filename: string): Response {

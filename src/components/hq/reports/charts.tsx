@@ -68,7 +68,7 @@ export function WonLostChart({ data }: { data: { month: string; won: number; los
         <CartesianGrid vertical={false} stroke={GRID} />
         <XAxis dataKey="month" tick={AXIS} axisLine={false} tickLine={false} tickFormatter={shortMonth} />
         <YAxis tick={AXIS} axisLine={false} tickLine={false} allowDecimals={false} width={28} />
-        <Tooltip cursor={{ fill: "var(--surface-2)" }} content={<ChartTooltip labelFormatter={shortMonth} formatter={(v, k) => `${v} deal${v === 1 ? "" : "s"}`} />} />
+        <Tooltip cursor={{ fill: "var(--surface-2)" }} content={<ChartTooltip labelFormatter={shortMonth} formatter={(v) => `${v} deal${v === 1 ? "" : "s"}`} />} />
         <Legend iconType="square" iconSize={8} wrapperStyle={{ fontSize: 11, color: "var(--muted)" }} />
         <Bar dataKey="won" name="Won" fill="var(--ok)" radius={[4, 4, 0, 0]} maxBarSize={22} />
         <Bar dataKey="lost" name="Lost" fill="var(--bad)" radius={[4, 4, 0, 0]} maxBarSize={22} />

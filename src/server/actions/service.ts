@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { actionCan, actionStaff, AccessDenied } from "@/lib/session";
+import { runEventAutomations } from "@/lib/automations/engine";
 import { audit, logActivity, notify, notifyTier } from "@/lib/audit";
 import { nextNumber } from "@/lib/settings";
 import { certificateExpiry, computeNextMaintenance, defaultMaintenanceInterval, robotLabel, slaDueFor } from "@/lib/service";
@@ -396,6 +397,7 @@ export async function saveTicket(input: TicketInput & { id?: string }): Promise<
       const slaDueAt = await slaDueFor(d.priority);
       const row = await prisma.ticket.create({ data: { ...data, number, slaDueAt, createdById: user.id, status: "NEW" } });
       id = row.id;
+      await runEventAutomations("ticket.created", { ticketId: id });
       await logActivity({ type: "TICKET", subject: `${number} opened: ${d.subject}`, body: d.description || undefined, ticketId: id, companyId, siteId: d.siteId, contactId: d.contactId, actorId: user.id, source: "system" });
       if (d.assigneeId && d.assigneeId !== user.id) await notify({ userId: d.assigneeId, type: "ticket", title: `New ticket for you: ${number}`, body: `${d.priority === "CRITICAL" ? "Critical. " : ""}${d.subject}`, link: `/hq/service/tickets/${id}` });
       if (d.priority === "CRITICAL") await notifyTier({ minTier: "OWNER", type: "ticket", title: `Critical ticket: ${number}`, body: d.subject, link: `/hq/service/tickets/${id}`, exceptUserId: user.id });

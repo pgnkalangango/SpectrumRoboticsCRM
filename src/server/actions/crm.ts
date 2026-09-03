@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { actionStaff, AccessDenied } from "@/lib/session";
+import { runEventAutomations } from "@/lib/automations/engine";
 import { audit, logActivity, notify, notifyTier } from "@/lib/audit";
 import { getSetting } from "@/lib/settings";
 import type { ActivityType, ContactType, CompanyStatus, DealType, Direction } from "@/generated/prisma/enums";
@@ -255,6 +256,8 @@ async function afterStageChange(dealId: string, from: string, to: string, actorI
     if (deal.companyId) await prisma.company.update({ where: { id: deal.companyId }, data: { status: "ACTIVE" } });
     await notifyTier({ minTier: "LEADERSHIP", type: "deal", title: `Deal won: ${deal.name}`, body: `${deal.company?.name ?? ""} · setup task and install project created`, link: `/hq/deals/${dealId}`, exceptUserId: actorId });
   }
+  // Company automations (Settings > Automations) run after the built in rules above.
+  await runEventAutomations("deal.stage_changed", { dealId, from, to });
 }
 
 const INSTALL_STAGES = [

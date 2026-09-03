@@ -6,6 +6,7 @@ import { compare, hash } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { actionUser, AccessDenied } from "@/lib/session";
 import { portalScope } from "@/lib/portal";
+import { runEventAutomations } from "@/lib/automations/engine";
 import { audit, logActivity, notify, notifyTier } from "@/lib/audit";
 import { nextNumber } from "@/lib/settings";
 import { slaDueFor } from "@/lib/service";
@@ -146,6 +147,7 @@ export async function portalCreateTicket(input: PortalTicketInput, preview?: str
     const row = await prisma.ticket.create({
       data: { number, subject: d.subject, description: d.description || null, category: d.category, priority: d.priority as TicketPriority, status: "NEW", companyId, siteId, robotUnitId: robot?.id ?? null, contactId, createdById: user.id, assigneeId, slaDueAt, clientVisible: true },
     });
+    await runEventAutomations("ticket.created", { ticketId: row.id });
     const who = user.kind === "STAFF" ? `${user.name} (portal preview)` : user.name;
     await logActivity({ type: "TICKET", subject: `${number} opened from the portal: ${d.subject}`, body: d.description || undefined, ticketId: row.id, companyId, siteId, contactId, actorId: user.kind === "STAFF" ? user.id : null, actorLabel: who, source: "portal", direction: "INBOUND" });
     const link = `/hq/service/tickets/${row.id}`;

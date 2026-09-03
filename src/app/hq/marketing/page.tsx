@@ -11,7 +11,8 @@ import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { FilterBar } from "@/components/hq/filter-bar";
-import { ContentCalendar, dateKey } from "@/components/hq/marketing/calendar";
+import { ContentCalendar } from "@/components/hq/marketing/calendar";
+import { dateKey } from "@/components/hq/marketing/dates";
 import { PostSheetFromUrl } from "@/components/hq/marketing/post-sheet";
 import { SocialInbox, type InboxRow } from "@/components/hq/marketing/inbox";
 import { AssetLibrary } from "@/components/hq/marketing/assets";
@@ -41,7 +42,7 @@ function serializePost(p: PostWithRels): PostRow {
     body: p.body,
     status: p.status,
     scheduledAt: p.scheduledAt?.toISOString() ?? null,
-    publishedAt: p.status === "PUBLISHED" ? publishedAt : null,
+    publishedAt: p.status === "PUBLISHED" ? publishedAt ?? p.updatedAt.toISOString() : null,
     createdAt: p.createdAt.toISOString(),
     mediaUrls: p.mediaUrls,
     linkUrl: p.linkUrl,
@@ -106,7 +107,7 @@ export default async function MarketingPage({ searchParams }: { searchParams: Pr
   };
 
   const [calendarPosts, listPosts, counts] = await Promise.all([
-    tab === "calendar" ? prisma.socialPost.findMany({ where: { scheduledAt: { gte: rangeStart, lte: rangeEnd } }, include: postInclude, orderBy: { scheduledAt: "asc" } }) : Promise.resolve([] as PostWithRels[]),
+    tab === "calendar" ? prisma.socialPost.findMany({ where: { OR: [{ scheduledAt: { gte: rangeStart, lte: rangeEnd } }, { status: "PUBLISHED", updatedAt: { gte: rangeStart, lte: rangeEnd } }] }, include: postInclude, orderBy: { scheduledAt: "asc" } }) : Promise.resolve([] as PostWithRels[]),
     tab === "posts" ? prisma.socialPost.findMany({ where: listWhere, include: postInclude, orderBy: [{ updatedAt: "desc" }], take: 200 }) : Promise.resolve([] as PostWithRels[]),
     prisma.socialPost.groupBy({ by: ["status"], _count: { _all: true } }),
   ]);

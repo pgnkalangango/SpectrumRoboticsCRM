@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { dateKey } from "./dates";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { CalendarDays, ChevronLeft, ChevronRight, List, Plus } from "lucide-react";
@@ -11,9 +12,6 @@ import { ProviderDot, POST_STATUS_LABEL, type PostRow } from "@/components/hq/ma
 const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-export function dateKey(d: Date): string {
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-}
 function parseKey(s: string): Date {
   const [y, m, d] = s.split("-").map(Number);
   return new Date(y, (m || 1) - 1, d || 1);

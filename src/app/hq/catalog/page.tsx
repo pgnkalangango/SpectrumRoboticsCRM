@@ -54,6 +54,7 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
         specsText: (editing.specs as { specifications?: string | null } | null)?.specifications ?? "",
       }
     : undefined;
+  const totalProducts = categories.reduce((a, c) => a + c._count, 0);
   const categoryList = categories.map((c) => c.category);
   const oemList = oems.map((o) => o.oem).filter((o): o is string => !!o);
 
@@ -61,7 +62,7 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
     <div>
       <PageHeader
         title="Catalog"
-        subtitle={`${counts._count} published of ${rows.length === counts._count ? rows.length : categories.reduce((a, c) => a + c._count, 0)} products. Published products can be quoted and appear on the website.${canEdit ? "" : " You can browse; leadership edits pricing."}`}
+        subtitle={`${counts._count} published of ${totalProducts} products. Published products can be quoted and appear on the website.${canEdit ? "" : " You can browse; leadership edits pricing."}`}
         actions={
           canEdit ? (
             <Button asChild>

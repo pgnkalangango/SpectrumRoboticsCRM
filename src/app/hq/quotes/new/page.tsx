@@ -5,15 +5,10 @@ import { getSetting } from "@/lib/settings";
 import { fullName } from "@/lib/utils";
 import { PageHeader } from "@/components/ui/empty-state";
 import { Breadcrumbs } from "@/components/hq/record";
+import { loadCatalog } from "@/lib/quotes/load";
 import { QuoteBuilder, type BuilderQuote } from "@/components/hq/quotes/quote-builder";
-import type { CatalogProduct } from "@/components/hq/quotes/catalog-picker";
 
 export const metadata = { title: "New quote" };
-
-export async function loadCatalog(): Promise<CatalogProduct[]> {
-  const rows = await prisma.product.findMany({ where: { published: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }], select: { id: true, name: true, sku: true, oem: true, category: true, imageUrl: true, purchasePrice: true, monthlyPrice: true, description: true } });
-  return rows.map((p) => ({ id: p.id, name: p.name, sku: p.sku, oem: p.oem, category: p.category, imageUrl: p.imageUrl, purchasePrice: p.purchasePrice === null ? null : Number(p.purchasePrice), monthlyPrice: p.monthlyPrice === null ? null : Number(p.monthlyPrice), description: p.description ? p.description.slice(0, 160) : null }));
-}
 
 export default async function NewQuotePage({ searchParams }: { searchParams: Promise<{ contactId?: string; companyId?: string; dealId?: string }> }) {
   const user = await requireStaff();

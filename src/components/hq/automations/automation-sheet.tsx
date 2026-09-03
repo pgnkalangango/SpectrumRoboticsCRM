@@ -30,24 +30,14 @@ const DEFAULT_ACTION: Record<AutomationAction["type"], AutomationAction> = {
 export function AutomationSheet({ open, onClose, initial, users, departments, stages }: { open: boolean; onClose: () => void; initial?: AutomationRow | null; users: Option[]; departments: Option[]; stages: Option[] }) {
   const router = useRouter();
   const [pending, start] = React.useTransition();
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [enabled, setEnabled] = React.useState(true);
-  const [trigger, setTrigger] = React.useState<Trigger>({ type: "quote.unviewed", afterDays: 3 });
-  const [daysText, setDaysText] = React.useState("1, 7, 14");
-  const [conditions, setConditions] = React.useState<Condition[]>([]);
-  const [actions, setActions] = React.useState<AutomationAction[]>([{ ...DEFAULT_ACTION.create_task }]);
-
-  React.useEffect(() => {
-    if (!open) return;
-    setName(initial?.name ?? "");
-    setDescription(initial?.description ?? "");
-    setEnabled(initial?.enabled ?? true);
-    setTrigger(initial?.trigger ?? { type: "quote.unviewed", afterDays: 3 });
-    setDaysText((initial?.trigger.days ?? [1, 7, 14]).join(", "));
-    setConditions(initial?.conditions ?? []);
-    setActions(initial?.actions.length ? initial.actions : [{ ...DEFAULT_ACTION.create_task }]);
-  }, [open, initial]);
+  // State is initialized from `initial`; the wrapper remounts this component (key) whenever the sheet opens.
+  const [name, setName] = React.useState(initial?.name ?? "");
+  const [description, setDescription] = React.useState(initial?.description ?? "");
+  const [enabled, setEnabled] = React.useState(initial?.enabled ?? true);
+  const [trigger, setTrigger] = React.useState<Trigger>(initial?.trigger ?? { type: "quote.unviewed", afterDays: 3 });
+  const [daysText, setDaysText] = React.useState((initial?.trigger.days ?? [1, 7, 14]).join(", "));
+  const [conditions, setConditions] = React.useState<Condition[]>(initial?.conditions ?? []);
+  const [actions, setActions] = React.useState<AutomationAction[]>(initial?.actions.length ? initial.actions : [{ ...DEFAULT_ACTION.create_task }]);
 
   const def = TRIGGER_DEFS.find((d) => d.type === trigger.type)!;
   const setTriggerType = (type: TriggerType) => {
@@ -351,6 +341,6 @@ export function AutomationSheetFromUrl({ items, users, departments, stages }: { 
   const create = useUrlSheet("new");
   const edit = useUrlSheet("edit");
   const initial = edit.value ? items.find((a) => a.id === edit.value) ?? null : null;
-  if (edit.open && initial) return <AutomationSheet open onClose={edit.close} initial={initial} users={users} departments={departments} stages={stages} />;
-  return <AutomationSheet open={create.open} onClose={create.close} users={users} departments={departments} stages={stages} />;
+  if (edit.open && initial) return <AutomationSheet key={`edit-${initial.id}`} open onClose={edit.close} initial={initial} users={users} departments={departments} stages={stages} />;
+  return <AutomationSheet key={`new-${create.open ? "open" : "closed"}`} open={create.open} onClose={create.close} users={users} departments={departments} stages={stages} />;
 }

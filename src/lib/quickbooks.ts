@@ -5,7 +5,6 @@
 import { prisma } from "@/lib/prisma";
 import { decrypt, encrypt } from "@/lib/crypto";
 import { appUrl } from "@/lib/mailer";
-import { fullName } from "@/lib/utils";
 import { roundCents } from "@/lib/quotes/math";
 import type { Prisma } from "@/generated/prisma/client";
 
@@ -263,8 +262,4 @@ export async function syncPayment(paymentId: string): Promise<QbResult<{ quickbo
     await setIntegration("ERROR", { lastError: message }).catch(() => null);
     return { ok: false, error: message };
   }
-}
-
-export function contactLabel(c: { firstName: string; lastName?: string | null } | null | undefined): string {
-  return c ? fullName(c) : "";
 }
