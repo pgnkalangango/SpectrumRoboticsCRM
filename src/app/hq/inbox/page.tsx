@@ -27,15 +27,17 @@ export default async function InboxPage({ searchParams }: { searchParams: Promis
     );
   }
 
-  const [rows, stats] = await Promise.all([
+  const [rows, stats, known] = await Promise.all([
     prisma.mailMessage.findMany({ where: { userId: user.id }, orderBy: { receivedAt: "desc" }, take: 400, include: { contact: { select: { id: true, firstName: true, lastName: true, companyName: true, company: { select: { name: true } } } } } }),
     mailStats(user.id, 30),
+    prisma.mailContact.findMany({ where: { userId: user.id, name: { not: null } }, select: { email: true, name: true } }),
   ]);
+  const nameFor = new Map(known.map((k) => [k.email, k.name]));
   const threads = new Map<string, InboxThread>();
   for (const r of rows) {
     const key = r.threadId ?? r.externalId;
     const t = threads.get(key);
-    const counterpart = r.direction === "INBOUND" ? { email: r.fromEmail ?? "", name: r.fromName } : { email: r.toEmails[0] ?? "", name: null };
+    const counterpart = r.direction === "INBOUND" ? { email: r.fromEmail ?? "", name: r.fromName ?? nameFor.get(r.fromEmail ?? "") ?? null } : { email: r.toEmails[0] ?? "", name: nameFor.get(r.toEmails[0] ?? "") ?? null };
     if (!t) {
       threads.set(key, {
         threadId: key,
