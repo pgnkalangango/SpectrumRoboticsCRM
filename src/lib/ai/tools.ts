@@ -3,6 +3,7 @@ import { fullName, money } from "@/lib/utils";
 import { getSetting } from "@/lib/settings";
 import { getMailProvider } from "@/lib/mail/provider";
 import { mailStats } from "@/lib/mail/sync";
+import { createFollowUpTasks, followUpSuggestions } from "@/lib/mail/people";
 import { logActivity } from "@/lib/audit";
 import type { Tier } from "@/generated/prisma/enums";
 
@@ -235,6 +236,47 @@ export const HQ_TOOLS: HqTool[] = [
       }
       const rows = await prisma.mailMessage.findMany({ where: { userId: ctx.userId, threadId }, orderBy: { receivedAt: "asc" } });
       return rows.map((r) => ({ id: r.externalId, from: r.fromEmail, to: r.toEmails, at: r.receivedAt, direction: r.direction, subject: r.subject, text: r.bodyText ?? r.snippet }));
+    },
+  },
+  {
+    name: "mailbox_people",
+    description: "People found in the current person's own mailbox: who they talk to, how often, last contact, and details read from signatures (title, company, phone). Filter by status: new (not in the CRM), added (in the CRM), or all. Use it to answer who someone is, who has gone quiet, or which contacts are missing from the CRM.",
+    input_schema: { type: "object", properties: { query: str("Name, email, company or domain to search"), status: str("new, added or all (default all)"), limit: num("Max rows, default 25") } },
+    scope: "read",
+    async run(a, ctx) {
+      const status = s(a.status) ?? "all";
+      const query = s(a.query);
+      const rows = await prisma.mailContact.findMany({
+        where: {
+          userId: ctx.userId,
+          status: status === "new" ? "NEW" : status === "added" ? "ADDED" : { in: ["NEW", "ADDED"] },
+          ...(query ? { OR: [{ name: like(query) }, { email: like(query) }, { companyGuess: like(query) }, { domain: like(query) }, { jobTitle: like(query) }] } : {}),
+        },
+        orderBy: [{ score: "desc" }, { lastSeenAt: "desc" }],
+        take: Math.min(n(a.limit, 25)!, 100),
+        select: { email: true, name: true, jobTitle: true, companyGuess: true, phone: true, messagesIn: true, messagesOut: true, threads: true, lastSeenAt: true, lastInboundAt: true, lastOutboundAt: true, lastSubject: true, score: true, status: true, contactId: true },
+      });
+      return rows.map((r) => ({ ...r, inCrm: r.status === "ADDED", company: r.companyGuess, companyGuess: undefined }));
+    },
+  },
+  {
+    name: "follow_up_suggestions",
+    description: "Who the current person should follow up with, from their own mailbox: emails waiting on their reply, people who have not replied to them, CRM contacts that have gone quiet, and possible leads not yet in the CRM. Pass create_tasks=true to add reminder tasks for the listed keys.",
+    input_schema: { type: "object", properties: { kind: str("needs_reply, waiting_on_them, gone_quiet, quiet_lead or all (default all)"), create_tasks: { type: "boolean", description: "Create reminder tasks for the returned items (or the keys given)" }, keys: { type: "array", items: { type: "string" }, description: "Specific item keys to create tasks for" } } },
+    scope: "read",
+    async run(a, ctx) {
+      const f = await followUpSuggestions(ctx.userId);
+      const kind = s(a.kind) ?? "all";
+      const all = [...f.needsReply, ...f.waitingOnThem, ...f.goneQuiet, ...f.quietLeads];
+      const picked = kind === "all" ? all : all.filter((x) => x.kind === kind);
+      if (a.create_tasks === true) {
+        if (!ctx.scopes.includes("write")) return { error: "Creating tasks needs write access." };
+        const keys = Array.isArray(a.keys) ? (a.keys as string[]) : null;
+        const items = keys ? picked.filter((x) => keys.includes(x.key)) : picked.filter((x) => !x.taskId);
+        const r = await createFollowUpTasks(ctx.userId, items.slice(0, 30), ctx.userId);
+        return { created: r.created, alreadyHad: r.existing, taskIds: r.ids };
+      }
+      return { thresholds: f.settings, items: picked.slice(0, 60).map((x) => ({ key: x.key, kind: x.kind, name: x.name, email: x.email, company: x.company, jobTitle: x.jobTitle, contactId: x.contactId, subject: x.subject, lastAt: x.lastAt, daysAgo: x.days, reason: x.reason, reminderTaskId: x.taskId })) };
     },
   },
   {

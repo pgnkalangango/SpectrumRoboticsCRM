@@ -47,6 +47,7 @@ export const DEFAULT_SETTINGS = {
     ],
   },
   leads: { defaultOwnerEmail: "pg@spectrumrobotics.ai", notifyEmails: ["pg@spectrumrobotics.ai"], autoDeal: true },
+  followUp: { replyWithinDays: 2, waitingOnThemDays: 5, quietDays: 30, leadMinExchanges: 2, historyDays: 365, autoTasks: true },
   social: { requireApproval: true, approverTier: "OWNER" },
   portal: { selfSignup: true, autoApproveMatchingDomain: true, welcomeMessage: "Welcome to your Spectrum Robotics client portal." },
 } as const;

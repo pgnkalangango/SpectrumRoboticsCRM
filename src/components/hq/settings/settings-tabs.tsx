@@ -21,6 +21,7 @@ const TABS: { key: string; label: string }[] = [
   { key: "service", label: "Service" },
   { key: "assistant", label: "Assistant" },
   { key: "leads", label: "Leads" },
+  { key: "followUp", label: "Follow ups" },
   { key: "social", label: "Social" },
   { key: "portal", label: "Portal" },
   { key: "departments", label: "Departments" },
@@ -140,6 +141,19 @@ function specs(staff: StaffOption[]): Record<string, GroupSpec> {
         { name: "defaultOwnerEmail", label: "Default owner", type: "select", options: [{ value: "", label: "Nobody (leave unassigned)" }, ...staff.map((s) => ({ value: s.email, label: `${s.name} (${s.email})` }))], hint: "New leads without an owner go to this person." },
         { name: "autoDeal", label: "Create a deal automatically for each new lead", type: "switch" },
         { name: "notifyEmails", label: "Notify these emails", type: "list", placeholder: "name@spectrumrobotics.ai" },
+      ],
+    },
+    followUp: {
+      key: "followUp",
+      title: "Follow ups",
+      intro: "How HQ reads each person's connected mailbox to find people, spot quiet leads and remind them to follow up. Every mailbox stays private to its owner.",
+      fields: [
+        { name: "historyDays", label: "How far back to read on first connect (days)", type: "number", min: 30, max: 730, hint: "Older mail is read once to build the people list. After that only new mail is synced." },
+        { name: "replyWithinDays", label: "Flag emails I have not answered after (days)", type: "number", min: 1, max: 30 },
+        { name: "waitingOnThemDays", label: "Flag people who have not replied to me after (days)", type: "number", min: 1, max: 60 },
+        { name: "quietDays", label: "A relationship has gone quiet after (days)", type: "number", min: 7, max: 365 },
+        { name: "leadMinExchanges", label: "Two way exchanges before someone counts as a possible lead", type: "number", min: 1, max: 20 },
+        { name: "autoTasks", label: "Create follow up tasks automatically during the nightly sync", type: "switch" },
       ],
     },
     social: {

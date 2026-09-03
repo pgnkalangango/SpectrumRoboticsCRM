@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { runScheduledAutomations } from "@/lib/automations/engine";
 import { publishDuePosts } from "@/lib/social/publish";
 import { sendDigest } from "@/lib/automations/digest";
+import { syncAllMailboxes } from "@/lib/mail/people";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
@@ -31,6 +32,15 @@ export async function GET(req: Request) {
   } catch (e) {
     out.social = { error: e instanceof Error ? e.message : "failed" };
     out.ok = false;
+  }
+  // Mailboxes: pull new mail, refresh people and follow ups. Once an hour is plenty, so this runs
+  // when the minute is under 15 or when ?mail=1 forces it.
+  if (url.searchParams.get("mail") === "1" || now.getMinutes() < 15) {
+    try {
+      out.mail = await syncAllMailboxes();
+    } catch (e) {
+      out.mail = { error: e instanceof Error ? e.message : "failed" };
+    }
   }
   if (url.searchParams.get("digest") === "1") {
     try {

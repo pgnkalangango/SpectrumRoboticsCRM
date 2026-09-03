@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { getMailProvider } from "@/lib/mail/provider";
 import type { MailMessageDto } from "@/lib/mail/types";
 import { logActivity } from "@/lib/audit";
+import { getSetting } from "@/lib/settings";
 
 // Pulls the last N days of inbox and sent mail into the MailMessage cache for one person, matches
 // senders and recipients to contacts, and writes email activities on the contact timeline.
@@ -9,8 +10,12 @@ export async function syncMailbox(userId: string, opts: { days?: number; top?: n
   const got = await getMailProvider(userId);
   if (!got) return { ok: false as const, error: "No mailbox connected." };
   const { conn, provider } = got;
-  const days = opts.days ?? 30;
-  const top = opts.top ?? 60;
+  // First sync after connecting reads the configured history so the people list is complete.
+  // After that only recent mail is pulled.
+  const firstSync = !conn.lastSyncAt;
+  const history = firstSync ? (await getSetting("followUp")).historyDays : null;
+  const days = history ?? opts.days ?? 30;
+  const top = firstSync ? 500 : (opts.top ?? 60);
   const me = conn.accountEmail?.toLowerCase() ?? "";
   let inbox: MailMessageDto[] = [];
   let sent: MailMessageDto[] = [];

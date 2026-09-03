@@ -9,6 +9,7 @@ What is inside:
 - **Service and fleet**: sites, deployed robots, maintenance schedules, support tickets with SLA timers
 - **Marketing**: content calendar, LinkedIn, Facebook and Instagram publishing with posting rights, Canva designs
 - **SOP library**: every procedure searchable by task, with acknowledgments, versions and per screen help
+- **Mailbox intelligence**: once someone connects Outlook or Gmail, HQ reads their history, finds everyone they talk to, fills in title, company and phone from signatures, keeps last contact dates current, and flags emails waiting on a reply, people who went quiet and possible leads not yet in the CRM, with one click reminders
 - **Assistant**: reads the CRM, the SOPs, and each person's own mailbox and calendar; drafts in their voice, never sends without them
 - **MCP**: connect outside tools (Canva, media tools, accounting) to the assistant, and expose HQ itself to Claude Desktop and Claude Code with personal keys
 - **Client portal**: self service sign up matched to the customer's company, or invitation by the team
@@ -78,7 +79,7 @@ GET https://<host>/api/cron/automations
 Authorization: Bearer <CRON_SECRET>
 ```
 
-It runs time based automations, publishes scheduled social posts and sends digests.
+It runs time based automations, publishes scheduled social posts, sends digests, and once an hour syncs every connected mailbox to refresh people and follow up reminders (add `?mail=1` to force that part).
 
 ### MCP
 

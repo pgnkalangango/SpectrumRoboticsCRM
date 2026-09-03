@@ -33,6 +33,7 @@ const SCHEMAS = {
   service: z.object({ slaHours: z.object({ CRITICAL: int(1, 720), HIGH: int(1, 720), NORMAL: int(1, 720), LOW: int(1, 720) }), maintenanceIntervalDays: int(1, 730), renewalAlertDays: int(1, 365) }),
   assistant: z.object({ model: z.string().min(1).max(80), maxTokens: int(256, 64000), rules: list }),
   leads: z.object({ defaultOwnerEmail: z.string().email().or(z.literal("")), notifyEmails: z.array(z.string().email("One of the notify emails is not valid.")), autoDeal: z.boolean() }),
+  followUp: z.object({ replyWithinDays: z.number().int().min(1).max(30), waitingOnThemDays: z.number().int().min(1).max(60), quietDays: z.number().int().min(7).max(365), leadMinExchanges: z.number().int().min(1).max(20), historyDays: z.number().int().min(30).max(730), autoTasks: z.boolean() }),
   social: z.object({ requireApproval: z.boolean(), approverTier: z.enum(["OWNER", "LEADERSHIP"]) }),
   portal: z.object({ selfSignup: z.boolean(), autoApproveMatchingDomain: z.boolean(), welcomeMessage: str(500) }),
 } as const;

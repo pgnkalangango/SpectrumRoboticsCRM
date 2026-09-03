@@ -100,6 +100,7 @@ export default async function ContactPage({ params, searchParams }: { params: Pr
                 { label: "Address", value: [c.addressStreet, c.addressCity, c.addressState, c.addressZip].filter(Boolean).join(", ") },
                 { label: "Tags", value: c.tags.length ? <span className="flex flex-wrap gap-1">{c.tags.map((t) => <Badge key={t}>{t}</Badge>)}</span> : null },
                 { label: "Last contacted", value: c.lastContactedAt ? relTime(c.lastContactedAt) : null },
+                { label: "Last heard from", value: c.lastHeardFromAt ? relTime(c.lastHeardFromAt) : null },
                 { label: "Added", value: fmtDate(c.createdAt) },
               ]}
             />

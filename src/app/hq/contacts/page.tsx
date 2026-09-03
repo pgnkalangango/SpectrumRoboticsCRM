@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Plus, Upload, Users } from "lucide-react";
+import { Mail, Plus, Upload, Users } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { requireStaff } from "@/lib/session";
 import { fmtDate, fullName, label, relTime } from "@/lib/utils";
@@ -46,6 +46,11 @@ export default async function ContactsPage({ searchParams }: { searchParams: Pro
         subtitle={`${total} ${sp.status === "archived" ? "archived" : "active"} contact${total === 1 ? "" : "s"}. Every person you sell to, support or partner with.`}
         actions={
           <>
+            <Button asChild variant="secondary">
+              <Link href="/hq/inbox/people">
+                <Mail /> From your mailbox
+              </Link>
+            </Button>
             <Button asChild variant="secondary">
               <Link href="/hq/contacts/import">
                 <Upload /> Import

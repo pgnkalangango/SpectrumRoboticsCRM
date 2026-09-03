@@ -7,6 +7,8 @@ import { PageHeader } from "@/components/ui/empty-state";
 import { InboxView, type InboxThread } from "@/components/hq/inbox/inbox-view";
 import { ConnectMailbox } from "@/components/hq/inbox/connect-mailbox";
 import { fullName } from "@/lib/utils";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export const metadata = { title: "Inbox" };
 
@@ -60,6 +62,7 @@ export default async function InboxPage({ searchParams }: { searchParams: Promis
       <PageHeader
         title="Inbox"
         subtitle={`${conn.accountEmail} via ${conn.provider === "MICROSOFT" ? "Microsoft 365" : "Google Workspace"}${conn.lastSyncAt ? ` · synced ${new Date(conn.lastSyncAt).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}` : " · not synced yet"}`}
+        actions={<Button variant="secondary" asChild><Link href="/hq/inbox/people">People and follow ups</Link></Button>}
       />
       <InboxView
         threads={[...threads.values()]}

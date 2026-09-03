@@ -112,6 +112,7 @@ model User {
   sequences        OutreachSequence[]
   departmentsLed   Department[] @relation("DepartmentLead")
   mailMessages     MailMessage[]
+  mailContacts     MailContact[]
 
   @@index([kind, tier])
   @@index([companyId])
@@ -301,7 +302,8 @@ model Contact {
   researchBrief   Json?       // personalization brief per the outreach SOP
   doNotContact    Boolean     @default(false)
   unsubscribedAt  DateTime?
-  lastContactedAt DateTime?
+  lastContactedAt DateTime?   // last time we reached out (email, call, meeting)
+  lastHeardFromAt DateTime?   // last time they wrote to us
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
 
@@ -317,6 +319,7 @@ model Contact {
   enrollments  SequenceEnrollment[]
   sitesPrimary Site[]
   mailMessages MailMessage[]
+  mailContacts MailContact[]
 
   @@index([email])
   @@index([companyId])
@@ -1367,6 +1370,52 @@ model MailMessage {
   @@index([userId, receivedAt])
   @@index([contactId])
   @@index([threadId])
+}
+
+enum MailContactStatus {
+  NEW        // seen in the mailbox, not in the CRM yet
+  ADDED      // linked to a CRM contact
+  IGNORED    // the person chose to hide it
+  INTERNAL   // a teammate on our own domain
+  AUTOMATED  // newsletters, notifications, no reply addresses
+}
+
+// People discovered in one person's mailbox. Built from the MailMessage cache, enriched from
+// signatures, and promoted to CRM contacts with one click. Private to the mailbox owner.
+model MailContact {
+  id            String            @id @default(cuid())
+  userId        String
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  email         String
+  name          String?
+  firstName     String?
+  lastName      String?
+  domain        String?
+  companyGuess  String?
+  jobTitle      String?
+  phone         String?
+  linkedinUrl   String?
+  signature     String?           // trimmed signature block the details came from
+  messagesIn    Int               @default(0)
+  messagesOut   Int               @default(0)
+  threads       Int               @default(0)
+  firstSeenAt   DateTime?
+  lastSeenAt    DateTime?
+  lastInboundAt DateTime?
+  lastOutboundAt DateTime?
+  lastSubject   String?
+  lastThreadId  String?
+  score         Int               @default(0)   // 0 to 100, how much this looks like a real business relationship
+  status        MailContactStatus @default(NEW)
+  contactId     String?
+  contact       Contact?          @relation(fields: [contactId], references: [id], onDelete: SetNull)
+  enrichedAt    DateTime?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@unique([userId, email])
+  @@index([userId, status])
+  @@index([contactId])
 }
 
 enum McpAuthType {
