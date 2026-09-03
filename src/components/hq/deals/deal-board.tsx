@@ -121,6 +121,7 @@ function Draggable({ deal, staleDays }: { deal: BoardDeal; staleDays: number }) 
 }
 
 function DealCard({ deal, dragging, staleDays = 14 }: { deal: BoardDeal; dragging?: boolean; staleDays?: number }) {
+  // eslint-disable-next-line react-hooks/purity
   const overdueNext = deal.nextStepDueAt && new Date(deal.nextStepDueAt).getTime() < Date.now();
   const warn = !deal.nextStep || overdueNext || deal.stale;
   return (

@@ -12,7 +12,15 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "src/generated/**",
   ]),
+  {
+    rules: {
+      // Syncing local state from the URL or localStorage inside an effect is intentional in the
+      // shells, filters and theme toggle. Keep it visible as a warning rather than a build blocker.
+      "react-hooks/set-state-in-effect": "warn",
+    },
+  },
 ]);
 
 export default eslintConfig;

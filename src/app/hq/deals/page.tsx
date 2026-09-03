@@ -30,6 +30,8 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
     ...(sp.stage ? { stageKey: sp.stage } : {}),
   };
   const deals = await prisma.deal.findMany({ where, orderBy: [{ updatedAt: "desc" }], take: 400, include: { company: { select: { name: true } }, owner: { select: { name: true, image: true, avatarColor: true } }, stage: true } });
+  // Server component: reading the clock here is fine.
+  // eslint-disable-next-line react-hooks/purity
   const staleBefore = Date.now() - pipeline.staleDays * 86400000;
   const boardDeals = deals.map((d) => ({
     id: d.id,

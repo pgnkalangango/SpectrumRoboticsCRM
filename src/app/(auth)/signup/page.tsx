@@ -54,7 +54,7 @@ export default function SignupPage() {
         <Button type="submit" size="lg" loading={pending} className="w-full">
           Create account
         </Button>
-        <p className="text-center text-xs text-muted">By creating an account you agree to Spectrum Robotics' terms of service and privacy policy.</p>
+        <p className="text-center text-xs text-muted">By creating an account you agree to Spectrum Robotics&apos; terms of service and privacy policy.</p>
       </form>
       <p className="mt-6 text-center text-sm text-muted">
         Already have an account?{" "}

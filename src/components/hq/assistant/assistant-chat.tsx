@@ -43,7 +43,7 @@ export function AssistantChat({ threads, prompts, initialThreadId, initialMessag
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefill, configured]);
 
-  const ask = async (text?: string) => {
+  async function ask(text?: string) {
     const q = (text ?? input).trim();
     if (!q || busy) return;
     setInput("");
@@ -65,7 +65,7 @@ export function AssistantChat({ threads, prompts, initialThreadId, initialMessag
       setMessages((m) => m.map((x) => (x.id === tempBot.id ? { ...x, content: r.error, pending: false } : x)));
       toast.error(r.error);
     }
-  };
+  }
 
   const newConversation = () => {
     setThreadId(null);

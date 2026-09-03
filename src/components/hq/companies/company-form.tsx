@@ -128,7 +128,7 @@ export function CompanySheet({ open, onClose, initial }: { open: boolean; onClos
               <label className="flex items-center justify-between text-sm">
                 <span>
                   <span className="font-medium">Portal enabled</span>
-                  <span className="block text-xs text-muted">People who sign up with this company's email domain get access automatically.</span>
+                  <span className="block text-xs text-muted">People who sign up with this company&apos;s email domain get access automatically.</span>
                 </span>
                 <Switch checked={!!field.value} onCheckedChange={field.onChange} />
               </label>
