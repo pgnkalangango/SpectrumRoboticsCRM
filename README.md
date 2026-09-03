@@ -14,6 +14,18 @@ What is inside:
 - **MCP**: connect outside tools (Canva, media tools, accounting) to the assistant, and expose HQ itself to Claude Desktop and Claude Code with personal keys
 - **Client portal**: self service sign up matched to the customer's company, or invitation by the team
 
+## Where this runs today
+
+This repository is the reference build of Spectrum HQ: the full design, copy and behavior, on Next.js and PostgreSQL.
+
+The live system runs inside the Spectrum Robotics website, which is a Base44 app (app id 698cd4a752dc99c4d5b7105c). Every screen here has been ported into that app on Base44 entities:
+
+- `/hq` is Spectrum HQ for the team. It replaced the old `/staff` section, which was deleted along with the old quote builder, saved quotes and admin products pages.
+- `/portal` is the client portal, with its own sign in and its own access requests.
+- The public website is unchanged apart from the two sign in doors and the lead capture wiring.
+
+When the two builds differ, this repository is the design reference and the Base44 app is what customers and the team actually use. Changes to the live system are made in the Base44 app.
+
 ## Run it locally
 
 ```bash
