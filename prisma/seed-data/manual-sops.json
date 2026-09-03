@@ -1,0 +1,157 @@
+[
+  {
+    "slug": "admin-new-customer-setup",
+    "code": "ADMIN-001",
+    "title": "Setting up a new customer",
+    "department": "Admin",
+    "category": "procedure",
+    "scope": "DEPARTMENT",
+    "summary": "After the signed agreement and first payment arrive, set the customer up in HQ and QuickBooks, create their portal login, and hand off to the delivery team.",
+    "keywords": ["new customer", "onboarding", "setup", "billing", "portal", "handoff"],
+    "appliesTo": ["task:onboarding", "screen:companies", "screen:clients", "stage:won"],
+    "requiresAcknowledgment": true,
+    "enforcedBySystem": "Deal won creates the setup task; portal invite from Client accounts",
+    "body": "# Setting up a new customer\n\n**Team:** Administration · **Job owner:** Customer Success Manager · **Review:** every 3 months\n\n## Why we do this\nMake sure every new customer is set up correctly in HQ and billing right after they sign, so the delivery team can start without chasing paperwork. Done by the admin helper so the Customer Success Manager can spend time with customers.\n\n## Tools and help\n- HQ (company, contacts, sites, portal access)\n- QuickBooks (customer record and payment plan)\n- Signed agreement (MSA), the customer info form from Sales, the payment receipt\n\n## Steps\n1. **Check the papers.** Confirm the signed agreement, info form and payment receipt are all there and complete. If anything is missing, stop and call the salesperson.\n2. **Update the company.** In HQ set the company status to Active, add the address, robot type and where the robot will work. Create the Site record.\n3. **Set up billing.** Create the customer in QuickBooks and the payment plan exactly as the signed agreement says.\n4. **Create the portal login.** From Client accounts, invite the main customer contact. They get a welcome email with their login and a link to the help page.\n5. **Tell the robot team.** Send the standard handoff note to the Delivery Team Leader and the technician with the site address.\n6. **Save the papers.** Upload the signed agreement and info form to the company's documents in HQ.\n7. **Finish.** Mark the Set up customer task done.\n\n## Final check\n- All papers checked and saved\n- Company is Active with the right robot details and a Site\n- Payment plan is set up in QuickBooks\n- Customer has their portal login and welcome email\n- Delivery team has been told\n\n## What if things go wrong\n- **Info form missing or incomplete:** call the salesperson right away. Do not continue until it is complete.\n- **QuickBooks will not accept the payment plan:** check the agreement for the payment rules. If still wrong, ask Finance.\n- **Question about the agreement or payment:** ask the Customer Success Manager.",
+    "steps": [
+      { "title": "Check the papers", "detail": "Signed agreement, info form, payment receipt all present and complete.", "required": true },
+      { "title": "Update the company and create the Site", "detail": "Status Active, address, robot type, where the robot will work.", "required": true },
+      { "title": "Set up billing in QuickBooks", "detail": "Customer record and payment plan exactly as the agreement says.", "required": true },
+      { "title": "Invite the customer to the portal", "detail": "Client accounts > Invite. They get login and help link.", "required": true },
+      { "title": "Notify the delivery team", "detail": "Standard handoff note with the site address.", "required": true },
+      { "title": "Save the documents", "detail": "Upload agreement and info form to the company.", "required": true },
+      { "title": "Mark the task done", "detail": "", "required": true }
+    ]
+  },
+  {
+    "slug": "delivery-install-and-training",
+    "code": "DEL-002",
+    "title": "Robot delivery, setup and customer training",
+    "department": "Service",
+    "category": "procedure",
+    "scope": "DEPARTMENT",
+    "summary": "From order to certified operators: order the robot, plan the trip, install and map on site, train and test the customer's staff, and log every step in HQ.",
+    "keywords": ["delivery", "install", "installation", "mapping", "training", "certificate", "site visit", "order"],
+    "appliesTo": ["task:install", "screen:sites", "screen:robots", "screen:portal_training"],
+    "requiresAcknowledgment": true,
+    "enforcedBySystem": "Install project checklist; Training certificates issued from the Site record",
+    "body": "# Robot delivery, setup and customer training\n\n**Team:** Delivery and Installation · **Job owner:** Field Service Technician · **Review:** every 3 months\n\n## Why we do this\nThe robot is ordered, delivered, set up correctly at the customer's place, and the customer knows exactly how to use it. Starts right after the customer pays. Ordering and travel booking are done by a helper so the technician can focus on the install and the training.\n\n## Tools and help\n- HQ (site, robot units, install project, certificates)\n- Supplier contact list, the robot tablet, the OEM mapping app\n- Customer payment receipt and order forms\n\n## Section A: before delivery (ordering and planning)\n1. **Check customer payment.** Confirm the money arrived and cleared.\n2. **Order the robot.** Tell the supplier we need the robots and any extra parts.\n3. **Talk to the supplier.** Email and call to confirm they got the order, when the robot arrives, and whether their technician will help.\n4. **Log it.** Write the order number and what the supplier said on the Site timeline.\n5. **Tell the Team Leader** the robot is ordered and planning can start.\n6. **Plan the trip.** Who installs, how they travel, where they stay, what it costs.\n7. **Track the shipment** until it arrives.\n8. **Get the trip approved.** Log the plan in HQ and get the Team Leader's yes.\n\n## Section B: on site installation\n1. **Arrive and say hello.** On time. Meet the main customer contacts.\n2. **Check the area.** Walk the floor plan and where the robot will work.\n3. **Start the visit.** Mark the install project stage Installation visit started. Tell the Team Leader you have arrived.\n4. **Unbox and prepare** the robot.\n5. **Draw the map.** Use the mapping app. Set the work zones and routes.\n6. **Check the robot.** Everything working and every part set up.\n7. **Put on the Spectrum Robotics stickers.**\n8. **Log it.** Map done, setup done, test done on the robot unit. Tell the Team Leader if all is good or if there are problems.\n\n## Section C: teaching the customer (training and certification)\n1. **Teach the operators** how to use the robot, charge it, fix simple problems, and what to do if it stops.\n2. **Practice time** with your help.\n3. **Check their learning.** A short test per operator. Fix anything they do not understand.\n4. **Give certificates.** Issue Robotic Operator Certificates from the Site record. Record who got one.\n5. **Log training** details, test results and certified names in HQ. Tell the Team Leader training is finished.\n6. **Give support info.** Phone numbers and email for help, the portal login, the warranty and how we fix the robot if it breaks.\n7. **Finish.** Mark installation and training Completed. Send a final summary to the Team Leader.\n\n## Final check\n- Robot ordered, trip planned and approved\n- Robot set up, mapped and working on site\n- All key operators passed and got certificates\n- Customer has support contact info\n- HQ shows every step Completed\n\n## What if things go wrong\n- **Supplier says the robot will be late:** tell the customer right away. Work with Sales to manage expectations.\n- **An operator fails the test:** no certificate yet. More practice, then test again until they pass.\n- **Big problem with setup or the customer:** call the Delivery Team Leader.",
+    "steps": [
+      { "title": "A. Confirm payment and order the robot", "detail": "Confirm with supplier: order received, arrival date, whether their tech helps.", "required": true },
+      { "title": "A. Plan and approve the trip", "detail": "Installer, travel, lodging, cost. Team Leader approves in HQ.", "required": true },
+      { "title": "B. Install and map on site", "detail": "Walk the floor, unbox, map zones and routes, test, apply stickers.", "required": true },
+      { "title": "B. Log map done, setup done, test done", "detail": "On the robot unit record.", "required": true },
+      { "title": "C. Train, practice, test", "detail": "Every key operator passes a short test.", "required": true },
+      { "title": "C. Issue operator certificates", "detail": "From the Site record; names logged.", "required": true },
+      { "title": "C. Hand over support info and close the project", "detail": "Portal login, phone, email, warranty. Final summary to Team Leader.", "required": true }
+    ]
+  },
+  {
+    "slug": "hr-new-team-member-onboarding",
+    "code": "HR-001",
+    "title": "New team member: paperwork, setup and training",
+    "department": "HR",
+    "category": "onboarding",
+    "scope": "COMPANY",
+    "summary": "Everything from the day someone says yes to the end of their first months: paperwork, tools and access, training, and a mentor with regular check ins.",
+    "keywords": ["onboarding", "new hire", "NDA", "paperwork", "training", "mentor", "access"],
+    "appliesTo": ["task:onboarding", "screen:team"],
+    "requiresAcknowledgment": false,
+    "enforcedBySystem": "Team > Add member sends the invitation and assigns the SOP reading list",
+    "body": "# New team member: paperwork, setup and training\n\n**Team:** Human Resources · **Job owner:** HR Specialist · **Review:** every 3 months\n\n## Why we do this\nEvery new person fills out the right papers, gets their tools, and learns what they need to start well. Starts the moment the person says yes.\n\n## Section A: before the first day (paperwork)\n1. Send the NDA, non compete and job contract.\n2. Send the government and company forms.\n3. Mark in HQ that papers have been sent.\n4. Confirm every paper is signed and saved in the secure folder.\n5. Tell the Team Leader the pre first day papers are done.\n\n## Section B: setup and tools\n1. Ask for their shirt size and order a Spectrum Robotics shirt.\n2. Add them to the Blinq contact app.\n3. Add them in HQ (Team > Add member) with the right tier and department. Not too much access, not too little.\n4. Give them their company email.\n5. Mark in HQ that they have their access.\n6. Tell the Team Leader setup is complete.\n\n## Section C: training\n1. Give access to the training portal.\n2. They watch all first day training videos.\n3. Assign the SOPs they must read and acknowledge (HQ does this by department).\n4. Invite them to all team meetings.\n5. Have them listen to sales calls to learn how we talk to customers.\n6. Give them the scripts we use for calls, emails and texts.\n7. Track training progress in HQ.\n8. Tell the Team Leader when training starts, is half done, and is finished.\n\n## Section D: long term support\n1. Pair them with a mentor or manager for the first one to two months.\n2. Regular check in meetings.\n3. Make sure they always have the newest SOPs.\n4. Write check in notes in HQ.\n5. Tell HR when onboarding is fully complete.\n\n## Final check\n- NDA, non compete and contract signed and saved\n- Shirt, email and HQ access done\n- Training videos and SOPs assigned\n- Team Leader told they are ready to start\n\n## What if things go wrong\n- **Papers not signed on time:** call right away. They cannot start until the papers are signed.\n- **HQ will not create the account:** ask the owner who manages HQ.\n- **Legal question:** ask the HR Specialist.",
+    "steps": [
+      { "title": "Send and collect signed paperwork", "detail": "NDA, non compete, contract, government and company forms.", "required": true },
+      { "title": "Order shirt, add to Blinq, create email", "detail": "", "required": true },
+      { "title": "Add to HQ with the right tier and department", "detail": "Team > Add member.", "required": true },
+      { "title": "Assign training videos and SOP reading list", "detail": "", "required": true },
+      { "title": "Invite to meetings, shadow sales calls, share scripts", "detail": "", "required": true },
+      { "title": "Assign a mentor and schedule check ins", "detail": "First one to two months.", "required": true },
+      { "title": "Confirm onboarding complete to HR", "detail": "", "required": true }
+    ]
+  },
+  {
+    "slug": "sales-qualify-and-price-plan",
+    "code": "SALES-003",
+    "title": "Finding the right customers and writing a price plan",
+    "department": "Sales",
+    "category": "procedure",
+    "scope": "DEPARTMENT",
+    "summary": "Qualify with BANT, design the robot plan with the engineer, request the site visit, build the quote from the template, get the price approved, send it and book the review call within two days.",
+    "keywords": ["BANT", "qualify", "quote", "price plan", "proposal", "site visit", "ROI"],
+    "appliesTo": ["task:quote", "screen:quotes", "screen:deals", "stage:discovery", "stage:assessment", "stage:quote_sent"],
+    "requiresAcknowledgment": true,
+    "enforcedBySystem": "Quote builder pulls catalog prices; discounts need owner approval; sending a quote sets the deal to Quote sent and creates the follow up task",
+    "body": "# Finding the right customers and writing a price plan\n\n**Team:** Sales · **Job owner:** Account Executive · **Review:** every 3 months\n\n## Why we do this\nSpend time only with people who are ready to buy, and give them a clear plan that shows how the robot helps them. Runs from first interest to the final price plan.\n\n## Tools and help\n- HQ (contacts, deals, quotes, catalog)\n- The BANT script (Budget, Authority, Need, Timeline)\n- Site visit request form, standard quote template and terms\n\n## Steps\n1. **Ask the right questions (BANT).** Budget, who decides, what they need, when they want it. Put all four answers on the deal.\n2. **Design the robot plan.** Talk to the robot engineer. Which robot, how many, what software the customer needs.\n3. **Ask for a site visit.** If they are a good fit, send the site visit form and ask the delivery team to schedule the assessment.\n4. **Write the price plan.** Build the quote in HQ from the catalog. Adjust the robot plan and the savings section to match the customer.\n5. **Check the price plan.** Prices follow the catalog. Any discount goes to an owner for approval inside HQ.\n6. **Send the price plan** from HQ and book a meeting within two days to talk it through.\n7. **Update the deal.** HQ moves the deal to Quote sent and creates the follow up task; add the meeting time.\n\n## Final check\n- All four BANT answers are on the deal\n- The robot plan was checked by an engineer\n- The quote shows how the customer saves money\n- Any discount was approved by an owner\n- A review meeting is booked\n\n## What if things go wrong\n- **They need it but have no budget or authority:** do not send a price plan yet. Send case studies and stay in touch (Nurturing stage).\n- **They ask for a robot not in the catalog:** talk to the design team first. Promise nothing until they say yes.\n- **Very big deal or very important customer:** bring in an owner.",
+    "steps": [
+      { "title": "Run BANT and record answers on the deal", "detail": "Budget, Authority, Need, Timeline.", "required": true },
+      { "title": "Design the robot plan with the engineer", "detail": "Model, quantity, software.", "required": true },
+      { "title": "Request the site visit", "detail": "Send the form; delivery team schedules the assessment.", "required": true },
+      { "title": "Build the quote from the catalog", "detail": "Adjust the plan and savings for the customer.", "required": true },
+      { "title": "Get any discount approved", "detail": "Owners only. HQ routes the request.", "required": true },
+      { "title": "Send and book the review call within two days", "detail": "", "required": true }
+    ]
+  },
+  {
+    "slug": "marketing-customer-success-story",
+    "code": "MKT-004",
+    "title": "Writing a success story about a customer",
+    "department": "Marketing",
+    "category": "procedure",
+    "scope": "DEPARTMENT",
+    "summary": "After 90 days with a happy customer: get written permission, interview them, write the story with before and after numbers and a quote, get their approval, design it, then share it with Sales, the website and social.",
+    "keywords": ["case study", "success story", "testimonial", "permission", "90 day", "content"],
+    "appliesTo": ["screen:marketing", "screen:campaigns"],
+    "requiresAcknowledgment": false,
+    "enforcedBySystem": "Proof and claims check on outgoing copy",
+    "body": "# Writing a success story about a customer\n\n**Team:** Marketing · **Job owner:** Content Marketing Specialist · **Review:** every 3 months\n\n## Why we do this\nStories about how our robots saved customers time and money help Sales sell more robots. Do this after a customer has used the robot for 90 days and is happy. Goal: one new story every month.\n\n## Tools and help\n- HQ (company timeline, 90 day report, documents), customer survey results\n- Success story template, interview questions, customer permission form\n- Canva for the design\n\n## Steps\n1. **Find a great customer.** Customer Success finds customers who saved a lot of time or money (20% or more) after 90 days and asks if we can tell their story.\n2. **Get permission.** Send the official permission form. No story until it is signed and saved on the company record.\n3. **Talk to the customer.** A 30 minute interview using the interview questions. Capture the before and after numbers and what they say about the robot.\n4. **Write the story.** Use the template: the problem, the robot solution, the results (numbers and quotes). Write a catchy title. Every figure follows the Proof and claims policy.\n5. **Get the customer's yes.** They must approve every word and quote before design.\n6. **Make it look good.** Design team turns the final words and photos into a PDF and a website page in Canva.\n7. **Share the story.** Website, tell Sales, social media and the monthly email.\n\n## Final check\n- Permission form signed and saved\n- At least one before and after number\n- At least one great customer quote\n- Customer approved the final words before design\n- Sales knows about the new story\n\n## What if things go wrong\n- **Customer will not share exact dollar numbers:** ask for percentages (30% faster) and focus on how much easier the job is.\n- **The 90 day report shows little improvement:** do not write the story. Ask Customer Success to help the customer use the robot better and check again in 90 days.\n- **Not sure what we may share:** ask an owner before publishing.",
+    "steps": [
+      { "title": "Pick a customer with 20%+ improvement after 90 days", "detail": "", "required": true },
+      { "title": "Get the permission form signed", "detail": "Save it on the company record.", "required": true },
+      { "title": "Run the 30 minute interview", "detail": "Before and after numbers, quotes.", "required": true },
+      { "title": "Write the story with the template", "detail": "Problem, solution, results. Hedged figures.", "required": true },
+      { "title": "Get customer approval on every word", "detail": "", "required": true },
+      { "title": "Design in Canva and publish", "detail": "Website, Sales, social, monthly email.", "required": true }
+    ]
+  },
+  {
+    "slug": "leadership-quarterly-plan-meeting",
+    "code": "LEAD-005",
+    "title": "Quarterly big plan meeting",
+    "department": "Leadership",
+    "category": "procedure",
+    "scope": "COMPANY",
+    "summary": "In the last two weeks of every quarter: pre read 72 hours ahead, review last quarter, look at the market, set three to five measurable goals with an owner each, and tell the company within two days.",
+    "keywords": ["quarterly", "planning", "OKR", "goals", "leadership", "scorecard"],
+    "appliesTo": ["screen:reports"],
+    "requiresAcknowledgment": false,
+    "enforcedBySystem": "",
+    "body": "# Quarterly big plan meeting\n\n**Team:** Leadership · **Job owner:** CEO / Chief of Staff · **When:** last two weeks of every quarter, fixed dates\n\n## Why we do this\nLook at how the company did last quarter, see what is happening in the world (new robots, new customer needs), and decide the most important goals for the next three months. The Executive Assistant gathers the numbers so leadership spends its time deciding.\n\n## Tools and help\n- HQ Reports (pipeline, revenue, service, marketing)\n- Goal tracker, standard meeting slides\n- Last quarter's goal scorecard and each team's report (Sales, Delivery, Finance)\n\n## Steps\n1. **Gather numbers and make slides.** EA collects every report and the goal scorecard and fills the standard slides.\n2. **Send the pre read** to leadership three days before the meeting.\n3. **Review last quarter (90 min).** What went well, what we missed, the three to five problems we must fix.\n4. **Look at the world (60 min).** New robots and new customer needs. Rank the top three risks for next quarter.\n5. **Set new goals (120 min).** Three to five goals, clear and measurable, tied to the yearly mission.\n6. **Final say and tell everyone.** The CEO approves. Announce in an all hands and by email.\n7. **Update the goal tracker** with the approved goals and who owns each.\n\n## Final check\n- Pre read went out 72 hours ahead\n- Last quarter's scorecard is final and reviewed\n- Three to five goals, each measurable with an owner\n- Everyone told within two days\n\n## What if things go wrong\n- **A team sends numbers late:** the EA tells the team lead right away. Still late, the COO steps in.\n- **Leadership cannot agree on the top goal:** the CEO decides based on the yearly mission.\n- **Something big and unexpected happens:** the CEO calls an emergency meeting.",
+    "steps": [
+      { "title": "EA gathers reports and builds the slides", "detail": "", "required": true },
+      { "title": "Pre read sent 3 days ahead", "detail": "", "required": true },
+      { "title": "Review last quarter (90 min)", "detail": "Wins, misses, 3 to 5 problems.", "required": true },
+      { "title": "Market and risks (60 min)", "detail": "Top 3 risks.", "required": true },
+      { "title": "Set 3 to 5 measurable goals with owners (120 min)", "detail": "", "required": true },
+      { "title": "CEO approves; announce within 2 days; update tracker", "detail": "", "required": true }
+    ]
+  },
+  {
+    "slug": "ea-managing-the-owners-schedule",
+    "code": "ASSIST-006",
+    "title": "Managing an owner's schedule",
+    "department": "Admin",
+    "category": "procedure",
+    "scope": "COMPANY",
+    "summary": "The Executive Assistant is the time guard: four hours of focus time every day, every meeting request tiered (say yes, suggest something else, or say no), pre reads 24 hours ahead, and a daily seven point briefing.",
+    "keywords": ["calendar", "scheduling", "executive assistant", "focus time", "briefing", "meeting request"],
+    "appliesTo": ["screen:inbox", "screen:assistant"],
+    "requiresAcknowledgment": false,
+    "enforcedBySystem": "Assistant can draft the standard replies and block focus time on a connected calendar",
+    "body": "# Managing an owner's schedule\n\n**Team:** Administration · **Job owner:** Executive Assistant · **Review:** every 3 months\n\n## Why we do this\nAn owner's time goes to the most important work. Protect it so they can think about big plans and not be interrupted by small things. Applies to every request to meet with an owner.\n\n## Steps\n1. **Check the request** against the meeting priority list below.\n2. **Block focus time.** Four hours of no meeting time on the calendar every day.\n3. **Tier 1: say yes.** Board members, direct reports, main customers, meetings about a main goal. Schedule during meeting hours.\n4. **Tier 2: suggest something else.** Other team leads, non critical customer check ins, vendors. Use the standard reply to offer a shorter meeting, a meeting with someone else, or an email update.\n5. **Tier 3: say no.** General questions, cold calls, meetings with no clear reason. Standard reply that politely declines and points them to the right person.\n6. **Get ready.** Every accepted meeting has a pre read (agenda and decisions needed) in the invite 24 hours ahead.\n7. **Daily seven point briefing.** Fifteen minutes with the owner every day.\n\n## Meeting priority list\n| Tier | Who | What to do |\n|---|---|---|\n| 1 | Board, direct reports, main customers, main goal topics | Say yes |\n| 2 | Other team leads, routine customer check ins, vendors | Suggest something else |\n| 3 | General questions, cold calls, no clear reason | Say no, redirect |\n\n## Daily seven point briefing\n1. Today's schedule and focus blocks\n2. Tomorrow's schedule, travel and location\n3. Quick decisions that need a yes or no\n4. Updates on delegated tasks\n5. Urgent emails or messages needing a personal reply\n6. Travel and logistics for the next 7 days\n7. Status of the owner's top 3 goals\n\n## Definition of done\n- Calendar managed for the next 7 days\n- Daily briefing done and actions noted\n- Every Tier 3 request declined or redirected\n- At least 4 hours of focus time today\n\n## What if things go wrong\n- **A Tier 2 person keeps asking:** raise it in the briefing. If the owner says yes, cap it at 30 minutes.\n- **Focus time keeps getting eaten by meetings:** move or cancel the non critical ones and remind the owner what focus time is for.\n- **Conflict over a Tier 1 slot:** ask the Chief of Staff.",
+    "steps": [
+      { "title": "Tier every meeting request", "detail": "Yes, suggest something else, or no.", "required": true },
+      { "title": "Block 4 hours of focus time daily", "detail": "", "required": true },
+      { "title": "Pre read in every invite 24 hours ahead", "detail": "", "required": true },
+      { "title": "Daily 15 minute seven point briefing", "detail": "", "required": true }
+    ]
+  }
+]

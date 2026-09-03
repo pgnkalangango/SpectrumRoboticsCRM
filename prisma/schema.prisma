@@ -1,0 +1,1556 @@
+// Spectrum HQ data model.
+// One database for staff (owner, leadership, employee) and clients. Every table that a client
+// may see carries a companyId so the server layer can scope it; nothing relies on the UI.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ───────────────────────────── People, auth, access ─────────────────────────────
+
+enum UserKind {
+  STAFF
+  CLIENT
+}
+
+enum Tier {
+  OWNER
+  LEADERSHIP
+  EMPLOYEE
+  CLIENT
+}
+
+enum UserStatus {
+  INVITED
+  ACTIVE
+  INACTIVE
+}
+
+model User {
+  id               String     @id @default(cuid())
+  email            String     @unique
+  name             String
+  passwordHash     String?
+  emailVerified    DateTime?
+  image            String?
+  kind             UserKind   @default(STAFF)
+  tier             Tier       @default(EMPLOYEE)
+  status           UserStatus @default(INVITED)
+  roleLabel        String     @default("sales_rep") // job role label: admin, manager, sales_rep, tech, support, marketing, finance, viewer
+  title            String?
+  phone            String?
+  departmentId     String?
+  department       Department? @relation(fields: [departmentId], references: [id])
+  managerId        String?
+  manager          User?      @relation("UserManager", fields: [managerId], references: [id])
+  reports          User[]     @relation("UserManager")
+  bookingLink      String?
+  signatureHtml    String?
+  voiceProfile     String?
+  territory        String?
+  approvalLimitPct Int        @default(0)
+  permissions      String[]   @default([]) // e.g. social.post, catalog.publish, quotes.discount, team.manage
+  avatarColor      String?
+  timezone         String     @default("America/Chicago")
+  startDate        DateTime?
+  lastSeenAt       DateTime?
+  onboarding       Json?      // { tourCompleted, checklist: {...} }
+  preferences      Json?      // notification prefs, hidden nav, theme
+
+  // Client users belong to a company and optionally map to a contact record.
+  companyId        String?
+  company          Company?   @relation(fields: [companyId], references: [id])
+  contactId        String?    @unique
+  contact          Contact?   @relation(fields: [contactId], references: [id])
+
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  accounts         Account[]
+  sessions         Session[]
+  connections      Connection[]
+  apiKeys          ApiKey[]
+  invitationsSent  Invitation[] @relation("InvitedBy")
+  ownedContacts    Contact[]    @relation("ContactOwner")
+  ownedCompanies   Company[]    @relation("CompanyOwner")
+  ownedDeals       Deal[]       @relation("DealOwner")
+  tasksAssigned    Task[]       @relation("TaskAssignee")
+  tasksCreated     Task[]       @relation("TaskCreator")
+  activities       Activity[]
+  quotesOwned      Quote[]      @relation("QuoteOwner")
+  quotesApproved   Quote[]      @relation("QuoteApprover")
+  invoicesOwned    Invoice[]
+  approvalsRequested Approval[] @relation("ApprovalRequester")
+  approvalsDecided Approval[]   @relation("ApprovalDecider")
+  ticketsAssigned  Ticket[]     @relation("TicketAssignee")
+  ticketsCreated   Ticket[]     @relation("TicketCreator")
+  ticketComments   TicketComment[]
+  sopsOwned        Sop[]
+  sopAcks          SopAcknowledgment[]
+  sopVersions      SopVersion[]
+  threads          AssistantThread[]
+  notifications    Notification[]
+  auditLogs        AuditLog[]
+  socialPosts      SocialPost[] @relation("PostAuthor")
+  postsApproved    SocialPost[] @relation("PostApprover")
+  campaigns        Campaign[]
+  projectsOwned    Project[]
+  documents        Document[]
+  payments         Payment[]
+  mcpCalls         McpToolCall[]
+  savedPrompts     SavedPrompt[]
+  automations      Automation[]
+  sitesManaged     Site[]       @relation("SiteAccountManager")
+  sitesTech        Site[]       @relation("SiteTechnician")
+  certificatesIssued TrainingCertificate[]
+  maintenanceLogs  MaintenanceLog[]
+  sequences        OutreachSequence[]
+  departmentsLed   Department[] @relation("DepartmentLead")
+  mailMessages     MailMessage[]
+
+  @@index([kind, tier])
+  @@index([companyId])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Department {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  name        String
+  description String?
+  color       String  @default("#0A9DA0")
+  sortOrder   Int     @default(0)
+  leadId      String?
+  lead        User?   @relation("DepartmentLead", fields: [leadId], references: [id])
+  users       User[]
+  sops        Sop[]
+}
+
+enum InvitationKind {
+  STAFF
+  CLIENT
+}
+
+model Invitation {
+  id           String         @id @default(cuid())
+  email        String
+  name         String?
+  kind         InvitationKind @default(STAFF)
+  tier         Tier           @default(EMPLOYEE)
+  roleLabel    String?
+  departmentId String?
+  companyId    String?
+  token        String         @unique
+  invitedById  String
+  invitedBy    User           @relation("InvitedBy", fields: [invitedById], references: [id])
+  expiresAt    DateTime
+  acceptedAt   DateTime?
+  createdAt    DateTime       @default(now())
+
+  @@index([email])
+}
+
+enum AccessRequestStatus {
+  PENDING
+  APPROVED
+  DENIED
+}
+
+model AccessRequest {
+  id            String              @id @default(cuid())
+  name          String
+  email         String
+  company       String?
+  reason        String?
+  requestedKind InvitationKind      @default(STAFF)
+  status        AccessRequestStatus @default(PENDING)
+  reviewedById  String?
+  reviewedAt    DateTime?
+  adminNotes    String?
+  createdAt     DateTime            @default(now())
+}
+
+// ───────────────────────────── CRM core ─────────────────────────────
+
+enum CompanyStatus {
+  PROSPECT
+  ACTIVE
+  PARTNER
+  COMPETITOR
+  INACTIVE
+}
+
+model Company {
+  id                  String        @id @default(cuid())
+  name                String
+  domain              String?       // used to match client sign ups and inbound mail
+  industry            String?       // hospitality, healthcare, manufacturing, education, warehouse, office, retail, other
+  website             String?
+  phone               String?
+  addressStreet       String?
+  addressCity         String?
+  addressState        String?
+  addressZip          String?
+  employeeCount       Int?
+  annualRevenue       Decimal?      @db.Decimal(14, 2)
+  status              CompanyStatus @default(PROSPECT)
+  ownerId             String?
+  owner               User?         @relation("CompanyOwner", fields: [ownerId], references: [id])
+  tags                String[]      @default([])
+  notes               String?
+  source              String?
+  portalEnabled       Boolean       @default(false)
+  clientCode          String?       @unique // short code clients can use at sign up
+  stripeCustomerId    String?
+  quickbooksCustomerId String?
+  logoUrl             String?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  contacts   Contact[]
+  deals      Deal[]
+  quotes     Quote[]
+  invoices   Invoice[]
+  sites      Site[]
+  robots     RobotUnit[]
+  tickets    Ticket[]
+  activities Activity[]
+  tasks      Task[]
+  projects   Project[]
+  documents  Document[]
+  users      User[]
+  certificates TrainingCertificate[]
+
+  @@index([name])
+  @@index([domain])
+  @@index([ownerId])
+}
+
+enum ContactType {
+  LEAD
+  PROSPECT
+  CLIENT
+  PARTNER
+  VENDOR
+  OTHER
+}
+
+model Contact {
+  id              String      @id @default(cuid())
+  firstName       String
+  lastName        String?
+  email           String?
+  emailSecondary  String?
+  phoneMobile     String?
+  phoneOffice     String?
+  companyId       String?
+  company         Company?    @relation(fields: [companyId], references: [id])
+  companyName     String?     // free text until linked
+  jobTitle        String?
+  type            ContactType @default(LEAD)
+  leadSource      String?     // email, referral, website, event, cold_outreach, linkedin, chatbot, other
+  ownerId         String?
+  owner           User?       @relation("ContactOwner", fields: [ownerId], references: [id])
+  status          String      @default("active") // active, inactive, archived
+  tags            String[]    @default([])
+  linkedinUrl     String?
+  addressStreet   String?
+  addressCity     String?
+  addressState    String?
+  addressZip      String?
+  timezone        String?
+  notes           String?
+  researchBrief   Json?       // personalization brief per the outreach SOP
+  doNotContact    Boolean     @default(false)
+  unsubscribedAt  DateTime?
+  lastContactedAt DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  user         User?
+  deals        DealContact[]
+  primaryDeals Deal[]        @relation("DealPrimaryContact")
+  activities   Activity[]
+  tasks        Task[]
+  quotes       Quote[]
+  invoices     Invoice[]
+  tickets      Ticket[]
+  documents    Document[]
+  enrollments  SequenceEnrollment[]
+  sitesPrimary Site[]
+  mailMessages MailMessage[]
+
+  @@index([email])
+  @@index([companyId])
+  @@index([ownerId])
+  @@index([lastName, firstName])
+}
+
+model PipelineStage {
+  id          String  @id @default(cuid())
+  key         String  @unique
+  label       String
+  probability Int     @default(0)
+  sortOrder   Int     @default(0)
+  isWon       Boolean @default(false)
+  isLost      Boolean @default(false)
+  color       String?
+  deals       Deal[]
+}
+
+enum DealType {
+  NEW_BUSINESS
+  UPSELL
+  RENEWAL
+  PARTNERSHIP
+}
+
+model Deal {
+  id                String    @id @default(cuid())
+  name              String
+  companyId         String?
+  company           Company?  @relation(fields: [companyId], references: [id])
+  primaryContactId  String?
+  primaryContact    Contact?  @relation("DealPrimaryContact", fields: [primaryContactId], references: [id])
+  value             Decimal   @default(0) @db.Decimal(14, 2) // one time value
+  monthlyValue      Decimal   @default(0) @db.Decimal(14, 2) // RaaS monthly
+  stageKey          String
+  stage             PipelineStage @relation(fields: [stageKey], references: [key])
+  probability       Int?
+  expectedCloseDate DateTime?
+  ownerId           String?
+  owner             User?     @relation("DealOwner", fields: [ownerId], references: [id])
+  channel           String?   // email, call, linkedin, event, referral, website, chatbot, other
+  dealType          DealType  @default(NEW_BUSINESS)
+  lostReason        String?
+  nextStep          String?
+  nextStepDueAt     DateTime?
+  lastActivityAt    DateTime?
+  wonAt             DateTime?
+  lostAt            DateTime?
+  tags              String[]  @default([])
+  notes             String?
+  campaignId        String?
+  campaign          Campaign? @relation(fields: [campaignId], references: [id])
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  contacts   DealContact[]
+  quotes     Quote[]
+  invoices   Invoice[]
+  activities Activity[]
+  tasks      Task[]
+  documents  Document[]
+  projects   Project[]
+
+  @@index([stageKey])
+  @@index([ownerId])
+  @@index([companyId])
+}
+
+model DealContact {
+  dealId    String
+  contactId String
+  role      String?
+  deal      Deal    @relation(fields: [dealId], references: [id], onDelete: Cascade)
+  contact   Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  @@id([dealId, contactId])
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  REVIEW
+  DONE
+  CANCELLED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+model Task {
+  id          String       @id @default(cuid())
+  title       String
+  description String?
+  priority    TaskPriority @default(MEDIUM)
+  status      TaskStatus   @default(TODO)
+  taskType    String       @default("general") // email, call, follow_up, quote, meeting, install, survey, maintenance, onboarding, general
+  dueAt       DateTime?
+  completedAt DateTime?
+  assigneeId  String?
+  assignee    User?        @relation("TaskAssignee", fields: [assigneeId], references: [id])
+  createdById String?
+  createdBy   User?        @relation("TaskCreator", fields: [createdById], references: [id])
+  contactId   String?
+  contact     Contact?     @relation(fields: [contactId], references: [id])
+  companyId   String?
+  company     Company?     @relation(fields: [companyId], references: [id])
+  dealId      String?
+  deal        Deal?        @relation(fields: [dealId], references: [id])
+  projectId   String?
+  project     Project?     @relation(fields: [projectId], references: [id])
+  ticketId    String?
+  ticket      Ticket?      @relation(fields: [ticketId], references: [id])
+  siteId      String?
+  site        Site?        @relation(fields: [siteId], references: [id])
+  sopId       String?
+  sop         Sop?         @relation(fields: [sopId], references: [id])
+  checklist   Json?        // [{ text, done }]
+  tags        String[]     @default([])
+  source      String       @default("manual") // manual, email, assistant, automation, system
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([assigneeId, status])
+  @@index([dueAt])
+  @@index([dealId])
+}
+
+enum ProjectStatus {
+  PLANNING
+  ACTIVE
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  type        String        @default("general") // general, install, pilot, custom
+  status      ProjectStatus @default(PLANNING)
+  ownerId     String?
+  owner       User?         @relation(fields: [ownerId], references: [id])
+  memberIds   String[]      @default([])
+  companyId   String?
+  company     Company?      @relation(fields: [companyId], references: [id])
+  dealId      String?
+  deal        Deal?         @relation(fields: [dealId], references: [id])
+  siteId      String?
+  site        Site?         @relation(fields: [siteId], references: [id])
+  startDate   DateTime?
+  dueDate     DateTime?
+  budget      Decimal?      @db.Decimal(14, 2)
+  stages      Json?         // install workflow stages with done flags
+  tags        String[]      @default([])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  tasks       Task[]
+}
+
+enum ActivityType {
+  NOTE
+  CALL
+  EMAIL_IN
+  EMAIL_OUT
+  MEETING
+  TASK_DONE
+  QUOTE_SENT
+  QUOTE_VIEWED
+  QUOTE_ACCEPTED
+  QUOTE_DECLINED
+  INVOICE_SENT
+  PAYMENT
+  STAGE_CHANGE
+  TICKET
+  CATALOG_CHANGE
+  SMS
+  LINKEDIN
+  SOCIAL
+  SYSTEM
+}
+
+enum Direction {
+  INBOUND
+  OUTBOUND
+  INTERNAL
+}
+
+model Activity {
+  id           String       @id @default(cuid())
+  type         ActivityType @default(NOTE)
+  subject      String?
+  body         String?
+  contactId    String?
+  contact      Contact?     @relation(fields: [contactId], references: [id])
+  companyId    String?
+  company      Company?     @relation(fields: [companyId], references: [id])
+  dealId       String?
+  deal         Deal?        @relation(fields: [dealId], references: [id])
+  quoteId      String?
+  quote        Quote?       @relation(fields: [quoteId], references: [id])
+  invoiceId    String?
+  invoice      Invoice?     @relation(fields: [invoiceId], references: [id])
+  ticketId     String?
+  ticket       Ticket?      @relation(fields: [ticketId], references: [id])
+  siteId       String?
+  site         Site?        @relation(fields: [siteId], references: [id])
+  actorId      String?
+  actor        User?        @relation(fields: [actorId], references: [id])
+  actorLabel   String?      // "system", "assistant", or a client name
+  occurredAt   DateTime     @default(now())
+  source       String       @default("manual") // manual, outlook, gmail, calendar, system, assistant, webhook, automation
+  externalId   String?
+  externalUrl  String?
+  direction    Direction    @default(INTERNAL)
+  participants String[]     @default([])
+  metadata     Json?
+  createdAt    DateTime     @default(now())
+
+  @@index([contactId, occurredAt])
+  @@index([companyId, occurredAt])
+  @@index([dealId, occurredAt])
+  @@index([externalId])
+}
+
+// ───────────────────────────── Outreach sequences ─────────────────────────────
+
+model OutreachSequence {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  ownerId     String?
+  owner       User?    @relation(fields: [ownerId], references: [id])
+  steps       Json     // [{ day, channel, subjectTemplate, bodyTemplate }]
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  enrollments SequenceEnrollment[]
+}
+
+model SequenceEnrollment {
+  id          String   @id @default(cuid())
+  sequenceId  String
+  sequence    OutreachSequence @relation(fields: [sequenceId], references: [id], onDelete: Cascade)
+  contactId   String
+  contact     Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  currentStep Int      @default(0)
+  nextSendAt  DateTime?
+  status      String   @default("active") // active, replied, completed, stopped
+  startedAt   DateTime @default(now())
+  endedAt     DateTime?
+
+  @@unique([sequenceId, contactId])
+}
+
+// ───────────────────────────── Catalog, quotes, invoices ─────────────────────────────
+
+model Product {
+  id                 String   @id @default(cuid())
+  sku                String?  @unique
+  name               String
+  oem                String?  // Pudu, RichTech, CenoBots
+  category           String   @default("Service Robot")
+  description        String?
+  imageUrl           String?
+  purchasePrice      Decimal? @db.Decimal(12, 2)
+  monthlyPrice       Decimal? @db.Decimal(12, 2) // RaaS
+  internalCost       Decimal? @db.Decimal(12, 2) // owner only
+  priceDisplayPrefix String   @default("from")
+  published          Boolean  @default(false)
+  specs              Json?
+  warrantyMonths     Int?
+  leadTimeDays       Int?
+  stripeProductId    String?
+  quickbooksItemId   String?
+  sortOrder          Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  quoteLines         QuoteLine[]
+  robots             RobotUnit[]
+  inventory          InventoryItem[]
+}
+
+enum InventoryStatus {
+  IN_STOCK
+  LOW_STOCK
+  OUT_OF_STOCK
+  DISCONTINUED
+}
+
+model InventoryItem {
+  id              String          @id @default(cuid())
+  name            String
+  sku             String?
+  category        String          @default("spare_parts")
+  productId       String?
+  product         Product?        @relation(fields: [productId], references: [id])
+  quantity        Int             @default(0)
+  minThreshold    Int             @default(2)
+  unitCost        Decimal?        @db.Decimal(12, 2)
+  salePrice       Decimal?        @db.Decimal(12, 2)
+  supplierName    String?
+  supplierContact String?
+  location        String?
+  status          InventoryStatus @default(IN_STOCK)
+  notes           String?
+  updatedAt       DateTime        @updatedAt
+}
+
+enum QuoteStatus {
+  DRAFT
+  PENDING_APPROVAL
+  APPROVED
+  SENT
+  VIEWED
+  ACCEPTED
+  DECLINED
+  EXPIRED
+  SUPERSEDED
+}
+
+enum PricingMode {
+  ONE_TIME
+  MONTHLY
+}
+
+model Quote {
+  id             String      @id @default(cuid())
+  number         String      @unique
+  version        Int         @default(1)
+  supersedesId   String?
+  title          String
+  companyId      String?
+  company        Company?    @relation(fields: [companyId], references: [id])
+  contactId      String?
+  contact        Contact?    @relation(fields: [contactId], references: [id])
+  dealId         String?
+  deal           Deal?       @relation(fields: [dealId], references: [id])
+  ownerId        String?
+  owner          User?       @relation("QuoteOwner", fields: [ownerId], references: [id])
+  status         QuoteStatus @default(DRAFT)
+  validUntil     DateTime?
+  subtotal       Decimal     @default(0) @db.Decimal(14, 2)
+  discountTotal  Decimal     @default(0) @db.Decimal(14, 2)
+  deliveryFee    Decimal     @default(0) @db.Decimal(12, 2)
+  installFee     Decimal     @default(0) @db.Decimal(12, 2)
+  taxRate        Decimal     @default(0) @db.Decimal(6, 3)
+  taxAmount      Decimal     @default(0) @db.Decimal(14, 2)
+  monthlyTotal   Decimal     @default(0) @db.Decimal(14, 2)
+  oneTimeTotal   Decimal     @default(0) @db.Decimal(14, 2)
+  total          Decimal     @default(0) @db.Decimal(14, 2)
+  notes          String?
+  terms          String?
+  internalNotes  String?
+  publicToken    String?     @unique
+  sentAt         DateTime?
+  viewedAt       DateTime?
+  respondedAt    DateTime?
+  acceptedByName String?
+  acceptedIp     String?
+  declineReason  String?
+  approvedById   String?
+  approvedBy     User?       @relation("QuoteApprover", fields: [approvedById], references: [id])
+  approvedAt     DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  lines      QuoteLine[]
+  invoices   Invoice[]
+  activities Activity[]
+  documents  Document[]
+
+  @@index([companyId])
+  @@index([status])
+}
+
+model QuoteLine {
+  id          String      @id @default(cuid())
+  quoteId     String
+  quote       Quote       @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  productId   String?
+  product     Product?    @relation(fields: [productId], references: [id])
+  description String
+  quantity    Int         @default(1)
+  unitPrice   Decimal     @default(0) @db.Decimal(12, 2)
+  pricingMode PricingMode @default(ONE_TIME)
+  discountPct Decimal     @default(0) @db.Decimal(5, 2)
+  total       Decimal     @default(0) @db.Decimal(14, 2)
+  sortOrder   Int         @default(0)
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  VIEWED
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+  VOID
+}
+
+model Invoice {
+  id                      String        @id @default(cuid())
+  number                  String        @unique
+  title                   String?
+  quoteId                 String?
+  quote                   Quote?        @relation(fields: [quoteId], references: [id])
+  companyId               String?
+  company                 Company?      @relation(fields: [companyId], references: [id])
+  contactId               String?
+  contact                 Contact?      @relation(fields: [contactId], references: [id])
+  dealId                  String?
+  deal                    Deal?         @relation(fields: [dealId], references: [id])
+  ownerId                 String?
+  owner                   User?         @relation(fields: [ownerId], references: [id])
+  issueDate               DateTime      @default(now())
+  dueDate                 DateTime?
+  status                  InvoiceStatus @default(DRAFT)
+  subtotal                Decimal       @default(0) @db.Decimal(14, 2)
+  taxRate                 Decimal       @default(0) @db.Decimal(6, 3)
+  taxAmount               Decimal       @default(0) @db.Decimal(14, 2)
+  total                   Decimal       @default(0) @db.Decimal(14, 2)
+  amountPaid              Decimal       @default(0) @db.Decimal(14, 2)
+  balanceDue              Decimal       @default(0) @db.Decimal(14, 2)
+  paymentTerms            String?       @default("Net 30")
+  notes                   String?
+  publicToken             String?       @unique
+  stripePaymentLinkUrl    String?
+  stripeCheckoutSessionId String?
+  quickbooksInvoiceId     String?
+  quickbooksSyncedAt      DateTime?
+  sentAt                  DateTime?
+  viewedAt                DateTime?
+  paidAt                  DateTime?
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+
+  lines      InvoiceLine[]
+  payments   Payment[]
+  activities Activity[]
+
+  @@index([companyId])
+  @@index([status])
+}
+
+model InvoiceLine {
+  id          String      @id @default(cuid())
+  invoiceId   String
+  invoice     Invoice     @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  description String
+  quantity    Int         @default(1)
+  unitPrice   Decimal     @default(0) @db.Decimal(12, 2)
+  pricingMode PricingMode @default(ONE_TIME)
+  total       Decimal     @default(0) @db.Decimal(14, 2)
+  sortOrder   Int         @default(0)
+}
+
+enum PaymentMethod {
+  CARD
+  ACH
+  CHECK
+  WIRE
+  CASH
+  OTHER
+}
+
+model Payment {
+  id                    String        @id @default(cuid())
+  invoiceId             String
+  invoice               Invoice       @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  amount                Decimal       @db.Decimal(14, 2)
+  method                PaymentMethod @default(OTHER)
+  reference             String?
+  paidAt                DateTime      @default(now())
+  stripePaymentIntentId String?
+  quickbooksPaymentId   String?
+  recordedById          String?
+  recordedBy            User?         @relation(fields: [recordedById], references: [id])
+  createdAt             DateTime      @default(now())
+}
+
+enum ApprovalType {
+  QUOTE_DISCOUNT
+  QUOTE_SEND
+  CATALOG_PUBLISH
+  REFUND
+  EXPENSE
+  DEMO_REQUEST
+  SOCIAL_POST
+  ACCESS_REQUEST
+  OTHER
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  WITHDRAWN
+}
+
+model Approval {
+  id            String         @id @default(cuid())
+  type          ApprovalType   @default(OTHER)
+  subject       String
+  reason        String?
+  entityType    String?
+  entityId      String?
+  requestedById String?
+  requestedBy   User?          @relation("ApprovalRequester", fields: [requestedById], references: [id])
+  requiredTier  Tier           @default(LEADERSHIP)
+  status        ApprovalStatus @default(PENDING)
+  decidedById   String?
+  decidedBy     User?          @relation("ApprovalDecider", fields: [decidedById], references: [id])
+  decidedAt     DateTime?
+  decisionNote  String?
+  details       Json?
+  createdAt     DateTime       @default(now())
+
+  @@index([status])
+}
+
+// ───────────────────────────── Service and fleet ─────────────────────────────
+
+enum SiteStatus {
+  PROSPECT
+  SURVEY_SCHEDULED
+  SURVEYED
+  INSTALL_SCHEDULED
+  LIVE
+  PAUSED
+  CHURNED
+}
+
+model Site {
+  id               String     @id @default(cuid())
+  name             String
+  companyId        String
+  company          Company    @relation(fields: [companyId], references: [id])
+  addressStreet    String?
+  addressCity      String?
+  addressState     String?
+  addressZip       String?
+  siteType         String     @default("other") // warehouse, hotel, casino, restaurant, hospital, senior_living, office, school, retail, other
+  sqFootage        Int?
+  floors           Int?
+  wifiNotes        String?
+  primaryContactId String?
+  primaryContact   Contact?   @relation(fields: [primaryContactId], references: [id])
+  accountManagerId String?
+  accountManager   User?      @relation("SiteAccountManager", fields: [accountManagerId], references: [id])
+  technicianId     String?
+  technician       User?      @relation("SiteTechnician", fields: [technicianId], references: [id])
+  status           SiteStatus @default(PROSPECT)
+  surveyDate       DateTime?
+  goLiveDate       DateTime?
+  notes            String?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  robots       RobotUnit[]
+  tickets      Ticket[]
+  activities   Activity[]
+  tasks        Task[]
+  projects     Project[]
+  documents    Document[]
+  certificates TrainingCertificate[]
+
+  @@index([companyId])
+}
+
+enum RobotStatus {
+  IN_STOCK
+  RESERVED
+  DEPLOYED
+  IN_SERVICE
+  RETURNED
+  RETIRED
+}
+
+enum Ownership {
+  RAAS
+  PURCHASED
+  DEMO
+  LOANER
+}
+
+model RobotUnit {
+  id                      String      @id @default(cuid())
+  serialNumber            String      @unique
+  assetTag                String?
+  productId               String?
+  product                 Product?    @relation(fields: [productId], references: [id])
+  modelName               String?
+  oem                     String?
+  siteId                  String?
+  site                    Site?       @relation(fields: [siteId], references: [id])
+  companyId               String?
+  company                 Company?    @relation(fields: [companyId], references: [id])
+  status                  RobotStatus @default(IN_STOCK)
+  ownership               Ownership   @default(RAAS)
+  installDate             DateTime?
+  warrantyEnd             DateTime?
+  raasTermEnd             DateTime?
+  lastMaintenance         DateTime?
+  nextMaintenance         DateTime?
+  maintenanceIntervalDays Int         @default(90)
+  firmwareVersion         String?
+  notes                   String?
+  createdAt               DateTime    @default(now())
+  updatedAt               DateTime    @updatedAt
+
+  tickets         Ticket[]
+  maintenanceLogs MaintenanceLog[]
+
+  @@index([companyId])
+  @@index([siteId])
+}
+
+model MaintenanceLog {
+  id            String    @id @default(cuid())
+  robotUnitId   String
+  robotUnit     RobotUnit @relation(fields: [robotUnitId], references: [id], onDelete: Cascade)
+  type          String    @default("scheduled") // scheduled, repair, firmware, inspection
+  performedAt   DateTime  @default(now())
+  performedById String?
+  performedBy   User?     @relation(fields: [performedById], references: [id])
+  notes         String?
+  partsUsed     Json?
+}
+
+enum TicketPriority {
+  LOW
+  NORMAL
+  HIGH
+  CRITICAL
+}
+
+enum TicketStatus {
+  NEW
+  ACKNOWLEDGED
+  IN_PROGRESS
+  WAITING_CUSTOMER
+  WAITING_OEM
+  RESOLVED
+  CLOSED
+}
+
+model Ticket {
+  id              String         @id @default(cuid())
+  number          String         @unique
+  subject         String
+  description     String?
+  category        String         @default("other") // navigation, charging, wifi, damage, software, training, billing, onboarding, other
+  priority        TicketPriority @default(NORMAL)
+  status          TicketStatus   @default(NEW)
+  siteId          String?
+  site            Site?          @relation(fields: [siteId], references: [id])
+  robotUnitId     String?
+  robotUnit       RobotUnit?     @relation(fields: [robotUnitId], references: [id])
+  companyId       String?
+  company         Company?       @relation(fields: [companyId], references: [id])
+  contactId       String?
+  contact         Contact?       @relation(fields: [contactId], references: [id])
+  createdById     String?
+  createdBy       User?          @relation("TicketCreator", fields: [createdById], references: [id])
+  assigneeId      String?
+  assignee        User?          @relation("TicketAssignee", fields: [assigneeId], references: [id])
+  slaDueAt        DateTime?
+  firstResponseAt DateTime?
+  resolvedAt      DateTime?
+  closedAt        DateTime?
+  resolution      String?
+  clientVisible   Boolean        @default(true)
+  attachments     String[]       @default([])
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  comments   TicketComment[]
+  activities Activity[]
+  tasks      Task[]
+  documents  Document[]
+
+  @@index([status, priority])
+  @@index([companyId])
+  @@index([assigneeId])
+}
+
+model TicketComment {
+  id        String   @id @default(cuid())
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  authorId  String?
+  author    User?    @relation(fields: [authorId], references: [id])
+  body      String
+  internal  Boolean  @default(false) // internal notes are never shown to clients
+  createdAt DateTime @default(now())
+}
+
+model TrainingCertificate {
+  id                String   @id @default(cuid())
+  certificateNumber String   @unique
+  companyId         String
+  company           Company  @relation(fields: [companyId], references: [id])
+  siteId            String?
+  site              Site?    @relation(fields: [siteId], references: [id])
+  traineeName       String
+  traineeEmail      String?
+  robotModel        String?
+  score             Int?
+  issuedAt          DateTime @default(now())
+  issuedById        String?
+  issuedBy          User?    @relation(fields: [issuedById], references: [id])
+  expiresAt         DateTime?
+}
+
+// ───────────────────────────── Knowledge: SOPs and documents ─────────────────────────────
+
+enum SopStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum SopScope {
+  COMPANY
+  DEPARTMENT
+}
+
+model Sop {
+  id                     String    @id @default(cuid())
+  slug                   String    @unique
+  code                   String?   // ADMIN-001, SALES-003
+  title                  String
+  summary                String?
+  body                   String    // markdown
+  steps                  Json?     // [{ title, detail, required }]
+  category               String    @default("procedure") // policy, procedure, checklist, playbook, reference, onboarding, best_practice
+  scope                  SopScope  @default(DEPARTMENT)
+  departmentId           String?
+  department             Department? @relation(fields: [departmentId], references: [id])
+  ownerId                String?
+  owner                  User?     @relation(fields: [ownerId], references: [id])
+  status                 SopStatus @default(DRAFT)
+  version                Int       @default(1)
+  keywords               String[]  @default([])
+  tags                   String[]  @default([])
+  appliesTo              String[]  @default([]) // task:email, stage:contacted, screen:quotes
+  requiresAcknowledgment Boolean   @default(false)
+  enforcedBySystem       String?
+  reviewDate             DateTime?
+  publishedAt            DateTime?
+  source                 String?
+  quiz                   Json?     // [{ question, options, answerIndex }]
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  versions        SopVersion[]
+  acknowledgments SopAcknowledgment[]
+  tasks           Task[]
+
+  @@index([status])
+  @@index([departmentId])
+}
+
+model SopVersion {
+  id          String   @id @default(cuid())
+  sopId       String
+  sop         Sop      @relation(fields: [sopId], references: [id], onDelete: Cascade)
+  version     Int
+  title       String
+  body        String
+  steps       Json?
+  changeNote  String?
+  changedById String?
+  changedBy   User?    @relation(fields: [changedById], references: [id])
+  createdAt   DateTime @default(now())
+
+  @@unique([sopId, version])
+}
+
+model SopAcknowledgment {
+  id             String   @id @default(cuid())
+  sopId          String
+  sop            Sop      @relation(fields: [sopId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  version        Int
+  quizScore      Int?
+  acknowledgedAt DateTime @default(now())
+
+  @@unique([sopId, userId, version])
+}
+
+model Document {
+  id            String   @id @default(cuid())
+  name          String
+  url           String
+  mimeType      String?
+  size          Int?
+  category      String   @default("general") // contract, quote, invoice, manual, photo, certificate, general
+  clientVisible Boolean  @default(false)
+  companyId     String?
+  company       Company? @relation(fields: [companyId], references: [id])
+  contactId     String?
+  contact       Contact? @relation(fields: [contactId], references: [id])
+  dealId        String?
+  deal          Deal?    @relation(fields: [dealId], references: [id])
+  quoteId       String?
+  quote         Quote?   @relation(fields: [quoteId], references: [id])
+  siteId        String?
+  site          Site?    @relation(fields: [siteId], references: [id])
+  ticketId      String?
+  ticket        Ticket?  @relation(fields: [ticketId], references: [id])
+  uploadedById  String?
+  uploadedBy    User?    @relation(fields: [uploadedById], references: [id])
+  createdAt     DateTime @default(now())
+}
+
+// ───────────────────────────── Marketing ─────────────────────────────
+
+model Campaign {
+  id          String   @id @default(cuid())
+  name        String
+  type        String   @default("social") // email, social, event, ads, outreach, content
+  status      String   @default("planned") // planned, active, paused, completed
+  channel     String?
+  description String?
+  startDate   DateTime?
+  endDate     DateTime?
+  budget      Decimal? @db.Decimal(12, 2)
+  ownerId     String?
+  owner       User?    @relation(fields: [ownerId], references: [id])
+  utmCampaign String?
+  stats       Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  posts       SocialPost[]
+  deals       Deal[]
+}
+
+enum SocialProvider {
+  LINKEDIN
+  FACEBOOK
+  INSTAGRAM
+  TIKTOK
+  YOUTUBE
+}
+
+model SocialAccount {
+  id             String         @id @default(cuid())
+  provider       SocialProvider
+  externalId     String
+  name           String
+  handle         String?
+  avatarUrl      String?
+  connectionId   String?
+  connection     Connection?    @relation(fields: [connectionId], references: [id])
+  status         String         @default("connected")
+  metadata       Json?
+  createdAt      DateTime       @default(now())
+  targets        SocialPostTarget[]
+  inbox          SocialInboxItem[]
+
+  @@unique([provider, externalId])
+}
+
+enum SocialPostStatus {
+  DRAFT
+  PENDING_APPROVAL
+  APPROVED
+  SCHEDULED
+  PUBLISHING
+  PUBLISHED
+  FAILED
+}
+
+model SocialPost {
+  id            String           @id @default(cuid())
+  title         String?
+  body          String
+  mediaUrls     String[]         @default([])
+  linkUrl       String?
+  scheduledAt   DateTime?
+  status        SocialPostStatus @default(DRAFT)
+  authorId      String?
+  author        User?            @relation("PostAuthor", fields: [authorId], references: [id])
+  approvedById  String?
+  approvedBy    User?            @relation("PostApprover", fields: [approvedById], references: [id])
+  approvedAt    DateTime?
+  campaignId    String?
+  campaign      Campaign?        @relation(fields: [campaignId], references: [id])
+  canvaDesignId String?
+  claimsCheck   Json?            // result of the proof and claims check
+  stats         Json?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  targets       SocialPostTarget[]
+
+  @@index([status, scheduledAt])
+}
+
+model SocialPostTarget {
+  id              String        @id @default(cuid())
+  postId          String
+  post            SocialPost    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  socialAccountId String
+  socialAccount   SocialAccount @relation(fields: [socialAccountId], references: [id], onDelete: Cascade)
+  externalPostId  String?
+  externalUrl     String?
+  status          String        @default("pending") // pending, published, failed
+  publishedAt     DateTime?
+  error           String?
+
+  @@unique([postId, socialAccountId])
+}
+
+model SocialInboxItem {
+  id              String        @id @default(cuid())
+  socialAccountId String
+  socialAccount   SocialAccount @relation(fields: [socialAccountId], references: [id], onDelete: Cascade)
+  type            String        @default("comment") // comment, message, mention
+  externalId      String        @unique
+  authorName      String?
+  authorHandle    String?
+  text            String
+  receivedAt      DateTime
+  repliedAt       DateTime?
+  status          String        @default("open") // open, replied, archived
+  metadata        Json?
+}
+
+model ContentAsset {
+  id            String   @id @default(cuid())
+  name          String
+  url           String
+  type          String   @default("image") // image, video, pdf, design
+  canvaDesignId String?
+  tags          String[] @default([])
+  createdById   String?
+  createdAt     DateTime @default(now())
+}
+
+// ───────────────────────────── Integrations, connections, MCP ─────────────────────────────
+
+enum IntegrationStatus {
+  NOT_CONFIGURED
+  PENDING
+  CONNECTED
+  ERROR
+  DISABLED
+}
+
+model Integration {
+  id              String            @id @default(cuid())
+  key             String            @unique // outlook, gmail, google_calendar, quickbooks, stripe, linkedin, meta, canva, slack, anthropic
+  name            String
+  category        String            @default("other") // email, calendar, accounting, payments, social, design, media, chat, files, ai
+  mechanism       String            @default("oauth") // oauth, api_key, mcp, webhook
+  scope           String            @default("shared") // shared, per_user
+  status          IntegrationStatus @default(NOT_CONFIGURED)
+  config          Json?
+  secretNames     String[]          @default([])
+  enabledForTiers Tier[]            @default([OWNER, LEADERSHIP, EMPLOYEE])
+  rolloutOrder    Int               @default(0)
+  lastSyncAt      DateTime?
+  lastError       String?
+  updatedAt       DateTime          @updatedAt
+}
+
+enum ConnectionProvider {
+  MICROSOFT
+  GOOGLE
+  QUICKBOOKS
+  LINKEDIN
+  META
+  CANVA
+  STRIPE
+  SLACK
+}
+
+enum ConnectionStatus {
+  ACTIVE
+  EXPIRED
+  REVOKED
+  ERROR
+}
+
+// A connection is a set of OAuth tokens. Per user connections carry a userId; shared company
+// connections (QuickBooks, the LinkedIn page) have userId null. Tokens are encrypted at rest.
+model Connection {
+  id             String             @id @default(cuid())
+  provider       ConnectionProvider
+  kind           String             @default("mail_calendar") // mail_calendar, accounting, social, design, payments, chat
+  userId         String?
+  user           User?              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountEmail   String?
+  accountName    String?
+  externalId     String?
+  scopes         String[]           @default([])
+  accessToken    String             // encrypted
+  refreshToken   String?            // encrypted
+  expiresAt      DateTime?
+  status         ConnectionStatus   @default(ACTIVE)
+  lastSyncAt     DateTime?
+  lastError      String?
+  metadata       Json?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  socialAccounts SocialAccount[]
+  mailMessages   MailMessage[]
+
+  @@unique([provider, userId, kind])
+  @@index([userId])
+}
+
+// Cached mailbox messages for each person's own inbox, used for search, stats and CRM logging.
+model MailMessage {
+  id           String     @id @default(cuid())
+  connectionId String
+  connection   Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+  userId       String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  externalId   String
+  threadId     String?
+  fromEmail    String?
+  fromName     String?
+  toEmails     String[]   @default([])
+  ccEmails     String[]   @default([])
+  subject      String?
+  snippet      String?
+  bodyText     String?
+  receivedAt   DateTime
+  direction    Direction  @default(INBOUND)
+  isRead       Boolean    @default(false)
+  hasAttachments Boolean  @default(false)
+  folder       String?
+  webLink      String?
+  contactId    String?
+  contact      Contact?   @relation(fields: [contactId], references: [id])
+  createdAt    DateTime   @default(now())
+
+  @@unique([connectionId, externalId])
+  @@index([userId, receivedAt])
+  @@index([contactId])
+  @@index([threadId])
+}
+
+enum McpAuthType {
+  NONE
+  BEARER
+  OAUTH
+}
+
+model McpServer {
+  id              String      @id @default(cuid())
+  name            String
+  slug            String      @unique
+  url             String
+  transport       String      @default("streamable_http") // streamable_http, sse
+  authType        McpAuthType @default(BEARER)
+  secretEnvName   String?     // env var holding the token
+  secretValue     String?     // encrypted token when stored in the database
+  headers         Json?
+  allowedTools    String[]    @default([]) // empty means all discovered tools
+  toolsCache      Json?
+  toolsCachedAt   DateTime?
+  enabled         Boolean     @default(true)
+  enabledForTiers Tier[]      @default([OWNER, LEADERSHIP])
+  status          String      @default("unknown") // unknown, healthy, error
+  lastError       String?
+  description     String?
+  createdById     String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  calls           McpToolCall[]
+}
+
+model McpToolCall {
+  id         String     @id @default(cuid())
+  serverId   String?
+  server     McpServer? @relation(fields: [serverId], references: [id])
+  serverName String
+  tool       String
+  userId     String?
+  user       User?      @relation(fields: [userId], references: [id])
+  args       Json?
+  resultSummary String?
+  ok         Boolean    @default(true)
+  error      String?
+  durationMs Int?
+  createdAt  DateTime   @default(now())
+
+  @@index([userId, createdAt])
+}
+
+// Keys that let Claude Desktop, Claude Code or another MCP client work HQ as a server.
+model ApiKey {
+  id         String    @id @default(cuid())
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name       String
+  prefix     String
+  hashedKey  String    @unique
+  scopes     String[]  @default(["read"]) // read, draft, write
+  lastUsedAt DateTime?
+  expiresAt  DateTime?
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
+}
+
+// ───────────────────────────── Assistant ─────────────────────────────
+
+model AssistantThread {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title         String
+  contextType   String   @default("general") // general, contact, company, deal, quote, ticket, sop
+  contextId     String?
+  archived      Boolean  @default(false)
+  lastMessageAt DateTime @default(now())
+  createdAt     DateTime @default(now())
+  messages      AssistantMessage[]
+
+  @@index([userId, lastMessageAt])
+}
+
+model AssistantMessage {
+  id        String          @id @default(cuid())
+  threadId  String
+  thread    AssistantThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  role      String          // user, assistant
+  content   String
+  toolCalls Json?
+  model     String?
+  tokensIn  Int?
+  tokensOut Int?
+  createdAt DateTime        @default(now())
+}
+
+model SavedPrompt {
+  id         String   @id @default(cuid())
+  title      String
+  prompt     String
+  scope      String   @default("personal") // personal, department, company
+  department String?
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+
+// ───────────────────────────── Operations ─────────────────────────────
+
+model Setting {
+  key         String   @id
+  value       Json
+  updatedById String?
+  updatedAt   DateTime @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  actor      User?    @relation(fields: [actorId], references: [id])
+  actorEmail String?
+  action     String   // create, update, delete, login, permission_change, export, send
+  entityType String
+  entityId   String?
+  before     Json?
+  after      Json?
+  ip         String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  @@index([entityType, entityId])
+  @@index([actorId, createdAt])
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String    @default("info") // info, task, approval, ticket, deal, mention, system
+  title     String
+  body      String?
+  link      String?
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, readAt])
+}
+
+model Automation {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  trigger     Json     // { type: 'quote.unviewed', afterDays: 3 } or { type: 'deal.stage_changed', to: 'won' }
+  conditions  Json?
+  actions     Json     // [{ type: 'create_task', ... }, { type: 'notify', ... }]
+  enabled     Boolean  @default(true)
+  createdById String?
+  createdBy   User?    @relation(fields: [createdById], references: [id])
+  lastRunAt   DateTime?
+  runCount    Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  runs        AutomationRun[]
+}
+
+model AutomationRun {
+  id           String     @id @default(cuid())
+  automationId String
+  automation   Automation @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  status       String     @default("ok") // ok, error, skipped
+  entityType   String?
+  entityId     String?
+  log          Json?
+  startedAt    DateTime   @default(now())
+  finishedAt   DateTime?
+}
+
+model WebhookEvent {
+  id         String   @id @default(cuid())
+  provider   String   // stripe, quickbooks, meta, linkedin
+  externalId String   @unique
+  type       String
+  payload    Json
+  processed  Boolean  @default(false)
+  error      String?
+  createdAt  DateTime @default(now())
+}

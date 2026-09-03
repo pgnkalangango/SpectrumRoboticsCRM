@@ -1,0 +1,925 @@
+{
+ "entities": [
+  {
+   "summary": "The free facility assessment is the offer in every region and the only thing outreach commits to. Demos and pilots are never promised in outreach anywhere; a request goes to a call and an owner decides. Start With One is the low risk path after the assessment.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "offer",
+    "assessment",
+    "free",
+    "demo",
+    "pilot",
+    "start with one",
+    "region",
+    "chicagoland"
+   ],
+   "requires_acknowledgment": true,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "The offer: what is free, what is not, where",
+   "body": "> **Owner rule, 24 Aug 2026, overrides anything older: never commit to a demo or pilot of any kind in outreach, in any region, including Chicagoland. Acknowledge the request, commit to nothing, route it to a call, and an owner decides case by case. See the Demos policy.**\n\n# The Offer\n\n## The one thing outreach offers, everywhere\n\n**Facility assessment, free, every region.** Spectrum walks the floor (or does it virtually), maps the space, analyzes the workflow, and comes back with a recommendation. No cost, no commitment, no obligation to buy. This is the primary CTA in all outreach, in every region.\n\nThe distinction to keep straight: the assessment is Spectrum *looking at* their space. A pilot is a robot *working in* their space, and that is an owner decision, never an outreach promise.\n\n## How to phrase it\n\n**Leading with the assessment (default, every region):**\n> The assessment is free. We walk your floor, map it, and come back with what we'd actually recommend, no cost either way.\n\n**When they want to see it working before committing:**\n> Happy to talk through what a trial could look like for your site. The quickest way is a 15 minute call; here are a few times.\n\nThen log a demo request on the deal for an owner.\n\n## After the assessment\n\n**Start With One**: one robot, one location, real ROI data after 30 days, cancel with 30 days notice. Robot as a Service from $799 a month, buy outright from $3,800, fleets of three or more custom. Always written with \"from\"; the monthly financed figure never appears in outreach.\n\n## Where this fits the objection answers\n\n- **\"Not ready to commit\"** \u2192 free assessment first, then Start With One.\n- **\"Too expensive\"** \u2192 the assessment costs nothing, and Start With One begins from $799 a month. Only owners can approve a discount.\n- **\"Show me it working\"** \u2192 a call, then an owner decides whether a pilot makes sense for that site.\n\n## Superseded text, kept for history\n\nThe earlier version of this procedure allowed mentioning a paid, credited pilot demo to Chicagoland prospects only. That allowance is withdrawn by the owner rule above. Sales leadership updates this procedure if pilots are ever offered in outreach again.",
+   "enforced_by_system": "Assistant drafting rules; demo requests create an owner approval",
+   "steps": [],
+   "version": 1,
+   "tags": [
+    "offer",
+    "demo",
+    "assessment",
+    "region"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:email",
+    "task:call",
+    "stage:contacted",
+    "stage:discovery",
+    "screen:assistant"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "policy",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-offer-and-demo",
+   "status": "published",
+   "id": "6a98733d60ec0a0aa32db55c",
+   "created_date": "2026-09-02T19:04:29.327000",
+   "updated_date": "2026-09-02T19:04:29.327000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "Run before every batch and every individual outreach email. Any unchecked item under Compliance or Send readiness means it does not send; say what is blocking rather than sending a partial version.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "checklist",
+    "pre-send",
+    "email",
+    "quality",
+    "compliance",
+    "send"
+   ],
+   "requires_acknowledgment": false,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Pre-send checklist",
+   "body": "# Pre-Send Checklist\n\nRun before every batch. Merges the cold outreach discipline with Spectrum's compliance and claims gates. The assistant runs this automatically before offering Send; a person runs it before sending by hand.\n\n## Setup\n\n- Your HQ profile is complete: name, title, email, phone, booking link, territory\n- Your voice profile is your own extracted profile, not the generic baseline\n- Signature block matches your HQ profile exactly\n\n## Research integrity\n\n- Every trigger event is real and was actually read this run, nothing fabricated\n- Contact name, title, and company are correct and current\n- No invented location counts, headcounts, client names, or results\n- No false claim of a mutual connection or referral\n\n## Claims (hard gate, see Proof and Claims)\n\n- Every performance figure traces to a documented OEM outcome\n- Hedging intact on every one: \"documented OEM deployment,\" \"reported,\" \"up to,\" \"results vary\"\n- Nothing framed as a Spectrum guarantee\n- No named client presented as a Spectrum customer\n- Pricing written accurately and with \"from\": from $799 a month RaaS, from $3,800 to buy, fleet custom\n- No financed monthly figure anywhere\n- Assessment described as free, correct in every region\n- No demo or pilot promised, hinted, or implied, in any region\n\n## Copy\n\n- Touch 1 under 90 words, Touch 2 under 70, Touch 3 under 50, DMs under 50 (hard ceiling 100 words above the signature)\n- Subject lines under 7 words, lowercase on Touch 1, re: on follow ups\n- One CTA per email\n- No \"just checking in,\" \"hope this finds you well,\" \"circle back,\" \"touch base,\" \"synergy\"\n- No apology openers (\"sorry to bother you,\" \"I know you're busy\")\n- **Zero dash characters in the body, subject, or signature.** No em dash, no en dash, no hyphen. Search the draft for all three before it ships. URLs and email addresses are the only exemption\n- Hyphenated compounds were rewritten, not just unhyphenated (\"a group running several locations\", never \"multi location group\")\n- No fake urgency, no exclamation points, no emoji\n- Each follow up adds genuinely new value, not a bump\n- No attachments on any first touch\n- Reads like you wrote it, per your own voice profile\n\n## Compliance\n\n- Exact footer present on every email touch, verbatim\n- Physical address present: Spectrum Robotics, 1795 Commerce Drive, Elk Grove Village, IL 60007\n- Working unsubscribe line present\n- Subject line accurately reflects the body, no misleading headers\n- Every recipient checked against Do Not Contact\n- Every recipient checked against contact history, no one contacted twice with a first touch\n\n## Send readiness\n\n- Sending domain configured (SPF, DKIM, DMARC) and warmed\n- Daily volume within the ramp (30 to 50 new leads per day per warmed mailbox)\n- Booking link is the 15 minute Google Calendar appointment page\n- The rep has approved this batch\n\nAny unchecked box in Compliance or Send readiness means the batch does not send. Say what's blocking rather than sending a partial version.",
+   "enforced_by_system": "Assistant runs this checklist before offering Send",
+   "steps": [
+    {
+     "title": "Setup complete",
+     "required": true,
+     "detail": "HQ profile, voice profile and signature all present and matching."
+    },
+    {
+     "title": "Research is real",
+     "required": true,
+     "detail": "Trigger events read this run, names and titles current, nothing invented."
+    },
+    {
+     "title": "Claims pass the gate",
+     "required": true,
+     "detail": "Every figure traced and hedged, pricing written with from, no financed figure, no demo promised."
+    },
+    {
+     "title": "Copy rules",
+     "required": true,
+     "detail": "Word limits, subject rules, one CTA, no dashes, no filler, no attachments on first touch."
+    },
+    {
+     "title": "Compliance",
+     "required": true,
+     "detail": "Footer, address, unsubscribe line, honest subject, Do Not Contact and history checked."
+    },
+    {
+     "title": "Send readiness",
+     "required": true,
+     "detail": "Domain warmed, volume within ramp, 15 minute booking link, rep approval."
+    }
+   ],
+   "version": 1,
+   "tags": [
+    "checklist",
+    "email",
+    "quality"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:email",
+    "screen:inbox",
+    "screen:assistant"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "checklist",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-pre-send-checklist",
+   "status": "published",
+   "id": "6a98733d60ec0a0aa32db55d",
+   "created_date": "2026-09-02T19:04:29.327000",
+   "updated_date": "2026-09-02T19:04:29.327000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "The order of a rep's outbound day: replies first, then bookings, then warm and dormant prospects, then live cold sequences, then new prospects, then verify and report. New outbound leads are 50 a day per warmed mailbox; follow ups and replies are on top of that, never counted against it.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "daily",
+    "routine",
+    "run",
+    "outreach",
+    "volume",
+    "50",
+    "pipeline"
+   ],
+   "requires_acknowledgment": false,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Daily outreach run",
+   "body": "# Daily Outreach Run\n\nThe order matters. Inbound before outbound, because a reply is worth more than a new first touch, and because the state of the pipeline decides how much sourcing is needed.\n\n## 0. Load state\n\nOpen My Day in HQ. Read the deals you own, the contacts flagged Do Not Contact, and yesterday's report. Everything you draft today targets someone who is not suppressed and has not already been touched with a first email.\n\n## 1. Inbound first: process replies\n\nEvery reply since the last run gets classified per the Reply Handling SOP and answered in your voice. Unsubscribes and do not contact requests are set immediately and get no reply. Positive replies get the booking link in the first response. Objections get substance from the Objection Library only.\n\n## 2. Check the calendar for bookings\n\nAny booked call becomes a deal at Call booked (or moves the existing deal there). Confirm the meeting has the Google Meet link attached. Prepare a one paragraph brief for each call from the contact's timeline.\n\n## 3. Advance warm and dormant prospects\n\n- **Warm silence** (proposal sent, assessment unscheduled, promised info outstanding) past its due date \u2192 one nudge, then escalate to the rep rather than nudging twice.\n- **Dormant** (\"not now\" date arrived, or a closed sequence 60+ days old) \u2192 check for a **new trigger event** first. Trigger found \u2192 a fresh re-engagement sequence. No trigger \u2192 leave dormant, do not recycle the old email.\n\n## 4. Advance live cold sequences\n\n- Touch 2 due (Day 3) \u2192 draft per the Sequence Templates, value add asset attached as a link\n- Touch 3 due (Day 7) \u2192 draft the breakup\n- Touch 3 already sent \u2192 status \"Sequence completed, no reply\". **No fourth email, ever.** Set a 60 to 90 day dormant review.\n\n## 5. Source today's new prospects\n\nPer the ICP SOP and the geographic rollout order. Work the current tier fully before advancing. Three failed research attempts on a prospect means drop them. Never pad a thin day with a marginal fit.\n\nVolume: 50 new outbound leads per day per warmed mailbox (the ramp that reached 50 on 1 Sep 2026 holds through 31 Dec 2026). Follow ups, replies, nudges and re-engagement are additional and happen after the new lead quota, not counted against it.\n\n## 6. Draft today's new sequences\n\nA brief per prospect (Personalization Method), then the sequence (Sequence Templates), then the Pre-Send Checklist. Present the batch; send only with approval and send readiness green.\n\n## 7. Verify\n\nRun the Pre-Send Checklist on the whole batch. Any compliance or send readiness failure blocks the batch; say what is blocking.\n\n## 8. Report\n\nEnd the run with a short report in HQ: replies handled, calls booked, sequences advanced, new leads sourced, anything blocked and why, and any deliverability warning from the mailbox provider (rate limit, throttling, suspension, reputation). A deliverability warning is an immediate alert to an owner, not a line in the digest.\n\n## Autonomy boundaries\n\nThe assistant and the outreach agent may draft and, once approved, send within these rules. They never decide pricing, contract terms, discounts, demos, or legal and compliance questions; those escalate to an owner.",
+   "enforced_by_system": "",
+   "steps": [
+    {
+     "title": "Load state",
+     "required": true,
+     "detail": "My Day, owned deals, Do Not Contact list, yesterday's report."
+    },
+    {
+     "title": "Process replies",
+     "required": true,
+     "detail": "Classify and answer every reply per Reply Handling. Opt outs get no reply."
+    },
+    {
+     "title": "Check bookings",
+     "required": true,
+     "detail": "Booked calls become deals at Call booked with a brief."
+    },
+    {
+     "title": "Advance warm and dormant",
+     "required": true,
+     "detail": "One nudge for warm silence; dormant only on a new trigger."
+    },
+    {
+     "title": "Advance live sequences",
+     "required": true,
+     "detail": "Touch 2 on day 3, Touch 3 on day 7, never a fourth."
+    },
+    {
+     "title": "Source new prospects",
+     "required": true,
+     "detail": "50 per day per warmed mailbox, ICP and territory order, no padding."
+    },
+    {
+     "title": "Draft and check",
+     "required": true,
+     "detail": "Brief, sequence, Pre-Send Checklist, approval."
+    },
+    {
+     "title": "Report",
+     "required": true,
+     "detail": "Short end of run report; deliverability warnings alert an owner immediately."
+    }
+   ],
+   "version": 1,
+   "tags": [
+    "daily",
+    "routine",
+    "pipeline"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:follow_up",
+    "task:email",
+    "screen:deals",
+    "screen:inbox"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "procedure",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-daily-run",
+   "status": "published",
+   "id": "6a98733d60ec0a0aa32db55e",
+   "created_date": "2026-09-02T19:04:29.327000",
+   "updated_date": "2026-09-02T19:04:29.327000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "What has to be true before any outreach mailbox sends: authenticated and warmed domain, volume within the ramp, suppression list current, booking link correct. Also the CAN-SPAM essentials and the rule that a deliverability warning goes straight to an owner.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "compliance",
+    "deliverability",
+    "spf",
+    "dkim",
+    "dmarc",
+    "warm",
+    "can-spam",
+    "unsubscribe"
+   ],
+   "requires_acknowledgment": true,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Send readiness and deliverability",
+   "body": "# Send Readiness and Deliverability\n\n## Before a mailbox sends anything\n\n- Sending domain has SPF, DKIM and DMARC configured\n- Mailbox warmed: week 1 about 10 to 15 a day, week 2 about 20 to 30 a day, then steady 30 to 50 a day per mailbox\n- Daily target agreed with an owner (currently 50 new leads a day per warmed mailbox through 31 Dec 2026)\n- Do Not Contact list current and checked against every recipient\n- Booking link is the 15 minute Google Calendar appointment page (https://calendar.app.google/jTrXgEpgFc3KHuPJA)\n\nAnything unresolved means draft only mode, stated plainly. Never describe unsent drafts as sent.\n\n## CAN-SPAM essentials (US B2B)\n\n- Truthful From name and address; subject must match the body\n- Valid physical postal address in every message: Spectrum Robotics, 1795 Commerce Drive, Elk Grove Village, IL 60007\n- Clear opt out mechanism, honored within 10 business days (HQ honors it immediately)\n- Opt out mechanism live for at least 30 days after send\n- No opt in required for US B2B cold email, but the above is mandatory\n- If the target geography ever leaves the US, stop and get a rule for that region (GDPR, CASL) before sending\n\n## Sending identity\n\nSend from the connected mailbox on the sending domain, with the signature updated to match that address. A secondary domain or subdomain protects the main domain's reputation if outreach ever takes a hit.\n\n## Deliverability warnings\n\nAny rate limit, throttling, suspension or reputation warning from the mailbox provider is an immediate alert to an owner, not a line in the morning digest. Routine single address bounces stay silent. When Google or Microsoft pushes back, volume pauses until an owner decides.\n\n## LinkedIn DMs\n\nDMs do not carry the email footer (a DM is not commercial email), but opt out requests received by DM still go to Do Not Contact.",
+   "enforced_by_system": "Send functions append the footer; do_not_contact blocks sends; deliverability alerts",
+   "steps": [],
+   "version": 1,
+   "tags": [
+    "compliance",
+    "can-spam",
+    "deliverability"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:email",
+    "screen:inbox"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "policy",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-compliance",
+   "status": "published",
+   "id": "6a98733d60ec0a0aa32db55f",
+   "created_date": "2026-09-02T19:04:29.327000",
+   "updated_date": "2026-09-02T19:04:29.327000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "The 15 minute setup every new rep completes before sending anything: identity and signature, territory, booking link, voice profile from real sent mail, connected mailbox and calendar, and the send readiness check.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "onboarding",
+    "setup",
+    "new rep",
+    "signature",
+    "territory",
+    "voice"
+   ],
+   "requires_acknowledgment": false,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "New rep setup",
+   "body": "# New Rep Setup\n\nAbout 15 minutes. Nothing sends until every step is done. Your HQ profile stores all of it, and the assistant reads it when drafting for you.\n\n## 1. Identity and signature\n\nFull name, job title, work email, phone, LinkedIn URL. HQ builds your signature block from these in the company format: \"Best,\" then a blank line, then your name line once, then title, company, email, phone, LinkedIn, and the tagline, followed by the company address and the unsubscribe line. No dashes anywhere in it (rewrite the phone as (832) 488 8797 style).\n\n## 2. Territory\n\nPick your territory from the rollout order: Chicagoland, Illinois, Midwest, Utah, Colorado, rest of USA. You work one tier fully before moving on. The territory decides which prospects HQ suggests.\n\n## 3. Booking link\n\nUse the company 15 minute Google Calendar appointment page unless an owner gives you a personal one. It attaches Google Meet automatically, Monday to Friday 9 to 5 Central.\n\n## 4. Voice profile (do not skip)\n\nConnect your mailbox, then run the Voice Profile Setup SOP. Without it the assistant drafts in the generic baseline, and generic is what loses cold email. Paste the result into the Voice profile field on your HQ profile.\n\n## 5. Connect email and calendar\n\nSettings, then Connections. Connect your own Gmail or Outlook and your calendar. Your mailbox is read by you and your assistant only; no one else on the team sees it.\n\n## 6. Read and acknowledge the policies\n\nPricing language, Email footer and CAN-SPAM, Demos, Proof and claims, Send readiness. HQ asks you to acknowledge each one; leadership can see who has.\n\n## 7. Send readiness\n\nAn owner confirms your mailbox is authenticated and warmed and sets your daily volume. Until then HQ keeps you in draft only mode and says so.",
+   "enforced_by_system": "HQ onboarding flow",
+   "steps": [
+    {
+     "title": "Identity and signature",
+     "required": true,
+     "detail": "Name, title, email, phone, LinkedIn. HQ builds the signature in company format."
+    },
+    {
+     "title": "Territory",
+     "required": true,
+     "detail": "Pick your tier from the rollout order."
+    },
+    {
+     "title": "Booking link",
+     "required": true,
+     "detail": "Company 15 minute Google Calendar page unless an owner assigns a personal one."
+    },
+    {
+     "title": "Voice profile",
+     "required": true,
+     "detail": "Run the Voice Profile Setup SOP against your real sent mail."
+    },
+    {
+     "title": "Connect email and calendar",
+     "required": true,
+     "detail": "Settings, Connections. Your mailbox stays private to you."
+    },
+    {
+     "title": "Acknowledge the policies",
+     "required": true,
+     "detail": "Pricing language, footer and CAN-SPAM, Demos, Proof and claims, Send readiness."
+    },
+    {
+     "title": "Send readiness",
+     "required": true,
+     "detail": "An owner confirms domain and volume; draft only until then."
+    }
+   ],
+   "version": 1,
+   "tags": [
+    "onboarding",
+    "setup"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:onboarding"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "onboarding",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-new-rep-setup",
+   "status": "published",
+   "id": "6a98733d60ec0a0aa32db560",
+   "created_date": "2026-09-02T19:04:29.327000",
+   "updated_date": "2026-09-02T19:04:29.327000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "Spectrum is an authorized integration partner, not the manufacturer. Every performance figure is framed as OEM-partner-documented with results varying by facility. Copy must match that discipline exactly: attribution, hedging, and never an OEM outcome presented as Spectrum's guarantee.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "claims",
+    "compliance",
+    "proof",
+    "case study",
+    "pricing",
+    "hedging"
+   ],
+   "requires_acknowledgment": true,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Proof and claims policy",
+   "body": "> **Owner rules that override anything below: never commit to a demo or pilot in outreach in any region (see the Demos policy), and never quote the financed monthly figure; buy pricing is written as from $3,800 with financing available.**\n\n# Proof and Claims, the hard gate\n\nSpectrum is an authorized integration partner, **not the manufacturer**. Every performance figure on spectrumrobotics.ai is framed as OEM-partner-documented with results varying by facility. Email copy must match that discipline exactly. This is both a legal exposure question and a credibility question, an overstated number collapses on the first call.\n\n## The framing rule\n\n| Never write | Write instead |\n|---|---|\n| \"We'll cut your cleaning labor 70%\" | \"Documented OEM deployments have shown cleaning labor reductions up to 70%, results vary by facility\" |\n| \"Our robots reduce walking distance 60%\" | \"In a documented OEM deployment with a Chicago-area restaurant group, server walking distance was reported down roughly 60%\" |\n| \"You'll see ROI in 30 days\" | \"Start With One is built to give you real ROI data after 30 days, before you decide to scale\" |\n| \"We deployed 1,000+ robots\" | \"1,000+ OEM robots deployed globally, per OEM partner reporting\" |\n\nAttribution (\"documented OEM deployment\"), hedging (\"up to,\" \"reported,\" \"results vary\"), and never presenting an OEM outcome as Spectrum's own guarantee. If a claim can't be written with that framing and still land, cut it.\n\n## Documented deployments, the credibility bridges\n\nUse the one matching the prospect's vertical, ideally their metro. All figures below are OEM-partner-documented; individual results vary.\n\n**Food Service, Chicago Metro, IL**\nRegional restaurant group, autonomous serving robots for food-runner and beverage duty. Server walking distance reported reduced up to ~60%. Table turn time improved; staff retained longer with less physical fatigue. Quote on record: \"The deployment process was completely painless. We were up and running in 2 days.\", General Manager, name withheld.\n\n**Hospitality, Chicago, IL**\nHotel group, 300+ room property, elevator-integrated autonomous delivery robots for amenity and room service. Front desk/bellhop staff had been spending 35 to 40% of shift on delivery runs. Delivery time reported down from ~18 minutes average to under 8. Quote on record: \"Our guests actually comment on the robot. It's become part of the brand experience.\", Director of Operations, name withheld.\n\n**Healthcare, Midwest Region**\nRegional healthcare network, combined delivery + cleaning fleet across 3 care units. Clinical staff had been walking an estimated 7+ miles per shift on supply runs; reported reduction up to 5 miles per shift. Cleaning protocols consistent 24/7. Quote on record: \"The deployment team was professional, quick, and the robots were integrated into our workflow within a week.\", Operations Director, name withheld.\n\n**Automotive Retail, Plano, TX**\nFlagship luxury dealership, autonomous delivery robot for inter-department service/parts logistics. Service advisor time on internal logistics reduced; customer-facing time increased. Quote on record: \"It pays for itself in hours saved and the wow factor with customers is real.\", Service Director, name withheld.\n\n**Cleaning & Facilities (platform capability)**\nCommercial cleaning robots documented at up to 23,680 sq ft/hour, with labor cost reductions up to 70% recorded across real-world OEM deployments.\n\n**Industrial & Warehousing (platform capability)**\nAMRs with payload capacity up to 1,300 lb deployed in warehouse and logistics operations.\n\nNamed clients are withheld by request across the board, never invent a client name, and never imply a named brand is a Spectrum customer.\n\n## Real pricing (from spectrumrobotics.ai/start-with-one)\n\nQuote these accurately; they are strong objection-handlers precisely because the entry point is low. Always written with \"from\".\n\n| Path | Price | Terms |\n|---|---|---|\n| Robot-as-a-Service | From $799/mo | No large upfront cost \u00b7 deployment & training included \u00b7 maintenance included \u00b7 cancel with 30 days notice |\n| Buy outright | From $3,800 | Financing available (never quote the monthly financed figure in outreach) \u00b7 full ownership day one \u00b7 1-year warranty \u00b7 deployment & training included |\n| Fleet (3+ robots) | Custom | Volume pricing \u00b7 dedicated account manager \u00b7 enterprise SLA in writing \u00b7 multi-location management |\n\nDeployment timeline: typically 1 to 2 business days (choose robot \u2192 deploy \u2192 30 days of real data \u2192 decide whether to scale).\n\n## Assets available to offer\n\n**The facility assessment is free everywhere and is the only offer that appears in outreach.** Demos and pilots are never committed in outreach in any region; a request is routed to a call and an owner decides (see the Demos policy).\n\n| Asset | URL | Best used when |\n|---|---|---|\n| Free assessment (onsite or virtual) | https://calendar.app.google/jTrXgEpgFc3KHuPJA | The primary CTA, no commitment, every region |\n| Demo or pilot | never promised in outreach | Route to a call; an owner decides case by case |\n| Start With One | spectrumrobotics.ai/start-with-one | Commitment/risk objection |\n| ROI Calculator | spectrumrobotics.ai/ROICalculator | \"What's the actual return?\", great Touch-2 value-add |\n| Deployments / case studies | spectrumrobotics.ai/Deployments | \"Show me it's worked before\" |\n| Reference call with an existing client | request via info@spectrumrobotics.ai | Late-stage trust objection, Spectrum offers this openly |\n| Products / full fleet | spectrumrobotics.ai/Products | \"What are the options?\" |\n\nThe ROI Calculator is the strongest Touch-2 asset: it's genuinely useful whether or not they ever buy, which is exactly the value-add the follow-up email is supposed to carry.",
+   "enforced_by_system": "Assistant refuses unhedged figures; marketing brand review",
+   "steps": [],
+   "version": 1,
+   "tags": [
+    "claims",
+    "compliance",
+    "proof"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:email",
+    "task:quote",
+    "screen:marketing",
+    "screen:assistant"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "policy",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-proof-and-claims",
+   "status": "published",
+   "id": "6a9872e06e98cd56b8fc3c52",
+   "created_date": "2026-09-02T19:02:56.257000",
+   "updated_date": "2026-09-02T19:02:56.257000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "Formulas and rules from the cold outreach playbook. Examples below are Spectrum-specific. Generate 3 variants per email and let the rep pick.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "subject",
+    "email",
+    "subject lines",
+    "opened"
+   ],
+   "requires_acknowledgment": false,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Subject lines that get opened",
+   "body": "# Subject Lines\n\nFormulas and rules from the cold outreach playbook. Examples below are Spectrum-specific. Generate 3 variants per email and let the rep pick.\n\n## Rules (non-negotiable)\n\n- **All lowercase** on Touch 1, reads like a personal note, not a campaign\n- **Under 7 words**, mobile truncates around 35 to 40 characters\n- **Never** all-caps, exclamation marks, or emoji\n- **Never** \"just checking in\" or \"following up\" as a standalone subject\n- `re:` prefix is correct for Touch 2 and 3 (same thread)\n- Clarity beats cleverness, a subject that sounds like marketing gets deleted\n\nDeliverability note: spam-trigger words matter more here than anywhere else in the email. Avoid \"free,\" \"guaranteed,\" \"save $$,\" \"act now,\" \"limited time.\" Note that \"free assessment\" is a real Spectrum offer, keep it in the *body*, not the subject line.\n\n## Formulas applied to Spectrum\n\n| Formula | Structure | Spectrum examples |\n|---|---|---|\n| Lowercase specific | their {specific thing} | `your 20 locations` \u00b7 `the fourth location` |\n| Pain + context | the {pain} at {event/place} | `the housekeeping gap` \u00b7 `peak-hour floor coverage` |\n| Trigger reference | {their recent event} | `saw the {neighborhood} opening` \u00b7 `your housekeeping reqs` |\n| Quick question | quick question about {topic} | `quick question about floor coverage` |\n| Result teaser (hedged) | {number} {result} | `18 minutes down to 8` \u00b7 `5 miles a shift` |\n| Re: original | re: {original subject} | `re: your 20 locations` |\n\n## Per-vertical starting points\n\n**Hospitality & Food Service**, `peak-hour coverage at {Company}` \u00b7 `your {N} rooms` \u00b7 `18 minutes down to 8`\n**Cleaning & Facilities**, `{N} sq ft, one cleaning crew` \u00b7 `nightly floor cleaning` \u00b7 `the janitorial line item`\n**Healthcare & Senior Living**, `7 miles a shift` \u00b7 `supply runs vs patient care` \u00b7 `your night-shift coverage`\n**Industrial & Warehousing**, `manual handling at {Company}` \u00b7 `1,300 lb, no forklift` \u00b7 `your throughput bottleneck`\n**Retail & Big Box**, `after-hours floor care` \u00b7 `your {N} stores` \u00b7 `inventory walk time`\n**Airports & Transportation**, `24/7 terminal cleaning` \u00b7 `wayfinding at {terminal}`\n\nResult-teaser subjects must correspond to a real documented figure in the Proof and Claims SOP, never a number invented to sound good. The hedging goes in the body; the subject just can't cite a figure that doesn't exist.",
+   "enforced_by_system": "",
+   "steps": [],
+   "version": 1,
+   "tags": [
+    "subject lines",
+    "email"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:email",
+    "screen:inbox",
+    "screen:assistant"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "reference",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-subject-lines",
+   "status": "published",
+   "id": "6a9872e06e98cd56b8fc3c4d",
+   "created_date": "2026-09-02T19:02:56.256000",
+   "updated_date": "2026-09-02T19:02:56.256000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "The baseline writing voice for every rep until their personal voice profile is built: plain spoken, warm, knowledgeable, and never a dash of any kind. Generic is what loses cold emails, so build the personal profile early.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "writing",
+    "tone",
+    "voice",
+    "dashes",
+    "style"
+   ],
+   "requires_acknowledgment": false,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Voice guide for written outreach",
+   "body": "# Voice Guide\n\nThis is the baseline. Replace it during setup by running the Voice Profile Setup SOP against your real sent mail; the result goes in your HQ profile and the assistant uses it when drafting for you.\n\nUntil then, drafts follow the baseline below, which is safe but generic. Generic is what loses cold emails, so do not stay here.\n\n---\n\n## Baseline (until your profile replaces it)\n\nPlain spoken and warm, but clearly someone who knows the operation. You are writing to operators who are busy and have heard a lot of pitches. What works on them is a knowledgeable peer talking straight, not a brochure.\n\nTwo failure modes to stay between:\n\n- **Too stiff.** \"Pursuant to our documented deployment outcomes, Spectrum Robotics offers turnkey integration solutions.\" Corporate, cold, deleted.\n- **Too casual.** \"Hey! Robots are a game changer for restaurants!!\" Hype, no credibility, straight to spam.\n\n**Do:** contractions \u00b7 short paragraphs, two or three lines \u00b7 plain words over industry words \u00b7 translate every number into what it means for them \u00b7 lead with their operation, not with Spectrum \u00b7 one idea per paragraph \u00b7 be candid about limits.\n\n**Never:** hype adjectives (game changing, revolutionary, cutting edge, best in class) \u00b7 fake urgency \u00b7 apology openers (\"sorry to bother you\") \u00b7 corporate filler (circle back, touch base, synergy, bandwidth) \u00b7 walls of text \u00b7 emoji in a cold email.\n\n---\n\n## No dashes. None. (Hard rule, survives setup)\n\n**No dash character appears anywhere in an email you send.** Not the em dash, not the en dash, not the hyphen. This is policy, not voice, and it stays after your profile replaces the rest of this guide.\n\nWhy: the em dash is the loudest tell that a message was machine written. A prospect who clocks it stops reading.\n\n**Rewrite around hyphens, never just delete them.** Deleting produces broken text (\"multi location group\"). Rephrasing produces better copy:\n\n| Instead of | Write |\n|---|---|\n| food-runner duty | running food |\n| multi-location group | a group running several locations |\n| on-site assessment | onsite assessment |\n| 15-minute call | 15 minutes |\n| kitchen-to-table only | kitchen to table only |\n| follow-up | follow up |\n\n**Replacing the em dash:** joining two thoughts becomes a full stop \u00b7 an aside becomes a comma pair or parentheses \u00b7 introducing an explanation becomes a colon \u00b7 after a name at the start (\"Marcus, I'll keep this short\") becomes a comma.\n\nThe full stop is the workhorse. Most em dashes are two sentences wearing a costume.\n\n**Exempt:** URLs, email addresses, and the unsubscribe link. A hyphen inside a web address is not prose.\n\n---\n\n## After you run the extraction\n\nReplace everything above the \"No dashes\" section with your real profile. Keep the no dash rule exactly as written.\n\nExpect the extraction to contradict some of the baseline. It usually does, and the extraction wins, because it came from emails you actually sent. One rep's profile found they use exclamation points constantly with familiar contacts and never in a proposal, which is sharper than any rule written in advance.",
+   "enforced_by_system": "Assistant drafting applies this guide plus the rep's voice profile",
+   "steps": [],
+   "version": 1,
+   "tags": [
+    "voice",
+    "tone",
+    "writing"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:email",
+    "screen:inbox",
+    "screen:assistant"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "reference",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-voice-guide",
+   "status": "published",
+   "id": "6a9872e06e98cd56b8fc3c4e",
+   "created_date": "2026-09-02T19:02:56.256000",
+   "updated_date": "2026-09-02T19:02:56.256000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "How a new rep builds the voice profile the assistant drafts with: run the extraction prompt against 15 to 25 real sent emails, demand evidence not adjectives, and paste the result into your HQ profile.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "onboarding",
+    "voice",
+    "profile",
+    "extraction"
+   ],
+   "requires_acknowledgment": false,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Building a rep's voice profile",
+   "body": "# Voice Extraction\n\nRun this in the HQ assistant with your email connected, or paste it above a block of your own sent emails. The output goes into the Voice profile field on your HQ profile.\n\n---\n\n## The prompt\n\n> Analyze my real sent emails and build a voice profile precise enough that someone else could write an email that I would sign without editing.\n>\n> **Source.** Pull 15 to 25 of my sent emails from the last 6 months. Prioritize emails to people outside my company: prospects, clients, partners, vendors. Skip anything under 20 words, anything that is purely logistical (\"sounds good\", \"see attached\"), forwards with no added text, and anything auto generated. If you cannot reach my sent mail, tell me and I will paste them instead.\n>\n> **Method.** Work from evidence, not impression. Every claim you make about my voice must be backed by at least two real quotes from the emails. If you cannot find two examples, do not make the claim. I would rather have a short accurate profile than a long flattering one.\n>\n> **Do not tell me my writing is good.** I am not asking for an assessment. I am asking for a specification. Note the tics and weak habits too, especially anything I repeat unconsciously.\n>\n> Analyze and report on:\n>\n> 1. **Openers.** How do I actually start? Do I greet, or go straight in? Do I use their name? Do I small talk first, and if so about what? Give me my three most common opening moves with real examples.\n> 2. **Closers and sign offs.** Exact wording and frequency. Do I vary it by relationship?\n> 3. **Sentence rhythm.** Average sentence length. Do I run long or clipped? Do I vary, or is it uniform? Quote a passage that is most typical of my rhythm.\n> 4. **Paragraph shape.** How many lines before I break? Do I use single sentence paragraphs?\n> 5. **Vocabulary.** Words and phrases I reach for repeatedly. Words I never use. Any jargon I actually use versus jargon I avoid. Flag filler I lean on without noticing.\n> 6. **Formality dial.** Contractions or not? First names? How does my formality shift between a cold prospect and someone I know?\n> 7. **How I make an ask.** Direct or softened? Do I give options? Do I stack multiple asks or keep to one? Quote my three most typical asks verbatim.\n> 8. **How I handle friction.** Find emails where I delivered bad news, pushed back, chased something late, or said no. How do I do it? This is the hardest part of voice to fake, so be specific.\n> 9. **Punctuation and formatting habits.** Dashes, ellipses, exclamation points, emoji, bold, bullets, capitalization. Count them, do not guess.\n> 10. **Tells.** Any phrase, construction, or move that appears often enough to be recognizably mine.\n>\n> **Then give me the negative space:** a list of things I demonstrably never do. This matters as much as what I do, because it is what stops a draft from sounding generic.\n>\n> **Output format.** Produce a single markdown document with these sections: Register, Rules (do), Rules (never), Sentence patterns that sound like me (at least 8 real verbatim lines pulled from my emails), and Open questions where the sample was too thin to be confident.\n>\n> **Last thing.** Tell me where my sample was weak. If I only had two cold emails in the set, say so, because a voice profile built on internal chatter will not survive contact with a prospect.\n\n---\n\n## Why it is built this way\n\n**It demands evidence, not adjectives.** The default failure of voice analysis is output like \"professional yet approachable\" which describes almost everyone and helps no one. Requiring two real quotes per claim forces specificity.\n\n**It asks for negative space.** What you never do is what keeps a draft from drifting generic. A profile that only lists positives will still produce writing that sounds like everyone.\n\n**It targets friction emails.** Anyone can sound like themselves confirming a meeting. Voice shows up under pressure: saying no, chasing a late payment, disagreeing. Those emails carry the most signal per word.\n\n**It blocks flattery.** Left alone, models tend to compliment the writing rather than specify it. The instruction to skip assessment keeps the output useful.\n\n**It reports its own weak spots.** If your sent folder is mostly internal one liners, the profile will be confident and wrong. Better to know.\n\n## After you run it\n\nPaste the output into the Voice profile field on your HQ profile. Keep the no dash rule and the offer language, which are policy rather than voice, and swap everything else for what the analysis returns.\n\nWorth rerunning every six months or so, or after any deliberate shift in how you write.",
+   "enforced_by_system": "TeamMember.voice_profile field",
+   "steps": [
+    {
+     "title": "Connect your email in HQ",
+     "required": true,
+     "detail": "Settings, then Connections, then connect your Gmail or Outlook so the assistant can read your sent mail."
+    },
+    {
+     "title": "Run the extraction prompt",
+     "required": true,
+     "detail": "Paste the prompt above into the assistant. It pulls 15 to 25 real sent emails and builds the profile from evidence."
+    },
+    {
+     "title": "Review the weak spots it reports",
+     "required": true,
+     "detail": "If the sample was thin on cold emails, paste 5 to 10 real cold first touches and rerun."
+    },
+    {
+     "title": "Save to your HQ profile",
+     "required": true,
+     "detail": "Paste the result into the Voice profile field. Keep the no dash rule and offer language as written."
+    }
+   ],
+   "version": 1,
+   "tags": [
+    "voice",
+    "onboarding"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:onboarding",
+    "screen:assistant"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "onboarding",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-voice-profile-setup",
+   "status": "published",
+   "id": "6a9872e06e98cd56b8fc3c4f",
+   "created_date": "2026-09-02T19:02:56.256000",
+   "updated_date": "2026-09-02T19:02:56.256000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "How every kind of reply is classified and answered: interested, objection, not now, not interested, wrong person, unsubscribe, hostile, silence. Cold silence, warm silence and dormant are different states with different rules.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "inbox",
+    "handling",
+    "replies",
+    "classification",
+    "objection",
+    "unsubscribe"
+   ],
+   "requires_acknowledgment": false,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Handling replies",
+   "body": "# Reply Handling\n\nClassification and Spectrum substance live here. The scripts below are the Spectrum-specific shape of each reply, rendered in your own voice (see the Voice Guide).\n\n## Routing table\n\n| Reply | Shape | CRM status |\n|---|---|---|\n| Interested / \"tell me more\" | Positive script below, booking link immediately | Replied \u2192 Call booked |\n| Objection / concern | Objection Library for substance + objection script | Replied |\n| \"Not now / next quarter\" | Not-now script, log the named date | Nurturing |\n| \"Not interested\" | Rejection script. One reply, then stop. | Lost |\n| Wrong person | Referral script \u2192 new contact for the referred person | Wrong contact |\n| Unsubscribe / do-not-contact | **Do Not Contact immediately. Send nothing.** | Unsubscribed |\n| Hostile | One-line close, nothing further | Do Not Contact |\n| Silence after 3 cold touches | Sequence complete. **No fourth email.** Dormant review in 60 to 90 days. | No response |\n| Warm silence, proposal, assessment, or promised info outstanding past its date | One nudge, then escalate to the rep | Warm, nudged |\n| Dormant + a **new** trigger event appears | Fresh re-engagement sequence | Nurturing \u2192 Contacted |\n| Call booked or held | Post-call recap \u2192 proposal | Call booked |\n\nCold silence, warm silence, and dormant are mutually exclusive states. If the prospect ever replied, it is never cold silence.\n\n## Positive reply\n\nGoal: convert to a booked slot immediately. Do not oversell, the call does the selling.\n\n```\nHi {FirstName},\n\nGreat to hear. I'll keep this brief.\n\nFastest way to find out if it fits: 15 minutes where I walk you through what\nthe {vertical} deployments actually looked like, and you tell me whether it\nmaps to {Company}'s setup. No deck, no pressure.\n\nGrab whatever works: https://calendar.app.google/jTrXgEpgFc3KHuPJA\nOr if easier, {2 or 3 specific times}.\n\n{footer}\n```\n\nIf they ask for information rather than a call, send the asset (Proof and Claims SOP asset table) *and* re-extend the 15 minutes in the same message, one ask, not two.\n\n## Objection reply\n\nPattern: validate \u2192 reframe with proof \u2192 re-extend, low pressure. The specific reframe for each objection is in the Objection Library.\n\n```\nHi {FirstName},\n\n{Validate the concern genuinely. It's usually a reasonable one.}\n\n{Reframe with the relevant documented outcome or the Start With One structure,\nhedging intact.}\n\n{Re extend: a question or the link. Explicit \"zero pressure if not.\"}\n\n{footer}\n```\n\n## \"Not now\"\n\n```\nHi {FirstName},\n\nMakes sense, and I appreciate the straight answer.\n\n{One useful thing they keep either way: the ROI calculator or a relevant\ncase study.}\n\nI'll check back in {timeframe they named, or about 90 days}. If it moves up\nsooner, I'm easy to find.\n\n{footer}\n```\n\nLog the date. Re-engage only with a genuinely new trigger event, not a recycled version of the first email.\n\n## Rejection\n\nNo arguing, no convincing. One reply, then stop.\n\n```\nAppreciate you letting me know, {FirstName}. I'd rather hear a clear no than chase.\n\nIf automation ever moves up the list at {Company}, I'm easy to find.\n\n{footer}\n```\n\n## Wrong person\n\n```\nHi {FirstName},\n\nThanks for pointing me in the right direction, appreciate it.\n\nWould you mind passing along who owns {relevant area}? Happy to contact them\ndirectly and take this off your plate.\n\n{footer}\n```\n\nLog the referred contact as a new contact with the referral noted, a referred intro converts far better than a cold one, so flag it.\n\n## Unsubscribe\n\nSet Do Not Contact. **Send nothing**, no confirmation, no \"sorry to see you go.\" A reply to an opt-out is itself an unwanted commercial email. Suppress across every mailbox, not just the one they replied to.\n\n## Hostile\n\n```\nUnderstood, and I appreciate your time. Removing you from my list.\n```\n\nThen Do Not Contact. Nothing further, ever.\n\n## After the call\n\nSupply real pricing and proof from the Proof and Claims SOP:\n\n- **Post-call recap** (same day), recap the specific pain discussed, confirm the agreed next step with a date. Usually: schedule the free onsite assessment.\n- **Proposal**, after the assessment. Lead with the recommended robot and the path (Start With One from $799/mo vs. buy from $3,800 vs. fleet). Call out the 1 or 2 most relevant sections.\n- **Negotiation**, reframe price to ROI using the calculator; the real flex is *structure* (RaaS vs. buy vs. financing), not discount. Only owners can approve a discount.\n- **Close**, recap acknowledged benefits, remove friction, one direct ask.\n\nKeep the discipline throughout: under 150 words, one CTA, no jargon.",
+   "enforced_by_system": "",
+   "steps": [
+    {
+     "title": "Classify the reply",
+     "required": true,
+     "detail": "Interested, objection, not now, not interested, wrong person, unsubscribe, hostile, or silence."
+    },
+    {
+     "title": "Update the deal stage and contact status",
+     "required": true,
+     "detail": "Use the CRM status column in the routing table."
+    },
+    {
+     "title": "Draft with the matching script",
+     "required": true,
+     "detail": "In your own voice, with the full footer. Unsubscribes and hostile replies get no sales reply."
+    },
+    {
+     "title": "One re-extension per objection",
+     "required": true,
+     "detail": "A second objection on the same ground moves them to Nurturing."
+    }
+   ],
+   "version": 1,
+   "tags": [
+    "replies",
+    "inbox",
+    "classification"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:email",
+    "task:follow_up",
+    "stage:contacted",
+    "screen:inbox"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "procedure",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-reply-handling",
+   "status": "published",
+   "id": "6a9872e06e98cd56b8fc3c50",
+   "created_date": "2026-09-02T19:02:56.256000",
+   "updated_date": "2026-09-02T19:02:56.256000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "The objections that actually come up selling service robots, mapped to Spectrum's real answers and assets. Every figure keeps the hedging from the Proof and Claims SOP. Never invent a number to win an objection.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "objections",
+    "answers",
+    "library",
+    "objection",
+    "expensive",
+    "staff",
+    "fleet"
+   ],
+   "requires_acknowledgment": false,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Objection library",
+   "body": "> **Owner rules that override anything below: never commit to a demo or pilot in outreach in any region (see the Demos policy), and never quote the financed monthly figure; buy pricing is written as from $3,800 with financing available.**\n\n# Objection Library\n\nThe objections that actually come up selling service robots, mapped to Spectrum's real answers and assets. Pair with the objection script in the Reply Handling SOP. Every figure must keep the hedging from the Proof and Claims SOP.\n\n## \"This will replace my staff / my team will hate it\"\n\nThe most common and most emotionally loaded objection in this category. Do not dodge it, the honest answer is genuinely good, and Spectrum's own case data supports it.\n\nReframe: these deployments moved staff *toward* the work people actually want. The documented food service deployment had servers freed for guest interaction with less physical fatigue and better retention. The healthcare deployment redeployed clinical staff from supply runs to patient care. The hotel deployment moved front-desk staff from delivery runs back to guest-facing work.\n\nNever claim \"no one loses a job\", that's not yours to promise. Frame it as reallocation of the walking, hauling, and repetitive runs, which is what the data actually shows.\n\n## \"Our floor plan is too complex / our space won't work\"\n\nThe free assessment exists precisely for this. Spectrum walks the floor and maps the facility *before* recommending anything, so the honest answer is \"that's the assessment's job, and it costs you nothing to find out.\" If the space genuinely doesn't work, they'll say so.\n\nStrong close: \"If the floor plan doesn't support it, I'd rather tell you that than sell you something.\"\n\nIf they want proof in their own room before deciding, do not promise a pilot. Offer a call and log a demo request for an owner to decide (see the Demos policy).\n\n## \"Too expensive / no budget right now\"\n\nUsually built on an assumption of a six-figure capital purchase. The real entry point is much lower:\n\n- Robot-as-a-Service from **$799/mo**, no large upfront cost, maintenance and training included, cancel with 30 days notice\n- Buy outright from **$3,800**, financing available (never quote a monthly financed figure in outreach)\n\nReframe to the ROI Calculator (spectrumrobotics.ai/ROICalculator) so they're comparing against their current labor line rather than against zero. And the assessment itself costs nothing, so finding out is free regardless.\n\nDo not discount, the flexibility here is *structure*, not price. Only owners can approve a discount; route the request rather than promising one.\n\n## \"Not ready to commit to a fleet\"\n\nStart With One (spectrumrobotics.ai/start-with-one) is built for exactly this: one robot, one location, real ROI data after 30 days, then decide. No fleet commitment, no long contract, cancel with 30 days notice. Deployment is typically 1 to 2 business days.\n\nSequence it: free assessment first (every region) \u2192 Start With One. Any pilot or demo request goes to an owner. Each step is smaller than the one after it, which is what makes the risk objection dissolve rather than get argued with.\n\nThis is Spectrum's strongest structural answer to risk, reach for it early rather than treating it as a last-resort concession.\n\n## \"We tried automation before and it didn't work\"\n\nUsually a hardware-only purchase with no integration support, which is precisely Spectrum's differentiator. Ask what happened; the answer is almost always no site assessment, no staff training, or no support after go-live.\n\nSpectrum's model: vendor-neutral selection (not one brand's catalog), site walk before any recommendation, deployment and mapping handled, staff trained on day one, US-based support after go-live. Offer a reference call with an existing client in their vertical (request via info@spectrumrobotics.ai), Spectrum offers this openly, and it's the highest-trust asset available.\n\n## \"Send me more info\"\n\nSend the asset *and* re-extend the ask in the same message. Match the asset to what they're actually unsure about, ROI Calculator for cost, Deployments page for proof, Start With One for risk, Products for options. Never attach a file to a first touch; link it.\n\n## \"We already have a vendor / we're talking to another provider\"\n\nDon't attack the competitor. Spectrum's position is vendor-neutral integration, it carries multiple OEM lines and recommends based on floor plan and budget rather than one catalog. A useful, non-pushy question: whether the assessment they got was tied to a single manufacturer's lineup.\n\nOffer the free assessment as a second opinion with nothing owed.\n\n## \"Just email me / I'll get back to you\"\n\nTake it at face value. Send one genuinely useful thing, log the date, and move on. Do not start a new sequence, that's the fourth-email anti-pattern wearing a disguise.\n\n## \"Is this even legal / safe in our environment?\"\n\nRelevant for healthcare and food service especially. Spectrum deploys healthcare-grade platforms into regulated environments, and the assessment covers the specific environment. Do not improvise a compliance answer, if the question goes past what the site documents (HIPAA, health-department, OSHA specifics), say it's exactly what the assessment call covers and get the solutions team on it rather than guessing.\n\n## General rules\n\n- **Never invent a number to win an objection.** Every figure traces to the Proof and Claims SOP.\n- **Never promise an outcome.** OEM-documented, results vary, always.\n- **One re-extension per objection.** If they object a second time on the same ground, move them to Nurturing rather than pushing again.\n- **Escalate rather than improvise** on compliance, legal, contract terms, pricing, discounts, or anything about a specific facility's regulatory situation.",
+   "enforced_by_system": "Assistant answers objections only from this library",
+   "steps": [],
+   "version": 1,
+   "tags": [
+    "objections",
+    "answers"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:call",
+    "task:email",
+    "stage:contacted",
+    "stage:discovery",
+    "stage:negotiation",
+    "screen:assistant"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "reference",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-objection-library",
+   "status": "published",
+   "id": "6a9872e06e98cd56b8fc3c51",
+   "created_date": "2026-09-02T19:02:56.256000",
+   "updated_date": "2026-09-02T19:02:56.256000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "Public pages and outreach never state a firm price because final terms depend on credit approval. Prices are written as 'from', quotes carry the exact numbers, and quotes stay private between Spectrum and the customer.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "pricing",
+    "from",
+    "799",
+    "3800",
+    "financing",
+    "discount"
+   ],
+   "requires_acknowledgment": true,
+   "org_scope": "staff",
+   "source": "owner policy",
+   "title": "Pricing language on public materials",
+   "body": "## The rule\n\nOn the website, in outreach, in ads and in social posts, prices are always written with the word **from**: \"from $799 a month\" for Robot as a Service, \"from $3,800\" to buy outright. Never \"is\", \"runs\" or \"costs\".\n\n## Never in outreach\n\n- The financed monthly figure (about $116 a month over 36 months) never appears in outreach or public materials.\n- No promised payback periods, savings figures, or guaranteed terms.\n- Hedged past OEM results stay allowed with their hedging intact (see the Proof and Claims policy).\n\n## Where exact numbers live\n\nQuotes carry real numbers. They are private to HQ and to the customer who receives them. Only owners can apply a discount; everyone else quotes list price or routes the request to an owner.\n\n## Why\n\nSome pricing depends on credit approval, so a firm public number can become a promise Spectrum cannot keep.",
+   "enforced_by_system": "Product.price_display_prefix required; only owners can discount quotes; assistant drafting rules",
+   "steps": [],
+   "version": 1,
+   "tags": [
+    "pricing",
+    "policy",
+    "compliance"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:quote",
+    "task:email",
+    "screen:quotes",
+    "screen:marketing",
+    "screen:assistant"
+   ],
+   "scope": "company",
+   "department": "All",
+   "category": "policy",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "policy-pricing-language",
+   "status": "published",
+   "id": "6a98722f83a0e4bd5c78a975",
+   "created_date": "2026-09-02T18:59:59.586000",
+   "updated_date": "2026-09-02T18:59:59.586000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "Every email Spectrum sends carries the full signature block, the company mailing address, and a way to opt out. Opt-out requests are honored immediately and never answered with a sales reply.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "signature",
+    "footer",
+    "unsubscribe",
+    "can-spam",
+    "address"
+   ],
+   "requires_acknowledgment": true,
+   "org_scope": "staff",
+   "source": "owner policy",
+   "title": "Email footer and CAN-SPAM",
+   "body": "## The rule\n\nThe full signature block is never omitted from any email of any type or length, including short replies and booking confirmations. The block includes the Spectrum Robotics mailing address, **1795 Commerce Drive, Elk Grove Village, IL 60007**, and a reply-to-unsubscribe line. These are legal requirements under CAN-SPAM, not styling.\n\n## Opt-outs\n\nAn unsubscribe or do-not-contact request goes straight to the suppression list (the contact's Do Not Contact flag in HQ). No reply is sent. The contact is excluded from every future sequence.\n\n## Signature format\n\n\"Best,\" then a blank line, then the name line once (never twice), then title, company, email, phone, LinkedIn, and the tagline. The signature does not count toward the word limit for outreach.\n\n## Reference\n\n# Signature, Footer, and Send-Readiness\n\n## Exact footer, verbatim on every email touch\n\n```\nBest,\n\nPG Nkalang'ango, MBA | PhD Candidate\nAssociate, Strategic Growth & Technology\nSpectrum Robotics | spectrumrobotics.ai\npg@spectrumrobotics.ai\nCell: (832) 488 8797\nLinkedIn: https://www.linkedin.com/in/pgnprofile/\n\"Providing Innovative Solutions to Meet Industry Demands\"\n\nSpectrum Robotics, 1795 Commerce Drive, Elk Grove Village, IL 60007\nDon't want these emails? Unsubscribe: {{UnsubscribeLink}}\n```\n\n**Two changes from PG's original signature, both required by the no dash rule** (\"Voice\" SOP), both worth PG confirming:\n\n1. The `------------` divider line under \"PG\" is gone, replaced by a blank line. A pipe row (`| | |`) or a row of periods would also work if PG wants a visible separator back.\n2. The phone number reads `(832) 488 8797` instead of `(832) 488-8797`. Alternatives that avoid a hyphen: `(832) 488.8797` or `832.488.8797`. PG picks.\n\nThe LinkedIn URL is exempt: hyphens inside a web address are not prose, and the address cannot be rewritten.\n\nThe physical address and unsubscribe line are CAN-SPAM requirements, not styling. Never send, or describe as ready to send, any version with either removed.\n\n**LinkedIn DMs don't carry this footer.** A DM isn't commercial email under CAN-SPAM, and a compliance block in a DM reads as spam. Opt-out requests received via DM still go to the Suppression List.\n\n**Link count:** the footer holds two links (LinkedIn, unsubscribe) plus the booking link in the body, three total. That's well within normal range for deliverability. Adding more (case study link, ROI calculator, products page) in a *first* touch pushes toward spam-filter territory; save additional links for replies and follow-ups.\n\n## Booking link\n\nUse the 15 minute Google Calendar appointment link: https://calendar.app.google/jTrXgEpgFc3KHuPJA (Google Meet is attached automatically, Mon to Fri 9 to 5 Central). Present it as attractive anchor text in HTML email, never as a raw URL. Calendly is no longer used.\n\n## CAN-SPAM essentials\n\nApplies to all of this (US-only rollout, so GDPR/CASL shouldn't come up, flag it if the target geography ever changes):\n\n- Truthful From name and address; subject must match the body\n- Valid physical postal address in every message\n- Clear opt-out mechanism, honored within 10 business days\n- Opt-out mechanism live for at least 30 days after send\n- No opt-in required for US B2B cold email, but the above is mandatory\n\n## Send-readiness checklist\n\n- [ ] Sending domain/mailbox configured, SPF, DKIM, DMARC on the sending domain\n- [ ] Mailbox warmed (Week 1 ~10, 15/day \u2192 Week 2 ~20, 30/day \u2192 steady 30, 50/day per mailbox)\n- [ ] Booking link is the 15 minute Google Calendar appointment page\n- [ ] Daily target contact count agreed with PG\n- [ ] Suppression list current and checked\n\n\nRecommended domain strategy: send from a secondary domain or subdomain (e.g. `hello.spectrumrobotics.ai` or a lookalike) rather than the root, if the sending domain's reputation ever takes damage, the main site and existing business email stay clean.",
+   "enforced_by_system": "Send functions append the footer; Contact.do_not_contact blocks sends",
+   "steps": [],
+   "version": 1,
+   "tags": [
+    "compliance",
+    "can-spam",
+    "signature",
+    "footer"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:email",
+    "screen:inbox",
+    "screen:assistant"
+   ],
+   "scope": "company",
+   "department": "All",
+   "category": "policy",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "policy-email-footer-can-spam",
+   "status": "published",
+   "id": "6a98722f83a0e4bd5c78a976",
+   "created_date": "2026-09-02T18:59:59.586000",
+   "updated_date": "2026-09-02T18:59:59.586000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "Nobody commits to a demo in outreach, in any region. A demo request is acknowledged, promised nothing, and turned into a call where an owner decides case by case.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "demo",
+    "pilot",
+    "trial"
+   ],
+   "requires_acknowledgment": true,
+   "org_scope": "staff",
+   "source": "owner policy",
+   "title": "Demos",
+   "body": "## The rule (24 Aug 2026)\n\nNever commit to a demo of any kind in outreach, in any region. This overrides the earlier Chicagoland pilot-demo allowance.\n\n## When a prospect asks for a demo\n\n1. Acknowledge the request warmly.\n2. Commit to nothing: no dates, no \"we can probably\", no hints about availability.\n3. Offer the free facility assessment and a 15 minute call.\n4. Log the request on the deal and flag it for an owner, who decides case by case.\n\n## Wording that is fine\n\n\"Happy to talk through what a trial could look like for your site. The quickest way is a 15 minute call; here are a few times.\"\n\n## Wording that is not\n\n\"We can set up a demo next week.\" \"We do pilots in your area.\" \"Let me check if a demo is possible\" written as if it were likely.",
+   "enforced_by_system": "Assistant drafting rules; demo request creates an owner approval",
+   "steps": [
+    {
+     "title": "Acknowledge the request",
+     "required": true,
+     "detail": "Thank them and treat the interest as a good sign."
+    },
+    {
+     "title": "Commit to nothing",
+     "required": true,
+     "detail": "No dates, no availability hints, no maybe."
+    },
+    {
+     "title": "Offer the assessment and a call",
+     "required": true,
+     "detail": "Free assessment plus the 15 minute booking link."
+    },
+    {
+     "title": "Flag for an owner",
+     "required": true,
+     "detail": "Log a demo request activity on the deal; an owner decides."
+    }
+   ],
+   "version": 1,
+   "tags": [
+    "demo",
+    "policy",
+    "offer"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:email",
+    "task:call",
+    "stage:contacted",
+    "stage:discovery",
+    "screen:assistant"
+   ],
+   "scope": "company",
+   "department": "All",
+   "category": "policy",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "policy-demos",
+   "status": "published",
+   "id": "6a98722f83a0e4bd5c78a977",
+   "created_date": "2026-09-02T18:59:59.586000",
+   "updated_date": "2026-09-02T18:59:59.586000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "Source: spectrumrobotics.ai. Spectrum is a vendor-neutral robotics integration partner (OEM partners: Pudu Robotics, Richtech Robotics, CenoBots), sells turnkey deployment (assessment, deployment, staff training, 24/7 support), not hardware alone.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "targeting",
+    "icp",
+    "profile",
+    "prospecting",
+    "customer",
+    "ideal"
+   ],
+   "requires_acknowledgment": false,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Who we target: ideal customer profile",
+   "body": "# Spectrum Robotics, ICP Reference\n\nSource: spectrumrobotics.ai. Spectrum is a vendor-neutral robotics integration partner (OEM partners: Pudu Robotics, Richtech Robotics, CenoBots), sells turnkey deployment (assessment, deployment, staff training, 24/7 support), not hardware alone.\n\n## Verticals and the products/stats that fit each\n\n| Vertical | Robot fit | Standout stat to use |\n|---|---|---|\n| Retail & Big Box | Floor cleaning, inventory, customer-facing robots | Vendor-neutral selection across brands |\n| Hospitality & Food Service | Serving, delivery, bartending (ADAM: bartender/barista/boba) | Reduced server labor hours, improved table turn |\n| Healthcare & Senior Living | Medication delivery, cleaning, support robots | Healthcare-grade, regulated-environment ready |\n| Industrial & Warehousing | Heavy-payload AMRs | Up to 1,300 lb payload capacity |\n| Airports & Transportation | Wayfinding, cleaning, service robots | 24/7 autonomous operation capability |\n| Cleaning & Facilities | AI scrubbers/sweepers (e.g. CC1 Pro) | Up to 70% cleaning labor cost reduction, 23,680 sq ft/hr |\n\n## Buyer titles, in priority order\n\n1. VP / Director of Operations, General Manager, owns labor cost & efficiency\n2. Director of Facilities / Environmental Services, owns cleaning & vendor decisions\n3. Owner / Founder / C-suite, smaller or single-location operators\n\n## What makes a company a good fit (signals to look for while sourcing)\n\n- Multi-location (the more locations, the bigger the labor-cost pain and the bigger the deal)\n- Visible labor intensity: housekeeping, table service, cleaning/janitorial, portering, wayfinding\n- Hiring-page signals: open reqs for the labor-intensive roles above suggest active staffing pain\n- Upscale/guest-experience-forward brands are a strong fit for the novelty angle (guest-facing/bartending robots as a brand differentiator), not just the cost-savings angle\n\n## Geographic rollout order\n\n1. Chicagoland\n2. Illinois (statewide)\n3. Midwest region\n4. Utah\n5. Colorado\n6. Rest of USA\n\nFully work a tier before advancing, this is what keeps \"new contacts every day\" true without geographic overlap creating duplicates.",
+   "enforced_by_system": "",
+   "steps": [],
+   "version": 1,
+   "tags": [
+    "icp",
+    "targeting",
+    "prospecting"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "stage:new",
+    "screen:contacts",
+    "screen:deals"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "reference",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-icp",
+   "status": "published",
+   "id": "6a98722f83a0e4bd5c78a978",
+   "created_date": "2026-09-02T18:59:59.586000",
+   "updated_date": "2026-09-02T18:59:59.586000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "Merges the cold outreach playbook's brief structure with the Spectrum-specific layers. The bar: a reader should not be able to tell this email was sent to more than one company.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "method",
+    "outreach",
+    "research",
+    "personalization",
+    "brief"
+   ],
+   "requires_acknowledgment": false,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Personalization method for outreach",
+   "body": "# Personalization Method\n\nMerges the cold outreach playbook's brief structure with the Spectrum-specific layers. The bar: a reader should not be able to tell this email was sent to more than one company.\n\n## The brief, build one per prospect, present before drafting (GATE)\n\nFive fields. The first three come from the cold outreach playbook's framework; the last two are what make it a *Spectrum* email rather than a generic one.\n\n```\n## Prospect Brief\n\n**Prospect:**          {Name}, {Title} at {Company}, {City, State} \u00b7 Tier: {geographic tier}\n**Trigger event:**     {Something recent and specific, new location, expansion, hiring spree,\n                        press mention, award, renovation. Dated where possible.}\n**Identified pain:**   {The labor/throughput problem their role plausibly owns, tied to the trigger.}\n**Credibility bridge:**{The closest documented OEM deployment from the Proof and Claims SOP, same vertical, ideally same metro.}\n**Vertical fit:**      {Which robot class fits THIS operation, and the one stat that goes with it, from the ICP SOP. Chosen because of the trigger, not picked at random.}\n**Role framing:**      {Ops \u2192 labor cost & throughput \u00b7 Facilities \u2192 cost per sq ft & vendor\n                        reliability \u00b7 Owner/Founder \u2192 brand & guest experience alongside cost.}\n```\n\n## Where Spectrum's trigger events actually live\n\nAdapted from the cold outreach playbook's source table for these verticals:\n\n| Source | What to look for |\n|---|---|\n| Company site, Locations page | Location count, recent openings (\"now open,\" \"coming soon\") |\n| Careers page | Open reqs for housekeeping, servers, porters, janitorial, warehouse associates, the roles robots offload. A stack of these is the strongest buying signal available. |\n| Local business press | Expansion, new concept, renovation, funding, acquisition |\n| LinkedIn company page | New ops/facilities leadership, growth posts |\n| Awards / \"best of\" lists | Guest-experience-forward brands, the brand-differentiation angle lands harder |\n| Franchise disclosure / investor pages | Unit counts and growth targets |\n\n**A hiring spree for labor-intensive roles is the single best trigger for Spectrum.** It's public, dated, specific, and it *is* the pain, no inference required.\n\n## Worked example, a real filled brief\n\nResearched from dineamic.com (public About / Locations pages):\n\n```\n## Prospect Brief\n\n**Prospect:**          {Ops leader}, {title} at DineAmic Hospitality, Chicago, IL \u00b7 Tier: Chicagoland\n**Trigger event:**     Operates 20 locations with 1,200+ team members across multi-concept\n                        portfolio (Bar Siena, Prime & Provisions, Fioretta, Siena Tavern).\n**Identified pain:**   Front-of-house coverage across 20 upscale concepts, peak-hour service\n                        consistency and server fatigue at that span of control.\n**Credibility bridge:**Documented OEM deployment, Chicago Metro food service: a regional\n                        restaurant group used autonomous serving robots for food-runner duty;\n                        server walking distance reported reduced up to ~60% (OEM data, varies).\n**Vertical fit:**      Hospitality & Food Service, autonomous serving/delivery robots; ADAM for\n                        bar service. Bar program is central to these concepts, so the bartending\n                        angle fits better than the cleaning stat.\n**Role framing:**      Upscale multi-concept group \u2192 lead with guest experience and brand\n                        differentiation alongside the labor math, not cost-cutting alone.\n```\n\nNote what makes this work: the trigger is a verifiable public fact, the credibility bridge is the *same vertical in the same metro*, and the vertical fit was chosen because these are cocktail-forward concepts, not because the cleaning stat is the one that gets reused most.\n\nThis is a method demonstration using public information. It names no individual and is not a sent email. A real run confirms an actual correctly-titled contact and clears the rep's Stage 3 gate first.\n\n## Failure modes\n\n- **A vertical generality is not a trigger event.** \"Labor shortages in hospitality\" is not personalization; \"hiring 6 housekeepers as of last week\" is.\n- **Don't pick the stat before the research.** Research first, then match the stat to what you found.\n- **Don't reuse a credibility bridge across verticals.** The healthcare walking-distance number does not belong in a restaurant email.\n- **Never fabricate.** If research came up thin, the email gets shorter and leans on the vertical stat, it never gets invented specifics. Per the cold outreach playbook's recovery path, three failed research attempts means drop the prospect.",
+   "enforced_by_system": "",
+   "steps": [
+    {
+     "title": "Research the trigger event",
+     "required": true,
+     "detail": "Find something recent and specific: new location, expansion, hiring spree, press mention, award, renovation. Dated where possible."
+    },
+    {
+     "title": "Name the pain in their role's terms",
+     "required": true,
+     "detail": "The labor or throughput problem their role plausibly owns, tied to the trigger."
+    },
+    {
+     "title": "Pick the credibility bridge",
+     "required": true,
+     "detail": "The closest documented OEM deployment from the Proof and Claims SOP, same vertical, ideally same metro."
+    },
+    {
+     "title": "Choose the vertical fit and stat",
+     "required": true,
+     "detail": "Which robot class fits this operation, and the one stat that goes with it, chosen because of the trigger."
+    },
+    {
+     "title": "Set the role framing",
+     "required": true,
+     "detail": "Ops: labor cost and throughput. Facilities: cost per square foot and vendor reliability. Owner or founder: brand and guest experience alongside cost."
+    },
+    {
+     "title": "Present the brief before drafting",
+     "required": true,
+     "detail": "The brief is a gate. A wrong read on the trigger wastes the whole sequence."
+    }
+   ],
+   "version": 1,
+   "tags": [
+    "outreach",
+    "research",
+    "personalization"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:email",
+    "stage:new",
+    "stage:contacted"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "procedure",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-personalization-method",
+   "status": "published",
+   "id": "6a98722f83a0e4bd5c78a979",
+   "created_date": "2026-09-02T18:59:59.586000",
+   "updated_date": "2026-09-02T18:59:59.586000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  },
+  {
+   "summary": "Cadence, structure, and word counts follow the cold outreach playbook. Copy and proof are Spectrum-specific. Three email touches over seven days, never a fourth; two LinkedIn messages, never a third.",
+   "owner_email": "pg@spectrumrobotics.ai",
+   "keywords": [
+    "outreach",
+    "cold email",
+    "sequence",
+    "templates",
+    "linkedin",
+    "touch"
+   ],
+   "requires_acknowledgment": false,
+   "org_scope": "staff",
+   "source": "outreach playbook",
+   "title": "Outreach sequence templates",
+   "body": "# Sequence Templates\n\nCadence, structure, and word counts follow the cold outreach playbook. Copy and proof are Spectrum-specific. Use the cold outreach playbook for the scaffold, then apply everything here.\n\n## The CTA decision, read this before drafting\n\nThe cold outreach playbook specifies a **question CTA, not \"book a call,\"** on the first email, a question earns replies, a calendar link asks for a bigger commitment cold. The goal is a full calendar of 15 minute calls.\n\n**Resolution, and it is deliberate:** Touch 1 asks a question. Touch 2 introduces the booking link as the easy path. Touch 3 carries the link. This follows the higher-reply-rate pattern while still routing everyone to the calendar, a reply to Touch 1 gets the link immediately in the response script anyway, so nothing is lost.\n\n**This is worth A/B testing** once volume supports it: run link-first on Touch 1 for half the batch and compare booked calls, not just reply rate. Record the result. Never run both variants on the same prospect.\n\n## Email cadence, 3 touches over 7 days\n\nWord counts are hard ceilings, not targets.\n\n### Touch 1, Day 1 \u00b7 60 to 90 words\n\nStructure per the cold outreach playbook: personalized hook \u2192 pain acknowledgment \u2192 credibility proof \u2192 low-friction question.\n\n```\nSubject: {see the Subject Lines SOP, lowercase, under 7 words}\n\nHi {FirstName},\n\n{Trigger event, stated as something you clearly researched. 1 sentence.}\n{The pain it implies, in their role's terms. 1 or 2 sentences.}\n\n{Credibility bridge from the Proof and Claims SOP, hedging intact. 1 sentence.}\n\n{One question. Not a demand, not a link.}\n\n{footer}\n```\n\nFilled example, hospitality, Chicagoland:\n\n```\nSubject: 20 locations, one floor plan question\n\nHi {FirstName},\n\nTwenty locations across the DineAmic concepts, Bar Siena and Prime & Provisions\nincluded, means coverage at peak is a nightly puzzle, especially with the service\nstandard those rooms carry.\n\nA Chicago restaurant group ran autonomous serving robots for running food. OEM\ndata reported server walking distance down roughly 60%, with servers freed for\nguest interaction. Results vary by floor plan.\n\nWorth a look at whether it maps to one of your rooms? The assessment is free\neither way.\n\n{footer}\n```\n\n### Touch 2, Day 3 \u00b7 40 to 70 words \u00b7 reply in-thread\n\nStructure: quick callback \u2192 **new value angle** \u2192 restate CTA. Never \"just checking in.\"\n\nThe ROI Calculator is the default value-add, useful whether or not they buy.\n\n```\nSubject: re: {original}\n\nHi {FirstName},\n\nQuick follow up on my note about {trigger, 3 words}.\n\n{New value: the ROI calculator, a case study, or a relevant data point.\nSomething they can use either way.} Here if useful: {asset link}\n\n{Restated question, or the booking link as the easy path: https://calendar.app.google/jTrXgEpgFc3KHuPJA}\n\n{footer}\n```\n\n### Touch 3, Day 7 \u00b7 30 to 50 words \u00b7 reply in-thread\n\nStructure: acknowledge silence without guilt \u2192 one line of value \u2192 explicit easy out.\n\n```\nSubject: re: {original}\n\n{FirstName}, I'll keep this short. If {pain area} at {Company} ever moves up\nthe list, 15 minutes is here: https://calendar.app.google/jTrXgEpgFc3KHuPJA\n\nIf the timing's off, no worries at all. Just say the word.\n\n{footer}\n```\n\n**Never a fourth email.** Mark \"sequence completed, no reply,\" and re-engage only on a genuinely new trigger event, 60 to 90 days out.\n\n## LinkedIn DM variant, 2 messages over 5 days\n\nRunning DMs in parallel with email spreads risk off a single channel while the sending domain is still warming. Per the cold outreach playbook: 30 to 50 words, conversational, short lines, no paragraphs, **hard limit of two messages**.\n\n**DM 1, Day 1**\n```\nHey {FirstName}, saw {trigger event, very short}.\n\nWe deploy autonomous {robot type} for {vertical} operators. A group in the\nsame space reported {hedged outcome}.\n\nMind if I send over a quick breakdown?\n```\n\n**DM 2, Day 5**\n```\nHey {FirstName}, no worries if the timing's off. Happy to send\nthe ROI breakdown either way, just say the word.\n```\n\nNever a third DM. If email and DM run together, do not repeat the identical hook verbatim in both, vary the phrasing so it reads as one person following up, not an automation firing on two channels.\n\n## Footer\n\nThe exact block from the Compliance SOP, verbatim, on every email touch. LinkedIn DMs don't carry it (not commercial email under CAN-SPAM, and it would read as spam in a DM).",
+   "enforced_by_system": "Assistant drafting uses these templates",
+   "steps": [],
+   "version": 1,
+   "tags": [
+    "sequence",
+    "cold email",
+    "linkedin"
+   ],
+   "review_date": "2026-12-01",
+   "applies_to": [
+    "task:email",
+    "stage:new",
+    "stage:contacted",
+    "screen:inbox"
+   ],
+   "scope": "department",
+   "department": "Sales",
+   "category": "playbook",
+   "published_at": "2026-09-02T19:00:00Z",
+   "slug": "sales-sequence-templates",
+   "status": "published",
+   "id": "6a98722f83a0e4bd5c78a97a",
+   "created_date": "2026-09-02T18:59:59.586000",
+   "updated_date": "2026-09-02T18:59:59.586000",
+   "created_by_id": "698cd4a752dc99c4d5b7105d",
+   "is_sample": false
+  }
+ ],
+ "count": 17,
+ "entityName": "SOP"
+}

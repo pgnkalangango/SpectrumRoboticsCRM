@@ -1,0 +1,154 @@
+[
+  {
+    "slug": "service-ticket-handling-and-sla",
+    "code": "SVC-001",
+    "title": "Support tickets and response times",
+    "department": "Service",
+    "category": "procedure",
+    "scope": "DEPARTMENT",
+    "status": "PUBLISHED",
+    "summary": "How every support ticket is acknowledged, prioritized, worked and closed. Critical tickets get a first response within 4 hours, high within 24, normal within 72, low within a week.",
+    "keywords": ["ticket", "support", "SLA", "response time", "priority", "escalation", "OEM"],
+    "appliesTo": ["screen:tickets", "screen:portal_support", "task:maintenance"],
+    "requiresAcknowledgment": true,
+    "enforcedBySystem": "SLA timer set on every ticket from Settings; critical tickets notify owners; SLA breach shows on My Day",
+    "body": "# Support tickets and response times\n\n**Team:** Service · **Job owner:** Service lead · **Review:** every 3 months\n\n## Why we do this\nA robot that is down costs the customer money every hour. Every ticket gets a fast, honest first response and a clear owner, and the customer can always see where it stands in their portal.\n\n## Priorities and response times\n| Priority | Means | First response | Examples |\n|---|---|---|---|\n| Critical | Robot down at a live site, safety concern | 4 hours | Robot will not start, collision, charging fault at a casino floor |\n| High | Robot working with a real limit | 24 hours | Navigation errors on one floor, water leak, repeated stops |\n| Normal | Question or minor issue | 72 hours | Training refresher, map update, Wi-Fi dropouts in one zone |\n| Low | Nice to have | 7 days | Feature question, cosmetic damage, billing question |\n\n## Steps\n1. **Acknowledge.** Set status Acknowledged and reply to the customer inside the SLA. Say what you understand and what happens next. Never leave a ticket at New past the SLA.\n2. **Set the priority and the category** (navigation, charging, Wi-Fi, damage, software, training, billing, onboarding).\n3. **Assign an owner.** Every open ticket has one person responsible. Critical tickets go to the on call technician and notify an owner.\n4. **Work it.** Try remote steps first (restart, map reload, charging check). Log every step as a comment. Internal notes stay internal; customer facing comments show in the portal.\n5. **Escalate to the OEM** when the fix needs the manufacturer. Set status Waiting on OEM, log the OEM case number, and tell the customer the expected timeline.\n6. **Schedule a visit** if remote steps fail. Create the task from the ticket so it shows on the technician's day.\n7. **Resolve.** Write the resolution in plain language, set Resolved, and ask the customer to confirm. Close after confirmation or 5 business days without a reply.\n\n## Rules\n- The customer always gets the truth about timelines, even when it is bad news.\n- A ticket is never closed without a written resolution.\n- Repeat issues on the same robot within 30 days reopen the original ticket rather than starting a new one.\n\n## What if things go wrong\n- **SLA about to breach:** post an update to the customer before the deadline, even if the fix is not ready.\n- **Customer is angry:** acknowledge, do not argue, bring in the service lead the same day.\n- **Safety concern:** stop the robot, then open a Critical ticket and call an owner immediately.",
+    "steps": [
+      { "title": "Acknowledge inside the SLA", "detail": "Reply to the customer with what you understand and what happens next.", "required": true },
+      { "title": "Set priority, category and owner", "detail": "Critical goes to on call and notifies an owner.", "required": true },
+      { "title": "Remote steps first, logged as comments", "detail": "", "required": true },
+      { "title": "Escalate to OEM or schedule a visit", "detail": "Log the OEM case number; create the visit task.", "required": false },
+      { "title": "Resolve in plain language and confirm with the customer", "detail": "", "required": true }
+    ]
+  },
+  {
+    "slug": "service-site-survey",
+    "code": "SVC-002",
+    "title": "Site survey before an install",
+    "department": "Service",
+    "category": "checklist",
+    "scope": "DEPARTMENT",
+    "status": "PUBLISHED",
+    "summary": "What to measure, photograph and confirm on a site visit so the right robot is quoted and the install day has no surprises: floors, thresholds, elevators, Wi-Fi, charging locations, staff and schedule.",
+    "keywords": ["site survey", "assessment", "floor plan", "wifi", "elevator", "charging", "checklist"],
+    "appliesTo": ["task:survey", "screen:sites", "stage:assessment"],
+    "requiresAcknowledgment": false,
+    "enforcedBySystem": "Site record fields for square footage, floors and Wi-Fi notes",
+    "body": "# Site survey before an install\n\n**Team:** Service · **Job owner:** Field technician · **When:** after the free assessment is booked and before a quote with install\n\n## Bring\nTape measure or laser, phone for photos and video, the survey form, a Wi-Fi analyzer app, the OEM spec sheet for the candidate robot.\n\n## Checklist\n### Building\n- Square footage of the area the robot will cover and number of floors\n- Floor types (carpet, tile, hardwood, concrete) and any transitions or thresholds over 1 cm\n- Ramps, steps, glass walls, mirrors, dark or reflective floors\n- Door widths, tight corridors, elevator size and whether elevator integration is needed\n- Where the robot can park and charge: outlet type, distance, out of the way of traffic\n\n### Network\n- 2.4 GHz coverage across the whole route, SSID and password owner\n- Dead zones near elevators, kitchens, metal shelving\n- Who at the customer can approve a network change\n\n### Operations\n- Hours the robot will run, peak traffic times, cleaning windows\n- Who the operators will be and their shift pattern\n- Water fill and dump locations for cleaning robots; dish and tray flow for delivery robots\n- Storage for consumables and spare parts\n\n### People\n- Main contact on site and the decision maker\n- Any union, safety or insurance requirements\n\n## After the visit\n1. Enter square footage, floors, Wi-Fi notes and the site type on the Site record the same day.\n2. Upload photos and the floor plan to the Site documents.\n3. Log a Meeting activity with the summary and next step.\n4. Tell Sales which robot and accessories fit, and any blockers.",
+    "steps": [
+      { "title": "Measure and photograph the route, floors and thresholds", "detail": "", "required": true },
+      { "title": "Check 2.4 GHz coverage across the whole route", "detail": "", "required": true },
+      { "title": "Confirm charging location and outlet", "detail": "", "required": true },
+      { "title": "Confirm operators, hours and consumable storage", "detail": "", "required": true },
+      { "title": "Update the Site record and upload photos the same day", "detail": "", "required": true },
+      { "title": "Tell Sales the fit and blockers", "detail": "", "required": true }
+    ]
+  },
+  {
+    "slug": "service-preventive-maintenance",
+    "code": "SVC-003",
+    "title": "Preventive maintenance every 90 days",
+    "department": "Service",
+    "category": "checklist",
+    "scope": "DEPARTMENT",
+    "status": "PUBLISHED",
+    "summary": "Every deployed robot gets a maintenance check every 90 days: sensors, brushes and filters, battery health, firmware, map accuracy, and a short operator refresher. Logged on the robot unit.",
+    "keywords": ["maintenance", "preventive", "90 days", "firmware", "battery", "brushes", "filters"],
+    "appliesTo": ["task:maintenance", "screen:robots"],
+    "requiresAcknowledgment": false,
+    "enforcedBySystem": "Next maintenance date on every robot; reminders 14 days ahead; maintenance log entries",
+    "body": "# Preventive maintenance every 90 days\n\n**Team:** Service · **Job owner:** Field technician\n\n## Why\nA well maintained robot keeps its uptime and its warranty. The 90 day rhythm matches the OEM guidance for service robots in hospitality and cleaning.\n\n## On every visit\n1. **Sensors and cameras.** Clean LiDAR windows, depth cameras and bumpers. Check for damage.\n2. **Consumables.** Replace brushes, pads, squeegee strips, filters and dust bags per the OEM interval. Note what was used so Finance can bill or restock.\n3. **Battery.** Record charge cycles and health from the tablet. Flag anything under 80% health for replacement planning.\n4. **Firmware.** Update to the version approved by Spectrum. Log the version on the robot unit.\n5. **Map and routes.** Walk the route. Fix map drift, new obstacles, moved furniture. Re test the charging return.\n6. **Wheels and drive.** Check wear, debris, casters.\n7. **Operator refresher.** Ten minutes with the on site operators: what changed, common questions, how to open a ticket in the portal.\n8. **Log it.** Add a maintenance log entry with notes and parts used. HQ sets the next date automatically.\n\n## Rules\n- Never skip a visit because things seem fine. Skipped visits void warranty claims.\n- Anything found that needs a repair becomes a ticket the same day.",
+    "steps": [
+      { "title": "Clean and inspect sensors, cameras, bumpers", "detail": "", "required": true },
+      { "title": "Replace consumables per OEM interval and note parts used", "detail": "", "required": true },
+      { "title": "Record battery health and firmware version", "detail": "", "required": true },
+      { "title": "Walk the route, fix the map, test charging return", "detail": "", "required": true },
+      { "title": "Operator refresher and log the visit", "detail": "", "required": true }
+    ]
+  },
+  {
+    "slug": "finance-invoicing-and-collections",
+    "code": "FIN-001",
+    "title": "Invoicing, payments and collections",
+    "department": "Finance",
+    "category": "procedure",
+    "scope": "DEPARTMENT",
+    "status": "PUBLISHED",
+    "summary": "How an accepted quote becomes an invoice, how payments are recorded and synced to QuickBooks, and the reminder schedule for late invoices. Only owners approve refunds or write offs.",
+    "keywords": ["invoice", "payment", "collections", "overdue", "QuickBooks", "Stripe", "refund", "net 30"],
+    "appliesTo": ["screen:invoices", "screen:portal_invoices", "stage:won"],
+    "requiresAcknowledgment": true,
+    "enforcedBySystem": "Invoice numbering and totals are computed server side; QuickBooks sync; overdue status set nightly; refunds need owner approval",
+    "body": "# Invoicing, payments and collections\n\n**Team:** Finance · **Job owner:** Finance lead\n\n## From quote to invoice\n1. When a quote is accepted, HQ creates the invoice task for the rep. Create the invoice from the accepted quote with one click. Recurring (RaaS) lines bill the first month; delivery and install become one time lines.\n2. Check the bill to name, address and PO number if the customer needs one.\n3. Send from HQ. The customer gets a link to view, download and pay by card or ACH (Stripe). The invoice also appears in their portal.\n4. HQ syncs the customer and invoice to QuickBooks. Fix any sync error the same day.\n\n## Payments\n- Card and ACH payments through Stripe are recorded automatically.\n- Checks and wires: record the payment on the invoice in HQ with the reference number the day it arrives.\n- Partial payments set the invoice to Partially paid; the balance stays visible to the customer.\n\n## Collections schedule\n| When | Action |\n|---|---|\n| Due date + 1 day | Friendly reminder from the rep (HQ template) |\n| Due date + 7 | Second reminder from Finance, copy the rep |\n| Due date + 14 | Phone call from the rep; note the promise to pay on the invoice |\n| Due date + 30 | Owner review; services may pause for RaaS accounts |\n\n## Refunds and write offs\nOnly an owner may approve a refund, credit or write off. Request it from the invoice; it lands in Approvals.\n\n## Monthly close\n- Reconcile HQ payments against Stripe payouts and QuickBooks deposits\n- Review every Overdue invoice with the reps\n- Confirm RaaS renewals due in the next 60 days",
+    "steps": [
+      { "title": "Create the invoice from the accepted quote", "detail": "Check bill to details and PO.", "required": true },
+      { "title": "Send from HQ with the payment link", "detail": "", "required": true },
+      { "title": "Record checks and wires the day they arrive", "detail": "", "required": true },
+      { "title": "Follow the reminder schedule", "detail": "+1, +7, +14, +30 days.", "required": true },
+      { "title": "Refunds and write offs through Approvals", "detail": "Owners only.", "required": true }
+    ]
+  },
+  {
+    "slug": "marketing-content-approval-and-brand",
+    "code": "MKT-005",
+    "title": "Content approval and brand rules",
+    "department": "Marketing",
+    "category": "policy",
+    "scope": "COMPANY",
+    "status": "PUBLISHED",
+    "summary": "Anyone can draft a post or a page. Only people with posting rights publish, and every piece passes the proof and claims check first: OEM attributed figures, from pricing only, no demo promises, the Spectrum logo and turquoise used correctly.",
+    "keywords": ["brand", "social", "approval", "LinkedIn", "Instagram", "Facebook", "logo", "claims", "posting"],
+    "appliesTo": ["screen:marketing", "screen:campaigns"],
+    "requiresAcknowledgment": true,
+    "enforcedBySystem": "Social posts need approval by a person with social.post rights; claims check runs on every draft",
+    "body": "# Content approval and brand rules\n\n## Who can do what\n- **Draft:** any team member, in HQ Marketing.\n- **Publish:** only people with posting rights (set by an owner under Team). Today that is the owners.\n- **Approve:** the same people. A post cannot go out without an approver's name on it.\n\n## Before anything goes out\n1. **Proof and claims.** Every number is an OEM documented outcome with the hedge intact (results vary by facility). No invented figures, no customer names without written permission.\n2. **Pricing.** Public copy says from $799 a month or from $3,800. Never a financed monthly figure, never an exact price outside a quote.\n3. **Offer.** The free 20 minute assessment is the call to action. No demo promises in public content.\n4. **Voice.** Plain, warm, knowledgeable. No em dashes. Short sentences.\n5. **Brand.** The Spectrum wordmark on light backgrounds, the badge for avatars. Turquoise #149CA0 as the accent, never stretched or recolored. Photos of real deployments over stock images.\n6. **Rights.** Only images we own or have rights to. OEM product images are fine for our authorized partners.\n\n## Channels\n- LinkedIn company page: thought leadership, case studies, hiring. 2 to 3 posts a week.\n- Instagram and Facebook: robots in action, behind the scenes, short video. 3 to 5 a week.\n- Every post links to a page with a booking button.\n\n## Comments and messages\nReply within one business day. Sales questions become a contact in HQ with source Social.",
+    "steps": [
+      { "title": "Draft in HQ Marketing", "detail": "", "required": true },
+      { "title": "Run the proof and claims check", "detail": "OEM attribution, from pricing, no demos.", "required": true },
+      { "title": "Approver with posting rights approves and schedules", "detail": "", "required": true },
+      { "title": "Reply to comments and messages within one business day", "detail": "", "required": true }
+    ]
+  },
+  {
+    "slug": "company-client-portal-access",
+    "code": "ADMIN-002",
+    "title": "Client portal access",
+    "department": "Admin",
+    "category": "policy",
+    "scope": "COMPANY",
+    "status": "PUBLISHED",
+    "summary": "Who gets a portal login, how sign ups are approved, and what clients can and cannot see. Clients only ever see their own company's quotes, invoices, robots, tickets, documents and certificates.",
+    "keywords": ["portal", "client login", "access", "approval", "sign up", "privacy"],
+    "appliesTo": ["screen:clients", "screen:approvals", "screen:portal_home"],
+    "requiresAcknowledgment": true,
+    "enforcedBySystem": "Every portal query is scoped to the client's company on the server; internal notes and costs are never sent to a client",
+    "body": "# Client portal access\n\n## Who gets access\n- The main contact at every active customer, invited from Client accounts when the customer is set up.\n- Additional people at the customer when the main contact or the rep asks.\n- Prospects only after a quote is sent, so they can review and accept it.\n\n## How sign ups work\n1. A client signs up on the portal with their work email.\n2. If the email domain matches a customer company with the portal enabled, or they enter the client code their rep gave them, the account opens as soon as they confirm their email.\n3. Otherwise the sign up lands in Approvals. Leadership checks it is a real customer contact, links it to the right company, and approves or denies. Deny anything you cannot verify.\n\n## What clients see\n- Their quotes (to accept or decline), invoices (to pay), robots and maintenance dates, support tickets and comments marked visible, documents marked visible, operator certificates.\n- Never: internal notes, costs and margins, other companies, staff only tickets or comments, the pipeline.\n\n## Removing access\nWhen a contact leaves the customer or the relationship ends, deactivate the login from Client accounts the same day.",
+    "steps": [
+      { "title": "Invite the main contact when the customer is set up", "detail": "", "required": true },
+      { "title": "Review unmatched sign ups in Approvals", "detail": "Verify, link to the company, approve or deny.", "required": true },
+      { "title": "Mark documents and ticket comments client visible on purpose", "detail": "", "required": true },
+      { "title": "Deactivate logins the day a contact leaves", "detail": "", "required": true }
+    ]
+  },
+  {
+    "slug": "company-data-and-security",
+    "code": "ADMIN-003",
+    "title": "Data handling and security",
+    "department": "Admin",
+    "category": "policy",
+    "scope": "COMPANY",
+    "status": "PUBLISHED",
+    "summary": "How we protect customer and company data: personal logins only, least access by tier, connected mailboxes are private to their owner, no secrets in notes, and what to do if something looks wrong.",
+    "keywords": ["security", "password", "access", "data", "privacy", "MCP", "API key", "phishing"],
+    "appliesTo": ["screen:settings", "screen:integrations", "screen:mcp", "screen:team"],
+    "requiresAcknowledgment": true,
+    "enforcedBySystem": "Tier based access, per user mailbox connections, encrypted tokens, audit log, revocable MCP keys",
+    "body": "# Data handling and security\n\n## Accounts\n- Everyone signs in with their own account. Sharing a login is not allowed.\n- Use Microsoft 365 sign in where possible. Passwords are at least 10 characters.\n- Access follows the tier: owners, leadership, employees, clients. Ask an owner if you need more; do not borrow someone else's.\n\n## Your mailbox and calendar\n- When you connect your own mailbox, only you and the assistant working for you can read it. Owners cannot read your inbox through HQ.\n- The assistant drafts; it never sends without you.\n\n## Customer data\n- Customer details live in HQ, not in spreadsheets or personal notes.\n- Do not paste passwords, card numbers or bank details into notes, tickets or the assistant.\n- Export data only when a customer or an owner asks, and log why.\n\n## MCP and API keys\n- Keys for Claude Desktop or Claude Code are personal, named, and revocable under MCP. Read and draft scope by default. Revoke a key the moment a device is lost.\n- Owners approve every new MCP server and which tiers can use it.\n\n## If something looks wrong\n- Suspicious email, unexpected login, a link you clicked: tell an owner within the hour. No blame for reporting.\n- Owners review the audit log monthly.",
+    "steps": [
+      { "title": "Personal login, Microsoft sign in, 10+ character password", "detail": "", "required": true },
+      { "title": "No secrets in notes, tickets or the assistant", "detail": "", "required": true },
+      { "title": "MCP keys personal and revoked when a device is lost", "detail": "", "required": true },
+      { "title": "Report anything suspicious within the hour", "detail": "", "required": true }
+    ]
+  }
+]

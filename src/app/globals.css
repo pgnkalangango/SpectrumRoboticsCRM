@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Spectrum HQ design tokens.
+  Brand turquoise from the Spectrum Robotics logo carries the accent; neutrals lean cool so the
+  turquoise reads as chosen. Every color is a token so light and dark resolve as a set.
+*/
+:root {
+  --brand: #149ca0;
+  --brand-deep: #0f7c80;
+  --brand-bright: #29b8ba;
+  --brand-tint: #e3f3f4;
+  --brand-mist: #f2f6f6;
+
+  --ground: #f4f7f7;
+  --surface: #ffffff;
+  --surface-2: #eef3f3;
+  --surface-3: #e4ebeb;
+  --line: #dae3e4;
+  --line-strong: #c3cfd0;
+
+  --ink: #141517;
+  --ink-2: #3f4650;
+  --muted: #6e7780;
+  --faint: #9aa4ab;
+
+  --ok: #1f7a4d;
+  --ok-soft: #dcefe4;
+  --warn: #b4700f;
+  --warn-soft: #f7ead3;
+  --bad: #b23a48;
+  --bad-soft: #f6dfe2;
+  --info: #2b5fb3;
+  --info-soft: #dfe8f7;
+
+  --sidebar: #0f1c22;
+  --sidebar-2: #162730;
+  --sidebar-ink: #d7e2e4;
+  --sidebar-muted: #7f939a;
+  --sidebar-line: #223740;
+
+  --radius: 10px;
+  --shadow-sm: 0 1px 2px rgba(20, 21, 23, 0.06);
+  --shadow: 0 4px 14px rgba(20, 21, 23, 0.08);
+  --shadow-lg: 0 18px 44px rgba(20, 21, 23, 0.14);
+}
+
+.dark {
+  --brand: #2fb3b6;
+  --brand-deep: #149ca0;
+  --brand-bright: #4dd0d2;
+  --brand-tint: #143c3e;
+  --brand-mist: #10292b;
+
+  --ground: #0d1417;
+  --surface: #141d21;
+  --surface-2: #1b272c;
+  --surface-3: #233137;
+  --line: #2a3a41;
+  --line-strong: #3a4d55;
+
+  --ink: #e9eef0;
+  --ink-2: #c4ced2;
+  --muted: #8d9ba1;
+  --faint: #66757c;
+
+  --ok: #5cc28c;
+  --ok-soft: #143222;
+  --warn: #e0a54a;
+  --warn-soft: #3a2c12;
+  --bad: #e27a69;
+  --bad-soft: #3d1d18;
+  --info: #6f9ae8;
+  --info-soft: #182742;
+
+  --sidebar: #0a1114;
+  --sidebar-2: #111b20;
+  --sidebar-ink: #d7e2e4;
+  --sidebar-muted: #7f939a;
+  --sidebar-line: #1d2b31;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 18px 44px rgba(0, 0, 0, 0.55);
+}
+
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-bright: var(--brand-bright);
+  --color-brand-tint: var(--brand-tint);
+  --color-brand-mist: var(--brand-mist);
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-2: var(--sidebar-2);
+  --color-sidebar-ink: var(--sidebar-ink);
+  --color-sidebar-muted: var(--sidebar-muted);
+  --color-sidebar-line: var(--sidebar-line);
+
+  --font-sans: var(--font-manrope), "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-archivo), var(--font-manrope), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow);
+  --shadow-lg: var(--shadow-lg);
+
+  --animate-fade-in: fade-in 0.18s ease-out;
+  --animate-slide-up: slide-up 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-slide-in-right: slide-in-right 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-pop: pop 0.16s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(16px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+
+@layer base {
+  * { border-color: var(--line); }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 { text-wrap: balance; letter-spacing: -0.01em; }
+  ::selection { background: var(--brand-tint); color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
+  input, textarea, select, button { font: inherit; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 6px; border: 2px solid var(--ground); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--brand); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@utility tabular { font-variant-numeric: tabular-nums; }
+@utility eyebrow { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+@utility card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+@utility surface-2 { background: var(--surface-2); }
+@utility text-balance { text-wrap: balance; }
+
+/* Kanban column scroll */
+.kanban-scroll { scrollbar-width: thin; }
+
+/* driver.js walkthrough theme */
+.driver-popover.spectrum-tour {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-sans);
+  max-width: 360px;
+}
+.driver-popover.spectrum-tour .driver-popover-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; }
+.driver-popover.spectrum-tour .driver-popover-description { color: var(--ink-2); font-size: 14px; line-height: 1.5; }
+.driver-popover.spectrum-tour .driver-popover-progress-text { color: var(--muted); font-size: 12px; }
+.driver-popover.spectrum-tour button { background: var(--surface-2); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; text-shadow: none; padding: 6px 12px; font-weight: 600; }
+.driver-popover.spectrum-tour .driver-popover-next-btn { background: var(--brand); color: #fff; border-color: var(--brand); }
+.driver-popover.spectrum-tour .driver-popover-arrow-side-left.driver-popover-arrow { border-left-color: var(--surface); }
+.driver-popover.spectrum-tour .driver-popover-arrow-side-right.driver-popover-arrow { border-right-color: var(--surface); }
+.driver-popover.spectrum-tour .driver-popover-arrow-side-top.driver-popover-arrow { border-top-color: var(--surface); }
+.driver-popover.spectrum-tour .driver-popover-arrow-side-bottom.driver-popover-arrow { border-bottom-color: var(--surface); }
+
+/* Print: quotes and invoices */
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+}
