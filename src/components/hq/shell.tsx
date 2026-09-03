@@ -73,7 +73,7 @@ export function HqShell({ user, nav, notifications, pendingApprovals, screenSops
     <nav className="flex h-full flex-col">
       <div className={cn("flex h-14 items-center border-b border-sidebar-line px-3", collapsed ? "justify-center" : "justify-between")}>
         <Link href="/hq" className="flex items-center gap-2 overflow-hidden">
-          {collapsed ? <SpectrumBadge size={30} /> : <SpectrumWordmark className="h-8" color="#4DD0D2" subColor="#9DB0B5" />}
+          {collapsed ? <SpectrumBadge size={30} /> : <SpectrumWordmark className="h-8" color="#4DD0D2" subColor="#9DB0B5" bg="var(--sidebar)" />}
         </Link>
         {!collapsed ? (
           <button onClick={toggleCollapsed} className="hidden rounded-md p-1 text-sidebar-muted hover:bg-sidebar-2 hover:text-sidebar-ink lg:block" aria-label="Collapse sidebar">

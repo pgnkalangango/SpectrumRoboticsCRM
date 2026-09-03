@@ -21,7 +21,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </svg>
         </div>
         <div className="relative">
-          <SpectrumWordmark className="h-14" color="#4DD0D2" subColor="#B9C6C9" />
+          <SpectrumWordmark className="h-14" color="#4DD0D2" subColor="#B9C6C9" bg="var(--sidebar)" />
         </div>
         <div className="relative max-w-md">
           <p className="font-display text-3xl font-bold leading-tight text-white text-balance">One place for the whole company and every client.</p>
