@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/ui/empty-state";
+import { portalHref, previewFor } from "@/components/portal/ui";
 
 export const metadata = { title: "Client portal" };
 
@@ -16,6 +17,7 @@ export default async function PortalHome({ searchParams }: { searchParams: Promi
   const user = await requireClient();
   const sp = await searchParams;
   const scope = await portalScope(user, sp.company);
+  const preview = previewFor(user, sp.company);
   const portal = await getSetting("portal");
   const status = user.kind === "CLIENT" ? (await prisma.user.findUnique({ where: { id: user.id }, select: { status: true, emailVerified: true } })) : null;
 
@@ -53,10 +55,10 @@ export default async function PortalHome({ searchParams }: { searchParams: Promi
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <QuickCard href="/portal/quotes" icon={FileText} title="Quotes" value={`${quotes.filter((q) => ["SENT", "VIEWED"].includes(q.status)).length} to review`} />
-        <QuickCard href="/portal/invoices" icon={Receipt} title="Balance due" value={money(openBalance)} tone={openBalance > 0 ? "warn" : "ok"} />
-        <QuickCard href="/portal/robots" icon={Bot} title="Robots" value={`${robots.length} on your account`} />
-        <QuickCard href="/portal/support" icon={LifeBuoy} title="Support" value={`${tickets.length} open ticket${tickets.length === 1 ? "" : "s"}`} />
+        <QuickCard href={portalHref("/portal/quotes", preview)} icon={FileText} title="Quotes" value={`${quotes.filter((q) => ["SENT", "VIEWED"].includes(q.status)).length} to review`} />
+        <QuickCard href={portalHref("/portal/invoices", preview)} icon={Receipt} title="Balance due" value={money(openBalance)} tone={openBalance > 0 ? "warn" : "ok"} />
+        <QuickCard href={portalHref("/portal/robots", preview)} icon={Bot} title="Robots" value={`${robots.length} on your account`} />
+        <QuickCard href={portalHref("/portal/support", preview)} icon={LifeBuoy} title="Support" value={`${tickets.length} open ticket${tickets.length === 1 ? "" : "s"}`} />
       </div>
 
       <div className="grid gap-5 lg:grid-cols-2">
@@ -64,7 +66,7 @@ export default async function PortalHome({ searchParams }: { searchParams: Promi
           <CardHeader>
             <CardTitle>Recent quotes</CardTitle>
             <Button asChild variant="ghost" size="sm">
-              <Link href="/portal/quotes">
+              <Link href={portalHref("/portal/quotes", preview)}>
                 All <ArrowRight />
               </Link>
             </Button>
@@ -77,7 +79,7 @@ export default async function PortalHome({ searchParams }: { searchParams: Promi
                 {quotes.map((q) => (
                   <li key={q.id} className="flex items-center gap-3 py-2.5">
                     <div className="min-w-0 flex-1">
-                      <Link href={`/portal/quotes/${q.id}`} className="block truncate text-sm font-medium hover:text-brand">
+                      <Link href={portalHref(`/portal/quotes/${q.id}`, preview)} className="block truncate text-sm font-medium hover:text-brand">
                         {q.title}
                       </Link>
                       <div className="text-xs text-muted">
@@ -96,7 +98,7 @@ export default async function PortalHome({ searchParams }: { searchParams: Promi
           <CardHeader>
             <CardTitle>Invoices</CardTitle>
             <Button asChild variant="ghost" size="sm">
-              <Link href="/portal/invoices">
+              <Link href={portalHref("/portal/invoices", preview)}>
                 All <ArrowRight />
               </Link>
             </Button>
@@ -109,7 +111,7 @@ export default async function PortalHome({ searchParams }: { searchParams: Promi
                 {invoices.map((i) => (
                   <li key={i.id} className="flex items-center gap-3 py-2.5">
                     <div className="min-w-0 flex-1">
-                      <Link href={`/portal/invoices/${i.id}`} className="block truncate text-sm font-medium hover:text-brand">
+                      <Link href={portalHref(`/portal/invoices/${i.id}`, preview)} className="block truncate text-sm font-medium hover:text-brand">
                         {i.number}
                         {i.title ? ` · ${i.title}` : ""}
                       </Link>
@@ -129,7 +131,7 @@ export default async function PortalHome({ searchParams }: { searchParams: Promi
           <CardHeader>
             <CardTitle>Your robots</CardTitle>
             <Button asChild variant="ghost" size="sm">
-              <Link href="/portal/robots">
+              <Link href={portalHref("/portal/robots", preview)}>
                 All <ArrowRight />
               </Link>
             </Button>
@@ -161,7 +163,7 @@ export default async function PortalHome({ searchParams }: { searchParams: Promi
           <CardHeader>
             <CardTitle>Open support tickets</CardTitle>
             <Button asChild size="sm">
-              <Link href="/portal/support?new=1">New ticket</Link>
+              <Link href={portalHref("/portal/support?new=1", preview)}>New ticket</Link>
             </Button>
           </CardHeader>
           <CardContent>
@@ -172,7 +174,7 @@ export default async function PortalHome({ searchParams }: { searchParams: Promi
                 {tickets.map((t) => (
                   <li key={t.id} className="flex items-center gap-3 py-2.5">
                     <div className="min-w-0 flex-1">
-                      <Link href={`/portal/support/${t.id}`} className="block truncate text-sm font-medium hover:text-brand">
+                      <Link href={portalHref(`/portal/support/${t.id}`, preview)} className="block truncate text-sm font-medium hover:text-brand">
                         {t.number} · {t.subject}
                       </Link>
                       <div className="text-xs text-muted">Updated {relTime(t.updatedAt)}</div>
